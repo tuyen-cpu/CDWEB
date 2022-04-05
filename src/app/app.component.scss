@@ -1,0 +1,12 @@
+.wrapper {
+    display: flex;
+    .side {
+        width: 60px;
+        display: inline-block;
+        height: 100px;
+        // flex: 0.6;
+    }
+    .list {
+        flex: 1
+    }
+}
