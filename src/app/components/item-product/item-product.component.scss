@@ -11,7 +11,7 @@
         }
     }
     mat-card-content {
-        margin: 20px 0 10px 0;
+        margin: 16px 0 10px 0;
         display: block;
         .name {
             text-decoration: none;
@@ -19,7 +19,7 @@
             font-size: 14px;
             overflow: hidden;
             display: -webkit-box;
-            -webkit-line-clamp: 2!important;
+            -webkit-line-clamp: 3!important;
             -webkit-box-orient: vertical;
         }
     }
@@ -42,7 +42,7 @@
     }
     .price-box {
         .new-price {
-            color: var(--color-main);
+            color: var(--main-color);
             font-size: 16px;
             font-weight: 700;
             font-family: arial, sans-serif;
@@ -83,7 +83,8 @@
         will-change: visibility, opacity;
         transition: all ease 0.5s;
         .btn {
-            background: var(--color-main);
+            --size: 21px;
+            background: var(--main-color);
             border-radius: 3px;
             text-align: center;
             height: var(--height);
@@ -92,7 +93,6 @@
                 background: #d92b1f;
             }
             mat-icon {
-                --size: 18px;
                 font-size: var(--size);
                 height: var(--size);
                 width: var(--size);
@@ -100,12 +100,18 @@
         }
         .add-cart {
             width: 120px;
-            margin-right: 4px;
+            margin-right: 6px;
+            mat-icon {
+                padding-right: calc(var(--size) + 4px);
+            }
         }
         .quick-view {
             min-width: 34px;
             line-height: 34px;
             padding: 0;
+            mat-icon {
+                transform: scale(0.8);
+            }
         }
     }
     &:hover {
@@ -114,8 +120,9 @@
             visibility: visible;
             top: calc(100% - var(--height));
         }
-        .price-box {
-            display: none;
+        .price-box,
+        .start-review {
+            visibility: hidden;
         }
     }
 }

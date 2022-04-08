@@ -1,24 +1,24 @@
 <div class="product-item">
     <a href="" class="wrapper-img">
-        <img class="img" src="https://bizweb.sapocdn.net/thumb/medium/100/329/122/products/laptop-gaming-gigabyte-aorus-17-xe5-73vn534gh.png?v=1648702456000" alt="Photo of a Shiba Inu">
+        <img class="img" src="{{productItem.urlImg}}" alt="Photo of a Shiba Inu">
     </a>
     <div class="action">
         <button mat-flat-button color="primary" class="btn add-cart">
-          <mat-icon>shopping_cart_checkout</mat-icon>Mua ngay
-        </button>
-        <button mat-flat-button color="primary" class="btn quick-view">
+          <mat-icon>shopping_cart_checkout</mat-icon>
+            <span>Mua ngay</span></button>
+        <button mat-flat-button color="primary" class="btn quick-view" matTooltipPosition="above" matTooltip="Xem nhanh">
         <mat-icon>remove_red_eye</mat-icon>
       </button>
+
     </div>
 
     <mat-card-content>
         <a class="name" href="">
-            Laptop Gaming Gigabyte AORUS 17 XE5-73VN534GH (i7-12700H, RTX 3070 Ti 8GB, Ram 16GB DDR5, SSD 1TB, 17.3 Inch IPS 360Hz FHD)
-        </a>
+          {{productItem.name}} </a>
     </mat-card-content>
-    <div class="discount-tag"><span class="value">10%</span></div>
+    <div class="discount-tag"><span class="value">{{productItem.discount}}%</span></div>
     <div class="price-box">
-        <span class="new-price">60.990.000₫</span>
+        <span class="new-price">{{productItem.price}}₫</span>
         <span class="old-price"> 61.990.000₫</span>
     </div>
     <div class="start-review">

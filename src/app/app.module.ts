@@ -14,12 +14,21 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
+// Owl-carousel
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { ProductListHomeComponent } from './components/product-list-home/product-list-home.component';
+// Swiper
+import { SwiperModule } from 'swiper/angular';
+
 @NgModule({
   declarations: [
     AppComponent,
     ItemProductComponent,
-    ListProductComponent
+    ListProductComponent,
+    ProductListHomeComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -29,7 +38,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatTooltipModule,
+    CarouselModule,
+    SwiperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
