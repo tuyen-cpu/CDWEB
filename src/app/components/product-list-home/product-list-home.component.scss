@@ -1,3 +1,6 @@
+@import "~swiper/css";
+@import "~swiper/css/pagination";
+@import "~swiper/css/navigation";
 .home-section {
     .top-section {
         position: relative;
@@ -31,6 +34,28 @@
         }
     }
     .wrapper {
+        swiper.swiper {
+            position: unset;
+        }
+        swiper {
+            .swiper-button-next,
+            .swiper-button-prev {
+                color: #acacac;
+                top: 25px;
+                &:after {
+                    font-size: 18px;
+                    
+                    font-weight: 700;
+                }
+                &:hover {
+                    color: var(--main-color);
+                }
+            }
+            .swiper-button-prev {
+                left: auto;
+                right: 34px;
+            }
+        }
         .banner-side {
             padding-left: 30px;
             .img-top {

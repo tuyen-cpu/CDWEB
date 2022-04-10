@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //Components
 import { ItemProductComponent } from './components/item-product/item-product.component';
 import { ListProductComponent } from './components/list-product/list-product.component';
-
+import { ProductListHomeComponent } from './components/product-list-home/product-list-home.component';
 //Material
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
@@ -16,9 +16,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
-// Owl-carousel
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { ProductListHomeComponent } from './components/product-list-home/product-list-home.component';
+
+
 // Swiper
 import { SwiperModule } from 'swiper/angular';
 
@@ -40,7 +39,6 @@ import { SwiperModule } from 'swiper/angular';
     MatButtonModule,
     FlexLayoutModule,
     MatTooltipModule,
-    CarouselModule,
     SwiperModule
   ],
   providers: [],

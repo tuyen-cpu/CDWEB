@@ -9,10 +9,3 @@
     <app-item-product fxFlex="25" fxFlex.sm="33.3333334" fxFlex.xs="50"></app-item-product>
 
 </div> -->
-<owl-carousel-o [options]="customOptions">
-
-    <ng-template carouselSlide *ngFor="let slide of slidesStore" [id]="slide.id">
-        <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
-    </ng-template>
-
-</owl-carousel-o>
