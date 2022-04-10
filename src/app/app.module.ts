@@ -21,6 +21,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // Swiper
 import { SwiperModule } from 'swiper/angular';
 import { SlideHomeComponent } from './components/slide-home/slide-home.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SlideHomeComponent } from './components/slide-home/slide-home.component
     ListProductComponent,
     ProductListHomeComponent,
     SlideHomeComponent,
+    HomeComponent,
 
   ],
   imports: [
