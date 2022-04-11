@@ -16,12 +16,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 
 // Swiper
 import { SwiperModule } from 'swiper/angular';
 import { SlideHomeComponent } from './components/slide-home/slide-home.component';
 import { HomeComponent } from './components/home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HomeComponent } from './components/home/home.component';
     ProductListHomeComponent,
     SlideHomeComponent,
     HomeComponent,
+    FooterComponent,
 
   ],
   imports: [
@@ -43,7 +45,8 @@ import { HomeComponent } from './components/home/home.component';
     MatButtonModule,
     FlexLayoutModule,
     MatTooltipModule,
-    SwiperModule
+    SwiperModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

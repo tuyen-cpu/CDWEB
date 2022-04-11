@@ -59,7 +59,7 @@
 .swiper-descr {
   height: 20%;
   box-sizing: border-box;
-  padding: 4px 0;
+  padding: 0;
   box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 20%);
   border-radius: 0 0 5px 5px;
   .swiper-slide {
@@ -69,9 +69,13 @@
       display:flex;
       justify-content:center;
       align-items:center;
+      min-height:48px;
+      border-top: 4px solid transparent;
 }
   .swiper-slide-thumb-active {
     opacity: 1;
+    border-top: 4px solid var(--main-color);
+    background:#f8f8f8;
   }
   .title{
     font-size:14px;
