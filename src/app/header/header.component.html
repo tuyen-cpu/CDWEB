@@ -1,0 +1,420 @@
+<header>
+    <!-- nav mobile -->
+    <div id="mySidenav" class="sidenav menu-mobile open-sidebar-menu" *ngIf="showNav">
+        <div class="content-memu-mb">
+            <div class="link-list-mobile">
+                <ul class="ct-mobile">
+
+                    <li class="level0 level-top parent level_ico">
+                        <a href="/">TRANG CHỦ</a>
+
+                    </li>
+
+                    <li class="level0 level-top parent level_ico">
+                        <a href="/huong-dan-thanh-toan">THANH TOÁN</a>
+
+                    </li>
+
+                    <li class="level0 level-top parent level_ico">
+                        <a href="/huong-dan-tra-gop">TRẢ GÓP</a>
+
+                    </li>
+
+                    <li class="level0 level-top parent level_ico">
+                        <a href="/chinh-sach-giao-hang">CHÍNH SÁCH GIAO HÀNG</a>
+
+                    </li>
+
+                    <li class="level0 level-top parent level_ico">
+                        <a href="/lien-he">LIÊN HỆ</a>
+
+                    </li>
+
+                    <li class="level0 level-top parent level_ico">
+                        <a href="/tin-tuc">THƯ VIỆN</a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- header top -->
+    <div class="topbar" fxLayout="row" fxLayoutAlign="center center">
+        <div class="container" fxFlex="80%" fxFlex.xs="100%" fxFlex.sm="100%">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="topbar-left" fxFlex="70%" fxShow fxHide.sm fxHide.xs fxLayoutAlign="start center">
+                    Mở cửa: 9h đến 20h, chủ nhật 10h đến 19h
+                </div>
+                <div class="topbar-right" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayoutAlign="end center">
+                    <ul ngClass.xs="center">
+                        <li class="login-content">
+                            <a href="/account" class="click-account">
+                                <mat-icon>person</mat-icon>
+                                Tài khoản
+                            </a>
+                            <ul class="ul-account">
+                                <li><a href="/account/login">Đăng nhập</a></li>
+                                <li><a href="/account/register">Đăng ký</a></li>
+                            </ul>
+                        </li>
+                        <li fxShow fxHide.xs>
+                            <a href="/san-pham-noi-bat" title="Khuyến mãi hot">
+                                <mat-icon>star</mat-icon>
+                                Khuyến mãi hot
+                            </a>
+                        </li>
+                        <li fxShow fxHide.xs>
+                            <a href="/he-thong" title="Hệ thống cửa hàng">
+                                <mat-icon>location_on</mat-icon>
+                                Hệ thống cửa hàng
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mid-header" fxLayout="row" fxLayoutAlign="center center">
+        <div class="container" fxFlex="80%" fxFlex.xs="100%" fxFlex.sm="100%">
+
+            <div class="content-header">
+                <div class="header-main" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                    <div class="menu-bar" fxHide fxShow.sm fxShow.xs (click)="toggleMenuNav()">
+                        <a href="">
+                            <mat-icon>menu</mat-icon>
+                        </a>
+                    </div>
+                    <div class="logo" fxFlex="25%" fxFlex.sm="60%" fxFlex.xs="90%" fxLayoutAlign.sm="center center"
+                        ngClass.xs="center">
+                        <a href="/">
+                            <img src="./../../assets/img/logo.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="header-left" fxFlex="40%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlexOrder.sm="2">
+                        <div class="header-search">
+                            <form class="search-bar" action="/search" method="get">
+                                <input type="text" class="auto-search" placeholder="Sản phẩm bạn muốn tìm...">
+                                <span>
+                                    <button type="submit">
+                                        <mat-icon>search</mat-icon>
+                                    </button>
+                                </span>
+                            </form>
+                        </div>
+                    </div>
+                    <div fxFlex="35%" fxFlex.xs="100%" fxFlex.sm="20%" fxFlexOrder.sm="1">
+                        <div class="header-right" [ngStyle.xs]="{'float': 'none'}">
+                            <div class="hotline-dathang" ngClass.gt-sm="pl-30" fxHide.sm>
+                                <div class="icon">
+                                    <mat-icon>local_phone</mat-icon>
+                                </div>
+                                <div class="content-hotline">
+                                    <div class="hotline">(028) 0123 4567</div>
+                                    <div class="phone"> DĐ:<b> 0909 305 350</b></div>
+                                </div>
+                            </div>
+                            <div class="mini-cart">
+                                <div class="heading-cart">
+                                    <a href="/cart" title="Giỏ hàng">
+                                        <div class="icon">
+                                            <mat-icon>shopping_cart</mat-icon>
+                                        </div>
+                                    </a>
+                                    <div class="content-cart-header">
+                                        <a href="/cart" title="Giỏ hàng">
+                                            (<span class="count-item">0</span>)&nbsp;Sản phẩm
+                                            <span class="txt-giohang">Giỏ hàng</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="top-cart-contain">
+                                    <ul id="cart-sidebar" class="mini-products-list">
+                                        <div class="no-item">
+                                            <p>Không có sản phẩm nào trong giỏ hàng.</p>
+                                        </div>
+                                        <ul class="list-item-cart">
+                                            <li>
+                                                <div class="border-list">
+                                                    <a href="" class="product-image">
+                                                        <img src="./../../assets/img/product1.png" alt="">
+                                                    </a>
+                                                    <div class="detail-item">
+                                                        <p class="product-name">
+                                                            <a class="text2line" href="#">Thẻ Nhớ MicroSDXC SanDisk
+                                                                Extreme Pro V30 A2 64GB 170MB/s SDSQXCY-064G-GN6MA</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="product-detail-bottom">
+                                                        <span class="price">330.000₫</span>
+                                                        <a href="" title="xóa">
+                                                            <i class="material-icons">close</i>
+                                                        </a>
+                                                        <div class="quantity-select">
+                                                            <input type="hidden" class="variantID">
+                                                            <button class="btn-reduced ">-</button>
+                                                            <input type="text" class="number-sidebar" maxlength="12"
+                                                                min="1" value="1" size="4">
+                                                            <button class="btn-increase">+</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="pd">
+                                            <div class="top-subtotal">
+                                                Tổng tiền:
+                                                <span class="price">330.000₫</span>
+                                            </div>
+                                        </div>
+                                        <div class="pd right-ct">
+                                            <a href="#" class="btn btn-primary">
+                                                <span>Tiến hành thanh toán</span>
+                                            </a>
+                                            <a href="#" class="btn btn-white">
+                                                <span>Đi đến giỏ hàng</span>
+                                            </a>
+                                        </div>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="wrap-main" fxLayout="row wrap" fxLayoutAlign="center center">
+        <div class="container" fxFlex="80%" fxFlex.xs="100%" fxFlex.sm="100%">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%">
+                    <div class="menu-mega" (click)="toggleMenuMobile()" [ngClass]="{'pt-100': showMenu}">
+                        <div class="title-menu">
+                            <span class="title">Danh mục sản phẩm</span>
+                            <span class="nav-btn">
+                                <mat-icon>menu</mat-icon>
+                            </span>
+                        </div>
+
+                        <div class="list-menu-header" fxShow fXHide.sm fxHide.xs>
+                            <ul class="ul-menu">
+                                <li class="nav-item lv1">
+                                    <a href="/laptop" title="Laptop">
+                                        <mat-icon class="pr-5">laptop</mat-icon>
+                                        Laptop
+                                        <mat-icon class="right">chevron_right</mat-icon>
+
+                                    </a>
+                                    <ul class="ul-content-right-1" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <li class="nav-item lv2" fxFlex="25%">
+                                            <a href="/thuong-hieu-laptop">Thương hiệu Laptop</a>
+                                            <ul class="ul-content-right-2">
+                                                <li class="nav-item lv3">
+                                                    <a href="/macbook">APPLE</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-hp">HP</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-acer">Acer</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item lv2" fxFlex="25%">
+                                            <a href="/thuong-hieu-laptop">Trending</a>
+                                            <ul class="ul-content-right-2">
+                                                <li class="nav-item lv3">
+                                                    <a href="/macbook">APPLE</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-hp">HP</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-acer">Acer</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item lv2" fxFlex="25%">
+                                            <a href="/thuong-hieu-laptop">Laptop MSI</a>
+                                            <ul class="ul-content-right-2">
+                                                <li class="nav-item lv3">
+                                                    <a href="/macbook">APPLE1</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-hp">HP</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-acer">Acer</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item lv2" fxFlex="25%">
+                                            <a href="/thuong-hieu-laptop">Laptop Dell</a>
+                                            <ul class="ul-content-right-2">
+                                                <li class="nav-item lv3">
+                                                    <a href="/macbook">APPLE</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-hp">HP</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-acer">Acer</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item lv2" fxFlex="25%">
+                                            <a href="/thuong-hieu-laptop">Laptop HP</a>
+                                            <ul class="ul-content-right-2">
+                                                <li class="nav-item lv3">
+                                                    <a href="/macbook">APPLE</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-hp">HP</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-acer">Acer</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item lv1">
+                                    <a href="/ram" title="RAM">
+                                        <mat-icon class="pr-5">developer_board</mat-icon>
+                                        RAM
+                                        <mat-icon class="right">chevron_right</mat-icon>
+                                    </a>
+                                    <ul class="ul-content-right-1 row">
+                                        <li class="nav-item lv2">
+                                            <a href="/thuong-hieu-laptop">Thương hiệu Laptop</a>
+                                            <ul class="ul-content-right-2">
+                                                <li class="nav-item lv3">
+                                                    <a href="/macbook">APPLE</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-hp">HP</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-acer">Acer</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item lv1">
+                                    <a href="/ssd" title="SSD">
+                                        <mat-icon class="pr-5">sd_card</mat-icon>
+                                        SSD
+                                        <mat-icon class="right">chevron_right</mat-icon>
+                                    </a>
+                                    <ul class="ul-content-right-1 row">
+                                        <li class="nav-item lv2">
+                                            <a href="/thuong-hieu-laptop">Thương hiệu Laptop</a>
+                                            <ul class="ul-content-right-2">
+                                                <li class="nav-item lv3">
+                                                    <a href="/macbook">APPLE</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-hp">HP</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-acer">Acer</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item lv1">
+                                    <a href="/usb" target="USB">
+                                        <mat-icon class="pr-5">desk</mat-icon>
+                                        USB
+                                        <mat-icon class="right">chevron_right</mat-icon>
+                                    </a>
+                                    <ul class="ul-content-right-1 row">
+                                        <li class="nav-item lv2">
+                                            <a href="/thuong-hieu-laptop">Thương hiệu Laptop</a>
+                                            <ul class="ul-content-right-2">
+                                                <li class="nav-item lv3">
+                                                    <a href="/macbook">APPLE</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-hp">HP</a>
+                                                </li>
+                                                <li class="nav-item lv3">
+                                                    <a href="/laptop-acer">Acer</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="list-menu-header-show" *ngIf="showMenu">
+                            <ul class="mobile-menu">
+                                <li class="mb-li">
+                                    <a href="/laptop" title="Laptop">
+                                        Laptop
+                                    </a>
+                                </li>
+                                <li class="mb-li">
+                                    <a href="/ram" title="RAM">
+                                        RAM
+                                    </a>
+                                </li>
+                                <li class="mb-li">
+                                    <a href="/usb" title="USB ">
+                                        USB
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div fxFlex="75%" fxHide.xs fxHide.sm>
+                    <div class="bg-header-nav">
+                        <nav class="header-nav">
+                            <ul class="item-big">
+                                <li class="nav-item active">
+                                    <a href="/">
+                                        <span>Trang chủ</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#">
+                                        <span>Thanh toán</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#">
+                                        <span>Trả góp</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#">
+                                        <span>Chính sách giao hàng</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#">
+                                        <span>Liên hệ</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#">
+                                        <span>Thư viện</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
