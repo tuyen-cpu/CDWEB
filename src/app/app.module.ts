@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatIconModule} from '@angular/material/icon';
 
 import { HeaderComponent } from './header/header.component';
 import {LayoutModule} from '@angular/cdk/layout';
@@ -36,7 +34,7 @@ import { FooterComponent } from './components/footer/footer.component';
   declarations: [
     AppComponent,
     HeaderComponent
-    ItemProductComponent,
+    ,ItemProductComponent,
     ListProductComponent,
     ProductListHomeComponent,
     SlideHomeComponent,
@@ -51,7 +49,7 @@ import { FooterComponent } from './components/footer/footer.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatIconModule,
-    LayoutModule
+    LayoutModule,
     MatGridListModule,
     MatCardModule,
     MatIconModule,
