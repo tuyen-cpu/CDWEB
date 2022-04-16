@@ -21,7 +21,9 @@ body {
 :root {
     --main-color: #008744;
 }
-
+a{
+    transition: all 150ms ease-in-out;
+}
 img {
     vertical-align: middle;
 }
