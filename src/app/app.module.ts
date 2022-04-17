@@ -23,13 +23,14 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatTableModule} from '@angular/material/table';
 // Swiper
 import { SwiperModule } from 'swiper/angular';
 import { SlideHomeComponent } from './components/slide-home/slide-home.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductPopupComponent } from './components/product-popup/product-popup.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { ProductPopupComponent } from './components/product-popup/product-popup.
     HomeComponent,
     FooterComponent,
     ProductPopupComponent,
+    CartComponent,
 
 
   ],
@@ -61,7 +63,7 @@ import { ProductPopupComponent } from './components/product-popup/product-popup.
     MatTooltipModule,
     SwiperModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,MatTableModule
 
   ],
   providers: [],

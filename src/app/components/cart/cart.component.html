@@ -1,0 +1,67 @@
+<div class="cart-wrapper"  fxLayoutAlign="center" >
+<div class="site" fxLayout="column"  fxFlex="87"  >
+  <div class="title-cart">
+    <h2 class="content">Giỏ hàng</h2>
+  </div>
+  <div class="cart-list"  fxLayout="column" fxLayoutAlign="center" >
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" >
+      <!-- Position Column -->
+      <ng-container matColumnDef="img-product">
+        <th mat-header-cell *matHeaderCellDef> Ảnh sản phẩm </th>
+        <td mat-cell *matCellDef="let element">
+          <img src="{{element.img}}" alt="">
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name-product">
+        <th mat-header-cell *matHeaderCellDef> Tên sản phẩm </th>
+        <td mat-cell *matCellDef="let element"> <h3 class="name-value">{{element.name}}</h3> </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="price-product">
+        <th mat-header-cell *matHeaderCellDef> Đơn giá </th>
+        <td mat-cell *matCellDef="let element"> <span class="price-value">{{element.price|currency:"VND"}}</span> </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="quantity-product">
+        <th mat-header-cell *matHeaderCellDef> Số lượng </th>
+        <td mat-cell *matCellDef="let element">
+          <button class="btn-quantity btn-increase" (click)="decreaseQuantity(inputElementQuantity)">-</button>
+          <input #inputElementQuantity type="text" class="input-quantity" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  maxlength="2" step="1" max="99" min="1" value="{{element.quantity}}">
+          <button class="btn-quantity btn-decrease" (click)="increaseQuantity(inputElementQuantity)">+</button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="total-product">
+        <th mat-header-cell *matHeaderCellDef>Thành tiền </th>
+        <td mat-cell *matCellDef="let element"><span class="price-value">{{element.quantity*element.price |currency: "VND"}}</span>  </td>
+      </ng-container>
+      <ng-container matColumnDef="action-product">
+        <th mat-header-cell *matHeaderCellDef> Xóa </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon class="btn-remove">close</mat-icon>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row>
+      <td>Tổng tiền:</td>
+        <td>56000</td>
+      </tr>
+    </table>
+    <div class="total-all" fxLayoutAlign="center">
+      <div class="title-wrapper" fxFlex="80"><p class="title">Tổng tiền:</p></div>
+      <div class="value-wrapper" fxFlex="20"><span class="value">{{totalCart|currency:"VND"}}</span></div>
+    </div>
+  <div class="btn-action-wrapper" fxLayoutAlign="end">
+    <button mat-flat-button class="btn"> Tiếp tục mua hàng</button>
+    <button mat-flat-button class="btn btn-checkout">Thực hiện thanh toán</button>
+  </div>
+  </div>
+</div>
+
+
+</div>

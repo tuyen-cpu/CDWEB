@@ -10,6 +10,7 @@
 html,
 body {
     height: 100%;
+  font-family: sans-serif;
 }
 
 body {
@@ -27,7 +28,9 @@ a{
 img {
     vertical-align: middle;
 }
-
+button{
+  transition: background-color .1s ease-in;
+}
 .home-section {
     owl-carousel-o {
         .owl-nav {

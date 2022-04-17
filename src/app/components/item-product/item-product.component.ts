@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Product } from 'src/app/model/product.model';
 import { ProductPopupComponent } from '../product-popup/product-popup.component';
+
+
 @Component({
   selector: 'app-item-product',
   templateUrl: './item-product.component.html',
@@ -10,6 +12,7 @@ import { ProductPopupComponent } from '../product-popup/product-popup.component'
 export class ItemProductComponent implements OnInit {
 @Input() productItem!:Product;
 name!: string;
+
 openDialog(): void {
   // console.log(3233)
   const dialogRef = this.dialog.open(ProductPopupComponent, {
