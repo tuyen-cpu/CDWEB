@@ -1,5 +1,5 @@
 <div class="cart-wrapper"  fxLayoutAlign="center" >
-<div class="site" fxLayout="column"  fxFlex="87"  >
+<div class="site" fxLayout="column"  fxFlex="87"  fxHide.xs>
   <div class="title-cart">
     <h2 class="content">Giỏ hàng</h2>
   </div>
@@ -62,6 +62,37 @@
   </div>
   </div>
 </div>
-
+<div class="site-mobile"  fxLayout="column" fxLayoutAlign="center center" fxHide.md fxHide.sm fxHide.lg>
+  <div class="title-cart">
+    <h2 class="content">Giỏ hàng của bạn</h2>
+  </div>
+  <div class="product-list"  fxLayout="column"  fxFlex="97">
+    <div class="product-item" fxLayoutAlign="center"  *ngFor="let item of dataSource">
+      <a href="" class="link">
+        <img src="{{item.img}}" alt="">
+      </a>
+      <div class="describe">
+        <a href="" class="name">{{item.name}}</a>
+        <p class="price">Giá: <span>{{item.price|currency: "VND"}}</span></p>
+      </div>
+      <div class="action">
+          <div class="quantity-box" fxLayoutAlign="center">
+            <button class="btn-quantity" (click)="decreaseQuantity(inputElementQuantity)">-</button>
+            <input #inputElementQuantity type="text" class="quantity-value" value="1" onkeypress='return event.charCode >= 48 && event.charCode <= 57'  maxlength="2" step="1" max="99" min="1">
+            <button class="btn-quantity btn-increase" (click)="increaseQuantity(inputElementQuantity)">+</button>
+          </div>
+        <a href="" class="btn-delete">Xóa</a>
+      </div>
+    </div>
+  </div>
+  <div class="total-cart">
+    <h3 class="title">Tổng tiền: </h3>
+    <span class="value">3824782347</span>
+  </div>
+  <div class="checkout">
+    <button class="btn">Tiến hành thanh toán</button>
+    <button class="btn btn-continue">Tiếp tục mua hàng</button>
+  </div>
+</div>
 
 </div>
