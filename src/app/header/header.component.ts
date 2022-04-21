@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+
   ngOnInit() {
 
     // this.mediaSub = this.mediaObserver.asObservable().subscribe(change => {
@@ -55,5 +56,5 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   public toggleMenuNav():void{
     this.showNav=!this.showNav;
   }
-  
+
 }

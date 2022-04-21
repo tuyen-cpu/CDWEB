@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule ,LOCALE_ID} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,12 +22,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
 // Swiper
 import { SwiperModule } from 'swiper/angular';
 import { SlideHomeComponent } from './components/slide-home/slide-home.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ProductPopupComponent } from './components/product-popup/product-popup.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 @NgModule({
@@ -40,6 +43,8 @@ import { FooterComponent } from './components/footer/footer.component';
     SlideHomeComponent,
     HomeComponent,
     FooterComponent,
+    ProductPopupComponent,
+    CartComponent,
 
 
   ],
@@ -57,7 +62,8 @@ import { FooterComponent } from './components/footer/footer.component';
     FlexLayoutModule,
     MatTooltipModule,
     SwiperModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,MatTableModule
 
   ],
   providers: [],

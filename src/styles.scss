@@ -2,7 +2,7 @@
 
 // @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300&family=Rubik:wght@400;500;700&display=swap');
 *,
-*::before,
+*::before,s
 *::after {
     box-sizing: border-box;
 }
@@ -10,6 +10,7 @@
 html,
 body {
     height: 100%;
+  font-family: sans-serif;
 }
 
 body {
@@ -21,27 +22,13 @@ body {
 :root {
     --main-color: #008744;
 }
-
+a{
+    transition: all 150ms ease-in-out;
+}
 img {
     vertical-align: middle;
 }
-
-.home-section {
-    owl-carousel-o {
-        .owl-nav {
-            position: absolute;
-            display: block !important;
-            top: -80px;
-            right: -340px;
-            [class*=owl-] {
-                padding: 0;
-                color: #acacac;
-                background: none;
-                &:hover {
-                    background: none;
-                    color: var(--main-color);
-                }
-            }
-        }
-    }
+button{
+  transition: background-color .1s ease-in;
 }
+
