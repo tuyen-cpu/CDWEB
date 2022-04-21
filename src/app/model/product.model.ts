@@ -1,4 +1,5 @@
 export class Product {
+
   constructor(
    public id: number,
    public name: string,
@@ -8,5 +9,6 @@ export class Product {
    public discount:number,
    public urlImg:string
    ) {}
+
  }
 
