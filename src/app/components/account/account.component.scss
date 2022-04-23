@@ -58,22 +58,6 @@ margin-top:80px;
       .btn{
         display: block;
         width: 100%;
-        background: var(--main-color);
-        color: #fff;
-        border-radius: 3px;
-        font-size: 14px;
-        font-family: roboto,helveticaneue,helvetica neue,sans-serif;
-        border: 1px solid transparent;
-        height: 40px;
-        line-height: 39px;
-        padding: 0 20px;
-        text-align: center;
-        white-space: nowrap;
-        outline: none!important;
-        cursor: pointer;
-        font-weight: 400;
-        letter-spacing: 0;
-        transition: background-color .1s ease-in;
         &:hover{
           background: #fff;
           color: var(--main-color);

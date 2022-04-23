@@ -32,6 +32,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ProductPopupComponent } from './components/product-popup/product-popup.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AccountComponent } from './components/account/account.component';
+import { AddressComponent } from './components/address/address.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { AccountComponent } from './components/account/account.component';
     ProductPopupComponent,
     CartComponent,
     AccountComponent,
+    AddressComponent,
 
 
   ],
