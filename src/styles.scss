@@ -11,11 +11,12 @@ html,
 body {
     height: 100%;
   font-family: sans-serif;
+  font-weight:400;
 }
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    //font-family: Roboto, "Helvetica Neue", sans-serif;
     overflow-x: hidden;
 }
 
@@ -30,5 +31,28 @@ img {
 }
 button{
   transition: background-color .1s ease-in;
+}
+.main-btn {
+  background: var(--main-color);
+  color: #fff;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: roboto, helveticaneue, helvetica neue, sans-serif;
+  border: 1px solid transparent;
+  height: 40px;
+  line-height: 39px;
+  padding: 0 20px;
+  text-align: center;
+  white-space: nowrap;
+  outline: none !important;
+  cursor: pointer;
+  font-weight: 400;
+  letter-spacing: 0;
+  transition: background-color .1s ease-in;
+  &:hover {
+    background: #fff;
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+  }
 }
 
