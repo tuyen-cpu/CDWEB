@@ -5,11 +5,11 @@
             <div class="link-list-mobile">
                 <ul class="ct-mobile" (click)="hiddenMenuNav ()">
                     <li class="level0 level-top parent level_ico" (click)="hiddenMenuNav ()">
-                        <img src="./../../assets/img/logo.png" alt="logo">
-
+                        <!-- <img src="./../../assets/img/logo.png" alt="logo"> -->
+                        <img src="https://i.ibb.co/XynK8Fr/logo.webp" alt="logo">                        
                     </li>
                     <li class="level0 level-top parent level_ico">
-                        <a href="">TRANG CHỦ</a>
+                        <a routerLink="" routerLinkActive="active">TRANG CHỦ</a>
 
                     </li>
 
@@ -58,8 +58,8 @@
                                 Tài khoản
                             </a>
                             <ul class="ul-account">
-                                <li><a href="/login">Đăng nhập</a></li>
-                                <li><a href="/register">Đăng ký</a></li>
+                                <li><a routerLink="/login" routerLinkActive="active" >Đăng nhập</a></li>
+                                <li><a routerLink="/register" routerLinkActive="active" >Đăng ký</a></li>
                             </ul>
                         </li>
                         <li fxShow fxHide.xs>
@@ -90,7 +90,8 @@
                     </div>
                     <div class="logo" fxFlex="25%" fxFlex.sm="60%" fxFlex.xs="90%" fxLayoutAlign.sm="center center" ngClass.xs="center">
                         <a href="/">
-                            <img src="./../../assets/img/logo.png" alt="logo">
+                            <!-- <img src="./../../assets/img/logo.png" alt="logo"> -->
+                            <img src="https://i.ibb.co/XynK8Fr/logo.webp" alt="logo">
                         </a>
                     </div>
                     <div class="header-left" fxFlex="40%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlexOrder.sm="2">

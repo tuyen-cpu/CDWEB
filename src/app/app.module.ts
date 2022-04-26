@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { LayoutModule } from '@angular/cdk/layout';
 
 //Components
@@ -45,6 +45,7 @@ import { RecommendedProductsComponent } from './components/recommended-products/
 import { AccountComponent } from './components/account/account.component';
 import { AddressComponent } from './components/address/address.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     AccountComponent,
     AddressComponent,
     CheckoutComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     BrowserModule,

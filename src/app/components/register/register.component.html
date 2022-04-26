@@ -1,17 +1,5 @@
 
-<section class="bread-crumb" fxLayout="row" fxLayoutAlign="center center">
-    <div fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
-        <div>
-            <span>
-                <a href="">Trang chủ</a>
-                <i class="material-icons">chevron_right</i>
-            </span>
-            <span>
-                Đăng ký tài khoản
-            </span>
-        </div>
-    </div>
-</section>
+<app-breadcrumb [name] = "'Đăng ký tài khoản'"></app-breadcrumb>
 
 <div class="form-container" fxLayout="row" fxLayoutAlign="center center">
     <div class="plr-15" fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
@@ -62,7 +50,7 @@
                 </div>
                 <div fxFlex="100%" class="form-buttons">
                     <button class="button" type="submit" [disabled]="registerForm.invalid">Đăng kí</button>
-                    <a href="/login">Đăng nhập</a>
+                    <a routerLink="/login" routerLinkActive="active">Đăng nhập</a>
                 </div>
             </div>
            

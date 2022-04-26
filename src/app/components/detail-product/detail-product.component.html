@@ -1,12 +1,5 @@
-<section class="bread-crumb" fxLayout="row" fxLayoutAlign="center center">
-    <div fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
-        <div>
-            <span>
-                {{product.name}}
-            </span>
-        </div>
-    </div>
-</section>
+
+<app-breadcrumb [name] = "product.name"></app-breadcrumb>
 
 <div class="details-product-container" id="details-product-container" fxLayout="row" fxLayoutAlign="center center">
     <div fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
