@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   private mqAlias = '';
   public showMenu = false;
-  public showNav = false;
 
   private mediaSub: Subscription = new Subscription;
   constructor(
@@ -50,11 +49,17 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   public toggleMenuMobile():void{
     if(this.mqAlias==='xs' || this.mqAlias==='sm'){
       this.showMenu=!this.showMenu;
+      console.log("menu mobile")
     }
   }
 
-  public toggleMenuNav():void{
-    this.showNav=!this.showNav;
+  public showMenuNav():void{
+    document.getElementById("mySidenav")?.setAttribute("style", "visibility: visible;");
+    document.getElementById("bg-nav")?.setAttribute("style", "visibility: visible;");
+  }
+  public hiddenMenuNav():void{
+    document.getElementById("mySidenav")?.setAttribute("style", "visibility: hidden;");
+    document.getElementById("bg-nav")?.setAttribute("style", "visibility: hidden;");
   }
 
 }

@@ -1,0 +1,70 @@
+<section class="bread-crumb" fxLayout="row" fxLayoutAlign="center center">
+    <div  fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
+        <div>
+            <span>
+                <a href="">Trang chủ</a>
+                <i class="material-icons">chevron_right</i>
+            </span>
+            <span>
+                Đăng nhập tài khoản
+            </span>
+        </div>
+    </div>
+</section>
+<div class="form-container" fxLayout="row" fxLayoutAlign="center center">
+    <div class="plr-15" fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
+        <h2 class="title-head">
+            <a href="#">Đăng nhập tài khoản</a>
+        </h2>
+        <div fxLayout="row wrap " fxLayoutAlign="center start">
+            <div class="login-form" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlexFill>
+                <p class="notice-form">Nếu đã có tài khoản, vui lòng đăng nhập tại đây</p>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="form">
+                    <div class="form-group">
+                        <label for="email">
+                            Email *
+                        </label>
+                        <input id="email" type="email" formControlName="email" class="form-control">
+                        <div *ngIf=" fLogin['email'].errors?.['required'] && fLogin['email'].touched
+                        || fLogin['email'].errors?.['required'] && submitted" class="alert">Email bắt buộc phải nhập</div>
+                        <div *ngIf=" fLogin['email'].errors?.['email']" class="alert">Email không hợp lệ</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">
+                            Mật khẩu*
+                        </label>
+                        <input id="password" type="password" formControlName="password" class="form-control">
+                        <div *ngIf=" fLogin['password'].errors?.['required'] && fLogin['password'].touched
+                        || fLogin['password'].errors?.['required'] && submitted" class="alert">Mật khẩu bắt buộc phải nhập</div>
+                        <div *ngIf=" fLogin['password'].errors?.['minlength']" class="alert">Mật khẩu phải có ít nhất 6 kí tự</div>
+                        <div *ngIf=" fLogin['password'].errors?.['maxLength']" class="alert">Mật khẩu phải chỉ tối đa 40 kí tự</div>
+            
+                    </div>
+                    <div class="form-buttons">
+                        <button class="button" type="submit" [disabled]="loginForm.invalid" >Đăng nhập</button>
+                        <a href="/login">Đăng kí</a>
+                    </div>
+                   
+                </form>
+            </div>
+            <div class="recover-password" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlexFill>
+                <p class="notice-form">Bạn quên mật khẩu? Nhập địa chỉ email để lấy lại mật khẩu qua email.</p>
+                <form [formGroup]="rePwdForm" (ngSubmit)="onSubmitRePwd()" class="form">
+                    <div class="form-group">
+                        <label for="email">
+                            Email *
+                        </label>
+                        <input id="email" type="email" formControlName="email" class="form-control">
+                        <div *ngIf=" fPwd['email'].errors?.['required'] && fPwd['email'].touched
+                        || fPwd['email'].errors?.['required'] && submitted" class="alert">Email bắt buộc phải nhập</div>
+                        <div *ngIf=" fPwd['email'].errors?.['email']" class="alert">Email không hợp lệ</div>
+                    </div>
+                    <div class="form-buttons">
+                        <button class="button" type="submit" [disabled]="rePwdForm.invalid" >Lấy lại mật khẩu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+       
+    </div>
+</div>

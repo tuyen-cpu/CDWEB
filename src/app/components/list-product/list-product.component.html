@@ -1,11 +1,77 @@
-<!-- <div fxLayout="row wrap" fxLayoutGap="15px grid" fxLayoutAlign="start stretch" fxFlexFill>
-    <app-item-product fxFlex="25" fxFlex.sm="33.3333334" fxFlex.xs="50"></app-item-product>
-    <app-item-product fxFlex="25" fxFlex.sm="33.3333334" fxFlex.xs="50"></app-item-product>
-    <app-item-product fxFlex="25" fxFlex.sm="33.3333334" fxFlex.xs="50"></app-item-product>
-    <app-item-product fxFlex="25" fxFlex.sm="33.3333334" fxFlex.xs="50"></app-item-product>
-    <app-item-product fxFlex="25" fxFlex.sm="33.3333334" fxFlex.xs="50"></app-item-product>
-    <app-item-product fxFlex="25" fxFlex.sm="33.3333334" fxFlex.xs="50"></app-item-product>
-    <app-item-product fxFlex="25" fxFlex.sm="33.3333334" fxFlex.xs="50"></app-item-product>
-    <app-item-product fxFlex="25" fxFlex.sm="33.3333334" fxFlex.xs="50"></app-item-product>
+<section class="bread-crumb" fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
+        <div>
+            <span>
+                <a href="">Trang chủ</a>
+                <i class="material-icons">chevron_right</i>
+            </span>
+            <span>
+                Laptop
+            </span>
+        </div>
+    </div>
+</section>
 
-</div> -->
+<div class="details-product-container" id="details-product-container" fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
+
+        <div class="list-product" fxLayout="row wrap " fxLayoutAlign="space-around  start">
+
+            <div fxFlex="25" fxHide.sm fxHide.xs >
+                <div class="filter">
+                    <div class="item">
+                        <div class="title">
+                            THƯƠNG HIỆU
+                        </div>
+                        <div class="content">
+                            <div class="field-search form-group">
+                                <input type="text" placeholder="Lọc theo thương hiệu" class="form-control">
+                                <span class="input-group-btn">
+                                    <button  class="btn btn-default">
+                                        <i class="material-icons">search</i>
+                                    </button>
+                                </span>
+                            </div>
+                            <ul>
+                                <li class="filter-item" *ngFor="let attrPro of setAttribute">
+                                    <span>
+                                        <input type="checkbox" id="filter-{{attrPro.id}}" >
+                                        {{attrPro.value}}
+                                    </span> 
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="title">
+                            GIÁ SẢN PHẨM
+                        </div>
+                        <div class="content">
+                            <mat-slider id="slider-high" (change)="onInputSliderHighChange($event)"
+                            [max]="maxHigh"
+                            [min]="minHigh"
+                            [step]="step"
+                            [(ngModel)]="valueHigh"
+                            [disabled]="disabledHigh"
+                            >
+                            </mat-slider>
+                            <mat-slider id="slider-low" (change)="onInputSliderLowChange($event)"
+                            [max]="maxLow"
+                            [min]="minLow"
+                            [step]="step"
+                            [(ngModel)]="valueLow"
+                            [disabled]="disabledLow"
+                            >
+                            </mat-slider>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div fxFlex="75" fxFlex.sm="100" fxFlex.xs="100">
+            </div>
+        </div>
+
+    </div>
+</div>

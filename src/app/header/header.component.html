@@ -1,12 +1,15 @@
 <header>
     <!-- nav mobile -->
-    <div id="mySidenav" class="sidenav menu-mobile open-sidebar-menu" *ngIf="showNav">
+    <div id="mySidenav" class="sidenav menu-mobile open-sidebar-menu"  >
         <div class="content-memu-mb">
             <div class="link-list-mobile">
-                <ul class="ct-mobile">
+                <ul class="ct-mobile" (click)="hiddenMenuNav ()">
+                    <li class="level0 level-top parent level_ico" (click)="hiddenMenuNav ()">
+                        <img src="./../../assets/img/logo.png" alt="logo">
 
+                    </li>
                     <li class="level0 level-top parent level_ico">
-                        <a href="/">TRANG CHỦ</a>
+                        <a href="">TRANG CHỦ</a>
 
                     </li>
 
@@ -39,23 +42,24 @@
             </div>
         </div>
     </div>
+    <div id="bg-nav" (click)="hiddenMenuNav ()"></div>
     <!-- header top -->
     <div class="topbar" fxLayout="row" fxLayoutAlign="center center">
-        <div class="container" fxFlex="80%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <div class="container" fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <div class="topbar-left" fxFlex="70%" fxShow fxHide.sm fxHide.xs fxLayoutAlign="start center">
                     Mở cửa: 9h đến 20h, chủ nhật 10h đến 19h
                 </div>
                 <div class="topbar-right" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayoutAlign="end center">
-                    <ul ngClass.xs="center">
-                        <li class="login-content">
+                    <ul ngClass.xs="center" >
+                        <li class="login-content"  >
                             <a href="/account" class="click-account">
                                 <mat-icon>person</mat-icon>
                                 Tài khoản
                             </a>
                             <ul class="ul-account">
-                                <li><a href="/account/login">Đăng nhập</a></li>
-                                <li><a href="/account/register">Đăng ký</a></li>
+                                <li><a href="/login">Đăng nhập</a></li>
+                                <li><a href="/register">Đăng ký</a></li>
                             </ul>
                         </li>
                         <li fxShow fxHide.xs>
@@ -77,14 +81,12 @@
     </div>
 
     <div class="mid-header" fxLayout="row" fxLayoutAlign="center center">
-        <div class="container" fxFlex="80%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <div class="container" fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
 
             <div class="content-header">
                 <div class="header-main" fxLayout="row wrap" fxLayoutAlign="space-between center">
-                    <div class="menu-bar" fxHide fxShow.sm fxShow.xs (click)="toggleMenuNav()">
-                        <a href="">
-                            <mat-icon>menu</mat-icon>
-                        </a>
+                    <div class="menu-bar" fxHide fxShow.sm fxShow.xs (click)="showMenuNav()">
+                        <mat-icon>menu</mat-icon>
                     </div>
                     <div class="logo" fxFlex="25%" fxFlex.sm="60%" fxFlex.xs="90%" fxLayoutAlign.sm="center center" ngClass.xs="center">
                         <a href="/">
@@ -186,7 +188,7 @@
     </div>
 
     <div class="wrap-main" fxLayout="row wrap" fxLayoutAlign="center center">
-        <div class="container" fxFlex="80%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <div class="container" fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
             <div fxLayout="row" fxLayoutAlign="center center">
                 <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%">
                     <div class="menu-mega" (click)="toggleMenuMobile()" [ngClass]="{'pt-100': showMenu}">
@@ -374,7 +376,7 @@
                 <div fxFlex="75%" fxHide.xs fxHide.sm>
                     <div class="bg-header-nav">
                         <nav class="header-nav">
-                            <ul class="item-big">
+                            <ul class="item-big" fxLayoutAlign="space-evenly center">
                                 <li class="nav-item active">
                                     <a href="/">
                                         <span>Trang chủ</span>

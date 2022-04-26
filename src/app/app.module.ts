@@ -24,6 +24,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSliderModule} from '@angular/material/slider';
+
+
+
+//Form
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 // Swiper
 import { SwiperModule } from 'swiper/angular';
 import { SlideHomeComponent } from './components/slide-home/slide-home.component';
@@ -31,6 +39,18 @@ import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductPopupComponent } from './components/product-popup/product-popup.component';
 import { CartComponent } from './components/cart/cart.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { DetailProductComponent } from './components/detail-product/detail-product.component';
+import { RelatedProductsComponent } from './components/related-products/related-products.component';
+import { ViewedProductsComponent } from './components/viewed-products/viewed-products.component';
+import { RecommendedProductsComponent } from './components/recommended-products/recommended-products.component';
+
+
+
+
+
+
 
 
 @NgModule({
@@ -45,7 +65,12 @@ import { CartComponent } from './components/cart/cart.component';
     FooterComponent,
     ProductPopupComponent,
     CartComponent,
-
+    RegisterComponent,
+    LoginComponent,
+    DetailProductComponent,
+    RelatedProductsComponent,
+    ViewedProductsComponent,
+    RecommendedProductsComponent,
 
   ],
   imports: [
@@ -63,8 +88,16 @@ import { CartComponent } from './components/cart/cart.component';
     MatTooltipModule,
     SwiperModule,
     MatExpansionModule,
-    MatDialogModule,MatTableModule
+    MatDialogModule,MatTableModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatProgressBarModule,
+    MatSliderModule
 
+
+
+
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
