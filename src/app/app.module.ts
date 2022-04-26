@@ -1,25 +1,23 @@
-import { NgModule ,LOCALE_ID} from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
-import {LayoutModule} from '@angular/cdk/layout';
+import { LayoutModule } from '@angular/cdk/layout';
 
 //Components
 import { ItemProductComponent } from './components/item-product/item-product.component';
 import { ListProductComponent } from './components/list-product/list-product.component';
 import { ProductListHomeComponent } from './components/product-list-home/product-list-home.component';
 //Material
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatCardModule} from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -32,6 +30,10 @@ import {MatSliderModule} from '@angular/material/slider';
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatRadioModule } from '@angular/material/radio';
 // Swiper
 import { SwiperModule } from 'swiper/angular';
 import { SlideHomeComponent } from './components/slide-home/slide-home.component';
@@ -46,18 +48,15 @@ import { RelatedProductsComponent } from './components/related-products/related-
 import { ViewedProductsComponent } from './components/viewed-products/viewed-products.component';
 import { RecommendedProductsComponent } from './components/recommended-products/recommended-products.component';
 
-
-
-
-
-
-
+import { AccountComponent } from './components/account/account.component';
+import { AddressComponent } from './components/address/address.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
-    ,ItemProductComponent,
+    HeaderComponent,
+    ItemProductComponent,
     ListProductComponent,
     ProductListHomeComponent,
     SlideHomeComponent,
@@ -72,6 +71,9 @@ import { RecommendedProductsComponent } from './components/recommended-products/
     ViewedProductsComponent,
     RecommendedProductsComponent,
 
+    AccountComponent,
+    AddressComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,13 +95,13 @@ import { RecommendedProductsComponent } from './components/recommended-products/
     FormsModule,
     MatProgressBarModule,
     MatSliderModule
-
-
-
-
-    
+    MatDialogModule,
+    MatTableModule,
+    MatRadioModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

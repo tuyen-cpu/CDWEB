@@ -1,0 +1,154 @@
+<div class="checkout-wrapper" fxLayoutAlign="center">
+    <div class="" fxFlex="90" fxFlex.xs="98" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+        <main class="information" fxFlex="70" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+            <div class="delivery" fxFlex="50" fxFlex.xs="100" fxFlex.sm="100">
+                <div class="title">Thông tin nhận hàng </div>
+                <div class="content">
+                    <div class="field">
+
+                        <select name="" id="customer-address" class="input-info label-info--select">
+                          <option>tuyen 1</option>
+                            <option>tuyen 3</option>
+                         </select>
+                        <label for="customer-address" class="label-info label-info--select">Sổ địa chỉ</label>
+                    </div>
+                    <div class="field">
+
+                        <input type="text" class="input-info" id="customer-name">
+                        <label for="customer-name" class="label-info">Họ và tên</label>
+                    </div>
+                    <div class="field">
+
+                        <select name="" id="customer-province" class="input-info">
+            <option>tuyen 1</option>
+            <option>tuyen 3</option>
+          </select>
+                        <label for="customer-province" class="label-info label-info--select">Tỉnh thành</label>
+                    </div>
+                    <div class="field">
+
+                        <select name="" id="customer-district" class="input-info">
+            <option>tuyen 1</option>
+            <option>tuyen 3</option>
+          </select>
+                        <label for="customer-district" class="label-info label-info--select">Quận huyện</label>
+                    </div>
+                    <div class="field">
+
+                        <select name="" id="customer-wards" class="input-info">
+                            <option>tuyen 1</option>
+                            <option>tuyen 3</option>
+                          </select>
+                        <label for="customer-wards" class="label-info label-info--select">Phường xã</label>
+                    </div>
+                    <div class="field">
+
+                        <textarea name="" rows="2" id="customer-note" class="input-info"></textarea>
+                        <label for="customer-note" class="label-info">Ghi chú (tùy chọn)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-transport" fxFlex="50" fxFlex.xs="100" fxFlex.sm="100">
+                <div class="transport">
+                    <div class="title">Vận chuyển</div>
+                    <div class="time-delivery">
+                        <div class="fill-complete">
+                            <input type="radio" id="time-shipping" class="radio-input" checked>
+                            <label for="time-shipping" class="radio-label">
+                              <span class="time">GIAO NHANH 2-4 NGÀY</span>
+                              <span class="fee">Miễn phí</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment">
+                    <div class="title">Thanh toán</div>
+                    <div class="payment-list">
+
+                        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="favoriteSeason">
+                            <mat-radio-button class="payment-item" *ngFor="let season of seasons" [value]="season">
+                                {{season}}
+                            </mat-radio-button>
+                        </mat-radio-group>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+        <aside class="order" fxFlex="30" fxFlex.xs="100" fxFlex.sm="100">
+            <div class="header">
+                <h2 class="title">Đơn hàng (3 sản phẩm)</h2>
+            </div>
+            <div class="content">
+                <div class="product-list">
+                    <div class="product-item">
+                        <div class="img-wrapper">
+                            <img src="https://bizweb.sapocdn.net/thumb/thumb/100/329/122/products/a400-01-be7f2126-f2ce-4fcd-8945-f2c31db996f5.jpg?v=1638368024010" alt="">
+                            <span class="quantity">3</span>
+                        </div>
+                        <div class="name">
+                            <p> SSD Kingston A400 2.5-Inch SATA III 240GB SA400S37/240G</p>
+                        </div>
+                        <div class="price">
+                            7770000Đ
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <div class="img-wrapper">
+                            <img src="https://bizweb.sapocdn.net/thumb/thumb/100/329/122/products/a400-01-be7f2126-f2ce-4fcd-8945-f2c31db996f5.jpg?v=1638368024010" alt="">
+                            <span class="quantity">3</span>
+                        </div>
+                        <div class="name">
+                            <p> SSD Kingston A400 2.5-Inch SATA III 240GB SA400S37/240G</p>
+                        </div>
+                        <div class="price">
+                            7770000Đ
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <div class="img-wrapper">
+                            <img src="https://bizweb.sapocdn.net/thumb/thumb/100/329/122/products/a400-01-be7f2126-f2ce-4fcd-8945-f2c31db996f5.jpg?v=1638368024010" alt="">
+                            <span class="quantity">3</span>
+                        </div>
+                        <div class="name">
+                            <p> SSD Kingston A400 2.5-Inch SATA III 240GB SA400S37/240G</p>
+                        </div>
+                        <div class="price">
+                            7770000Đ
+                        </div>
+                    </div>
+                </div>
+
+                <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="voucher-wrapper">
+                    <div class="field">
+                        <input type="text" class="input-info" id="voucher-input" formControlName="voucherValue">
+                        <label for="voucher-input" class="label-info">Nhập mã giảm giá</label>
+                    </div>
+                    <button class="main-btn btn-apply" type="submit" [disabled]="!recipeForm.valid">Áp dụng</button>
+                </form>
+
+                <div class="order-fee">
+                    <div class="fee-line" fxLayoutAlign="space-between center">
+                        <div class="fee-title">Tạm tính</div>
+                        <div class="fee-value">24.750.000₫</div>
+                    </div>
+                    <div class="fee-line" fxLayoutAlign="space-between center">
+                        <div class="fee-title">Phí vận chuyển</div>
+                        <div class="fee-value">24.750.000₫</div>
+                    </div>
+                </div>
+                <div class="total-wrapper" fxLayoutAlign="space-between center">
+                    <div class="total-title">Tổng cộng</div>
+                    <div class="total-value">24.750.000₫</div>
+                </div>
+                <div class="btn-action" fxLayoutAlign="space-between center">
+                    <a class="btn-back" fxLayoutAlign="space-between center">
+                        <mat-icon class="icon-left">arrow_left</mat-icon>Quay lại giỏ hàng</a>
+                    <button class="main-btn btn-apply btn-checkout">Đặt hàng</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+
+</div>
