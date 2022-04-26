@@ -4,7 +4,7 @@ $yellow-btn: #ffba00;
 
 // general
 .container {
-    padding: 0 15px;
+    padding: 0;
     margin: 0 auto;
 }
 
@@ -37,7 +37,6 @@ img {
     vertical-align: middle;
 }
 
-
 .sidenav {
     width: 280px;
     height: 100%;
@@ -46,7 +45,7 @@ img {
     background-color: #008744;
     overflow-x: hidden;
     box-shadow: 0 6px 12px 0 rgb(0 0 0 / 18%);
-
+    visibility: hidden;
     .content-memu-mb {
         display: block;
         float: left;
@@ -58,6 +57,10 @@ img {
             .level0 {
                 border-top: solid 1px #fff;
 
+                &:first-child{
+                    padding: 10px;
+                    background: $yellow-btn;
+                }
                 a {
                     display: block;
                     font-size: 14px;
@@ -69,7 +72,17 @@ img {
         }
     }
 }
-
+#bg-nav{
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    background: #000;
+    visibility: hidden;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
 .topbar {
     border-bottom: 1px solid;
     border-color: rgba(255, 255, 255, .2);
@@ -181,9 +194,11 @@ img {
     padding: 6px 0;
     background: $green-bg;
     color: $white-font;
-
+    .header-main{
+        position: relative;
+    }
     .header-main .menu-bar {
-        top: 70px;
+        top: 24px;
         width: 50px;
         left: 15px;
         position: absolute;
@@ -613,6 +628,7 @@ img {
             -webkit-transition: -webkit-transform .5s ease, opacity .2s ease, max-height 0s step-end, max-width 0s step-end, padding 0s step-end;
             -o-transition: -o-transform .5s ease, opacity .2s ease, max-height 0s step-end, max-width 0s step-end, padding 0s step-end;
             transition: transform .5s ease, opacity .2s ease, max-height 0s step-end, max-width 0s step-end, padding 0s step-end;
+            
         }
 
         .list-menu-header {
@@ -666,7 +682,7 @@ img {
                         }
 
                         &.lv1 .ul-content-right-1 {
-                            display: block;
+                            visibility: visible;
                         }
                     }
 
@@ -700,7 +716,8 @@ img {
                     margin-left: 0;
                     background: #fff;
                     padding: 25px 25px 45px;
-                    display: none;
+                    visibility: hidden;
+                    display: block;
                     box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 
                     .nav-item {
