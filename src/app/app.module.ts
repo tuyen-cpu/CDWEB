@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { LayoutModule } from '@angular/cdk/layout';
 
@@ -19,20 +18,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatTableModule} from '@angular/material/table';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatSliderModule} from '@angular/material/slider';
-
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSliderModule } from '@angular/material/slider';
 
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
 // Swiper
 import { SwiperModule } from 'swiper/angular';
@@ -90,12 +84,12 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     MatTooltipModule,
     SwiperModule,
     MatExpansionModule,
-    MatDialogModule,MatTableModule,
+    MatDialogModule,
+    MatTableModule,
     ReactiveFormsModule,
     FormsModule,
     MatProgressBarModule,
-    MatSliderModule
-    MatDialogModule,
+    MatSliderModule,
     MatTableModule,
     MatRadioModule,
     FormsModule,
