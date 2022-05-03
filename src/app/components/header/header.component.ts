@@ -62,4 +62,19 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     document.getElementById("bg-nav")?.setAttribute("style", "visibility: hidden;");
   }
 
+  public reduceItemMiniCart(id:number):void{
+  let input_product = <HTMLInputElement>document.getElementById('product-mini-cart-'+id);
+  let quantityProduct = input_product.value;
+  let tmp:number = +quantityProduct;
+  if(tmp>1){
+    input_product.value = (tmp-1)+'';
+  }
+  }
+
+  public increaseItemMiniCart(id:number):void{
+    let input_product = <HTMLInputElement>document.getElementById('product-mini-cart-'+id);
+    let quantityProduct = input_product.value;
+    let tmp:number = +quantityProduct;
+    input_product.value = (tmp+1)+'';
+    }
 }

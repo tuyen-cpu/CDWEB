@@ -1,18 +1,7 @@
-<section class="bread-crumb" fxLayout="row" fxLayoutAlign="center center">
-    <div fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
-        <div>
-            <span>
-                <a href="">Trang chủ</a>
-                <i class="material-icons">chevron_right</i>
-            </span>
-            <span>
-                Laptop
-            </span>
-        </div>
-    </div>
-</section>
 
-<div class="details-product-container" id="details-product-container" fxLayout="row" fxLayoutAlign="center center">
+<app-breadcrumb [name] = "category"></app-breadcrumb>
+
+<div class="list-product-container" id="list-product-container" fxLayout="row" fxLayoutAlign="center center">
     <div fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
 
         <div class="list-product" fxLayout="row wrap " fxLayoutAlign="space-around  start">
@@ -33,11 +22,11 @@
                                 </span>
                             </div>
                             <ul>
-                                <li class="filter-item" *ngFor="let attrPro of setAttribute">
-                                    <span>
-                                        <input type="checkbox" id="filter-{{attrPro.id}}" >
-                                        {{attrPro.value}}
-                                    </span> 
+                                <li class="filter-item" *ngFor="let v of setTrademark.values">
+                                    <label>
+                                        <input type="checkbox" value="v" >
+                                        {{v}}
+                                    </label> 
                                 </li>
                             </ul>
                         </div>
@@ -48,30 +37,144 @@
                             GIÁ SẢN PHẨM
                         </div>
                         <div class="content">
-                            <mat-slider id="slider-high" (change)="onInputSliderHighChange($event)"
-                            [max]="maxHigh"
-                            [min]="minHigh"
-                            [step]="step"
-                            [(ngModel)]="valueHigh"
-                            [disabled]="disabledHigh"
-                            >
-                            </mat-slider>
-                            <mat-slider id="slider-low" (change)="onInputSliderLowChange($event)"
-                            [max]="maxLow"
-                            [min]="minLow"
-                            [step]="step"
-                            [(ngModel)]="valueLow"
-                            [disabled]="disabledLow"
-                            >
-                            </mat-slider>
+                            <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options" (userChangeEnd)="onUserChangeEnd($event)">
+                            </ngx-slider>
+                            <div class="price-input">
+                                <input type="text" id="min-price" disabled value="0" [ngModel]="formatPrice(value)">
+                                <input type="text" id="max-price" disabled value="110.000.000₫" [ngModel]="formatPrice(highValue)">
+                            </div>
+                            <div  class="price-btn">
+                                <a href="" class="filter-price">Lọc giá</a>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="item" *ngFor="let attribute of attributes" >
+                        <div class="title">
+                            {{attribute.name}}
+                        </div>
+                        <div class="content">
+                            <ul>
+                                <li class="filter-item" *ngFor="let v of attribute.values">
+                                    <label>
+                                        <input type="checkbox" value="v" >
+                                        {{v}}
+                                    </label> 
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
             <div fxFlex="75" fxFlex.sm="100" fxFlex.xs="100">
+                <section class="main-container collection">
+                    <div class="category-products products">
+                        <div class="sortPagiBar">
+                            <div  fxLayout="row " fxLayoutAlign="start  center">
+                                <div fxFlex="50">
+                                    <h1 class="title-head">Laptop</h1>
+                                </div>
+                                <div fxFlex="50">
+                                    <div class="mode">
+                                        <div class="view-mode">
+                                            <a (click)="view_list=true;" [ngClass]="{'active': view_list}">
+                                                <i class="material-icons">format_list_bulleted</i>
+                                            </a>
+                                            <a (click)="view_list=false;" [ngClass]="{'active': !view_list}">
+                                                <i class="material-icons">grid_on</i>
+                                            </a>
+                                        </div>
+                                        <div id="sort-by">
+                                            <ul>
+                                                <li class="lv1"><span class="val" id="selected-sort">Mặc định</span>
+                                                    <ul class="ul_2">
+                                                        <li><a (click)="sortBy('default')">Mặc định</a></li>								
+                                                        <li><a (click)="sortBy('AZ')">A → Z</a></li>
+                                                        <li><a (click)="sortBy('ZA')">Z → A</a></li>
+                                                        <li><a (click)="sortBy('increase')">Giá tăng dần</a></li>
+                                                        <li><a (click)="sortBy('decrease')">Giá giảm dần</a></li>
+                                                        <li><a (click)="sortBy('new')">Hàng mới nhất</a></li>
+                                                        <li><a (click)="sortBy('old')">Hàng cũ nhất</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <section class="products-view products-view-list" [hidden]="!view_list">
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <div fxFlex="97" >
+                                    <div class="item-list" *ngFor="let product of products">
+                                        <div fxLayout="row" fxLayoutAlign="center center">
+                                            <div fxFlex="35" fxFlex.xs="97">
+                                                <div class="product-thumbnail">
+                                                    <a href="" class="img-link">
+                                                        <img src="{{product.urlImg}}" alt="">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div fxFlex="65" fxFlex.xs="97">
+                                                <div class="product-info">
+                                                    <h3 class="product-name">
+                                                        <a href="">{{product.name}}</a>
+                                                    </h3>
+                                                    <div class="price-box">
+                                                        <div class="special-price">
+                                                            {{formatPrice(product.price - product.price*product.discount/100) }}
+                                                        </div>
+                                                        <div class="old-price">
+                                                            {{formatPrice(product.price)}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-summary">{{product.desc}}</div>
+                                                    <div class="product-action">
+                                                        <button class="btn-cart">
+                                                            <i class="material-icons">shopping_cart_checkout</i>
+                                                            <span> Mua ngay</span>
+                                                        </button>
+                                                        <a (click)="openDialogProduct(product)" class="quick-view">
+                                                            <i class="material-icons">remove_red_eye</i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section  class="products-view products-view-grid" [hidden]="view_list">
+                            <div fxLayout="row wrap" fxLayoutAlign="start center">
+                                <div class="item-list" fxFlex="24" fxFlex.sm="33" fxFlex.xs="49" *ngFor="let product of products" >
+                                    <app-item-product></app-item-product>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+                <div class="pagination">
+                    <a href="#">&laquo;</a>
+                    <a href="#">1</a>
+                    <a class="active" href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">&raquo;</a>
+                </div>
+                  
             </div>
         </div>
+
+        <app-viewed-products></app-viewed-products>
 
     </div>
 </div>

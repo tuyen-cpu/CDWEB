@@ -47,6 +47,10 @@ import { AddressComponent } from './components/address/address.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
+
+//slider
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -96,6 +100,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent],

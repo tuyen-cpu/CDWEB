@@ -155,9 +155,9 @@
                                                         </a>
                                                         <div class="quantity-select">
                                                             <input type="hidden" class="variantID">
-                                                            <button class="btn-reduced ">-</button>
-                                                            <input type="text" class="number-sidebar" maxlength="12" min="1" value="1" size="4">
-                                                            <button class="btn-increase">+</button>
+                                                            <button class="btn-reduced " (click)="reduceItemMiniCart(1)">-</button>
+                                                            <input id="product-mini-cart-1" type="text" class="number-sidebar" maxlength="12" min="1" value="1" size="4">
+                                                            <button class="btn-increase" (click)="increaseItemMiniCart(1)">+</button>
                                                         </div>
                                                     </div>
 
@@ -209,65 +209,9 @@
                                         <mat-icon class="right">chevron_right</mat-icon>
 
                                     </a>
-                                    <ul class="ul-content-right-1" fxLayout="row wrap" fxLayoutAlign="start start">
-                                        <li class="nav-item lv2" fxFlex="25%">
+                                    <ul class="ul-content-right-1" >
+                                        <li class="nav-item lv2" >
                                             <a href="/thuong-hieu-laptop">Thương hiệu Laptop</a>
-                                            <ul class="ul-content-right-2">
-                                                <li class="nav-item lv3">
-                                                    <a href="/macbook">APPLE</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-hp">HP</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-acer">Acer</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item lv2" fxFlex="25%">
-                                            <a href="/thuong-hieu-laptop">Trending</a>
-                                            <ul class="ul-content-right-2">
-                                                <li class="nav-item lv3">
-                                                    <a href="/macbook">APPLE</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-hp">HP</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-acer">Acer</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item lv2" fxFlex="25%">
-                                            <a href="/thuong-hieu-laptop">Laptop MSI</a>
-                                            <ul class="ul-content-right-2">
-                                                <li class="nav-item lv3">
-                                                    <a href="/macbook">APPLE1</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-hp">HP</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-acer">Acer</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item lv2" fxFlex="25%">
-                                            <a href="/thuong-hieu-laptop">Laptop Dell</a>
-                                            <ul class="ul-content-right-2">
-                                                <li class="nav-item lv3">
-                                                    <a href="/macbook">APPLE</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-hp">HP</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-acer">Acer</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item lv2" fxFlex="25%">
-                                            <a href="/thuong-hieu-laptop">Laptop HP</a>
                                             <ul class="ul-content-right-2">
                                                 <li class="nav-item lv3">
                                                     <a href="/macbook">APPLE</a>

@@ -436,8 +436,8 @@ img {
                             border-left: none;
                             border-right: none;
                             width: 36px !important;
-                            height: 23px;
-                            min-height: 23px;
+                            height: 25px;
+                            line-height: 25px;
                             padding: 0;
                             text-align: center;
                             border: 1px solid #e1e1e1;
@@ -710,7 +710,7 @@ img {
                     position: absolute;
                     left: $width-menu;
                     min-height: 100%;
-                    width: 898px;
+                    width: 300px;
                     top: 0;
                     padding-left: 0;
                     margin-left: 0;
