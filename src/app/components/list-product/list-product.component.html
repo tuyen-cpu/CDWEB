@@ -153,7 +153,9 @@
                         <section  class="products-view products-view-grid" [hidden]="view_list">
                             <div fxLayout="row wrap" fxLayoutAlign="start center">
                                 <div class="item-list" fxFlex="24" fxFlex.sm="33" fxFlex.xs="49" *ngFor="let product of products" >
-                                    <app-item-product></app-item-product>
+                                    <ng-container *ngIf="!!products">
+                                        <app-item-product [productItem]="product" [textHere]="'ha'" ></app-item-product>
+                                    </ng-container>
                                 </div>
                             </div>
                         </section>
@@ -174,7 +176,7 @@
             </div>
         </div>
 
-        <app-viewed-products></app-viewed-products>
+        <!-- <app-viewed-products></app-viewed-products> -->
 
     </div>
 </div>

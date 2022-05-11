@@ -1,8 +1,10 @@
 import { ChangeContext, Options, PointerType } from '@angular-slider/ngx-slider';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AttributeProduct } from 'src/app/model/attribute-product.model';
 import { Product } from 'src/app/model/product.model';
+import { ProductService } from 'src/app/service/product.service';
 import { ProductPopupComponent } from '../product-popup/product-popup.component';
 
 @Component({
@@ -50,20 +52,29 @@ export class ListProductComponent implements OnInit {
   };
   productItem!: Product ;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private productService : ProductService,
+    ) { }
 
   ngOnInit(): void {
     this.attributeProduct = new AttributeProduct(1, 'Ram', ['4GB','6GB','8GB','16GB']);
     for (let index = 0; index < 5; index++) {
       this.attributes.push(this.attributeProduct);
     }
+    
+    this.getProducts();
+  }
 
-    this.productItem = new Product(1,' Laptop Gaming Gigabyte AORUS 17 XE5-73VN534GH (i7-12700H, RTX 3070 Ti 8GB, Ram 16GB DDR5, SSD 1TB, 17.3 Inch IPS 360Hz FHD) ','CPU: i7-12700H (Up to 4.7GHz) 14 Cores 20 Threads VGA: GeForce RTX 3070 Ti 8GB Ram: 16GB (2x8GB) DDR5 4800MHz SSD: 1TB SSD M.2 PCIe Gen4 x4 Màn hình: 17.3\'\' IPS 360Hz FHD BẢO HÀNH 2... ','Intel',60660990,10,'https://bizweb.sapocdn.net/thumb/medium/100/329/122/products/laptop-gaming-gigabyte-aorus-17-xe5-73vn534gh.png?v=1648702456000')
-
-    for (let index = 0; index < 10; index++) {
-      this.products.push(this.productItem);
-    }
-
+  public getProducts():void{
+    this.productService.getProducts().subscribe(
+      (response: Product[]) =>{
+        this.products = response;
+      },
+      (error: HttpErrorResponse)=>{
+        alert(error.message)
+      }
+    );
   }
 
   onUserChangeEnd(changeContext: ChangeContext): void {
@@ -78,8 +89,6 @@ export class ListProductComponent implements OnInit {
 
   sortBy(mode: string) {
     let value = 'Mặc định';
-
-
     switch (mode) {
       case 'AZ':
         value = 'A → Z';

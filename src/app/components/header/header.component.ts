@@ -1,6 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
+import { Menu } from 'src/app/model/menu.model';
+import { MenuService } from 'src/app/service/menu.service';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +15,12 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   public showMenu = false;
 
   private mediaSub: Subscription = new Subscription;
+  public menus!: Menu[];
+
   constructor(
     private cdRef: ChangeDetectorRef,
     private mediaObserver: MediaObserver,
+    private menuService: MenuService,
   ) {
 
   }
@@ -34,6 +40,20 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       (change: MediaChange) => {
         this.mqAlias = change.mqAlias;
       });
+
+    this.getMenus();
+  }
+
+  public getMenus(): void {
+    this.menuService.getMenus().subscribe(
+
+      (response: Menu[]) => {
+        this.menus = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message)
+      }
+    );
   }
 
   ngAfterViewInit() {
@@ -46,35 +66,29 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  public toggleMenuMobile():void{
-    if(this.mqAlias==='xs' || this.mqAlias==='sm'){
-      this.showMenu=!this.showMenu;
+  public toggleMenuMobile(): void {
+    if (this.mqAlias === 'xs' || this.mqAlias === 'sm') {
+      this.showMenu = !this.showMenu;
       console.log("menu mobile")
     }
   }
 
-  public showMenuNav():void{
+  public showMenuNav(): void {
     document.getElementById("mySidenav")?.setAttribute("style", "visibility: visible;");
     document.getElementById("bg-nav")?.setAttribute("style", "visibility: visible;");
   }
-  public hiddenMenuNav():void{
+  public hiddenMenuNav(): void {
     document.getElementById("mySidenav")?.setAttribute("style", "visibility: hidden;");
     document.getElementById("bg-nav")?.setAttribute("style", "visibility: hidden;");
   }
 
-  public reduceItemMiniCart(id:number):void{
-  let input_product = <HTMLInputElement>document.getElementById('product-mini-cart-'+id);
-  let quantityProduct = input_product.value;
-  let tmp:number = +quantityProduct;
-  if(tmp>1){
-    input_product.value = (tmp-1)+'';
-  }
-  }
-
-  public increaseItemMiniCart(id:number):void{
-    let input_product = <HTMLInputElement>document.getElementById('product-mini-cart-'+id);
-    let quantityProduct = input_product.value;
-    let tmp:number = +quantityProduct;
-    input_product.value = (tmp+1)+'';
+  decreaseQuantity(e: any): void {
+    e.value = --e.value;
+    if (e.value < 0) {
+      e.value = 0
     }
+  }
+  increaseQuantity(e: any): void {
+    e.value = ++e.value;
+  }
 }

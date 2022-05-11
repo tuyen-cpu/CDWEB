@@ -51,6 +51,10 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 //slider
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
+//http
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -100,7 +104,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSliderModule
+    NgxSliderModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

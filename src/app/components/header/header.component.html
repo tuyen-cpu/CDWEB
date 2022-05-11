@@ -154,10 +154,9 @@
                                                             <i class="material-icons">close</i>
                                                         </a>
                                                         <div class="quantity-select">
-                                                            <input type="hidden" class="variantID">
-                                                            <button class="btn-reduced " (click)="reduceItemMiniCart(1)">-</button>
-                                                            <input id="product-mini-cart-1" type="text" class="number-sidebar" maxlength="12" min="1" value="1" size="4">
-                                                            <button class="btn-increase" (click)="increaseItemMiniCart(1)">+</button>
+                                                            <button class="btn-reduced "  (click)="decreaseQuantity(inputElementQuantity)">-</button>
+                                                            <input #inputElementQuantity  type="text" class="number-sidebar" maxlength="12" min="1" value="1" size="4">
+                                                            <button class="btn-increase"(click)="increaseQuantity(inputElementQuantity)">+</button>
                                                         </div>
                                                     </div>
 
@@ -202,94 +201,19 @@
 
                         <div class="list-menu-header" fxShow fXHide.sm fxHide.xs>
                             <ul class="ul-menu">
-                                <li class="nav-item lv1">
-                                    <a href="/laptop" title="Laptop">
+                                <li class="nav-item lv1" *ngFor="let menu of menus">
+                                    <a title="{{menu.categoryName}}">
                                         <mat-icon class="pr-5">laptop</mat-icon>
-                                        Laptop
+                                        {{menu.categoryName}}
                                         <mat-icon class="right">chevron_right</mat-icon>
 
                                     </a>
                                     <ul class="ul-content-right-1" >
                                         <li class="nav-item lv2" >
-                                            <a href="/thuong-hieu-laptop">Thương hiệu Laptop</a>
+                                            <a href="/thuong-hieu-laptop">Thương hiệu</a>
                                             <ul class="ul-content-right-2">
-                                                <li class="nav-item lv3">
-                                                    <a href="/macbook">APPLE</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-hp">HP</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-acer">Acer</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item lv1">
-                                    <a href="/ram" title="RAM">
-                                        <mat-icon class="pr-5">developer_board</mat-icon>
-                                        RAM
-                                        <mat-icon class="right">chevron_right</mat-icon>
-                                    </a>
-                                    <ul class="ul-content-right-1 row">
-                                        <li class="nav-item lv2">
-                                            <a href="/thuong-hieu-laptop">Thương hiệu Laptop</a>
-                                            <ul class="ul-content-right-2">
-                                                <li class="nav-item lv3">
-                                                    <a href="/macbook">APPLE</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-hp">HP</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-acer">Acer</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item lv1">
-                                    <a href="/ssd" title="SSD">
-                                        <mat-icon class="pr-5">sd_card</mat-icon>
-                                        SSD
-                                        <mat-icon class="right">chevron_right</mat-icon>
-                                    </a>
-                                    <ul class="ul-content-right-1 row">
-                                        <li class="nav-item lv2">
-                                            <a href="/thuong-hieu-laptop">Thương hiệu Laptop</a>
-                                            <ul class="ul-content-right-2">
-                                                <li class="nav-item lv3">
-                                                    <a href="/macbook">APPLE</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-hp">HP</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-acer">Acer</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item lv1">
-                                    <a href="/usb" target="USB">
-                                        <mat-icon class="pr-5">desk</mat-icon>
-                                        USB
-                                        <mat-icon class="right">chevron_right</mat-icon>
-                                    </a>
-                                    <ul class="ul-content-right-1 row">
-                                        <li class="nav-item lv2">
-                                            <a href="/thuong-hieu-laptop">Thương hiệu Laptop</a>
-                                            <ul class="ul-content-right-2">
-                                                <li class="nav-item lv3">
-                                                    <a href="/macbook">APPLE</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-hp">HP</a>
-                                                </li>
-                                                <li class="nav-item lv3">
-                                                    <a href="/laptop-acer">Acer</a>
+                                                <li class="nav-item lv3" *ngFor="let brandItem of menu.brands">
+                                                    <a >{{brandItem}}</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -300,7 +224,7 @@
                         <div class="list-menu-header-show" *ngIf="showMenu">
                             <ul class="mobile-menu">
                                 <li class="mb-li">
-                                    <a href="/laptop" title="Laptop">
+                                    <a title="Laptop">
                                         Laptop
                                     </a>
                                 </li>
