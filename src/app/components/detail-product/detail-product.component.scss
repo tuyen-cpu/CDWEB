@@ -185,9 +185,10 @@ body{
               color: #64c343;
               font-size: 15px;
             }
-            &.special-description{
+            &:last-child{
               font-weight: 700;
               color: #2ecc71;
+              text-transform: uppercase;
             }
           }
         }

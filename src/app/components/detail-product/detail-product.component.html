@@ -1,5 +1,5 @@
 
-<app-breadcrumb [name] = "product.name"></app-breadcrumb>
+<app-breadcrumb [name] = "detailProduct.name"></app-breadcrumb>
 
 <div class="details-product-container" id="details-product-container" fxLayout="row" fxLayoutAlign="center center">
     <div fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
@@ -14,15 +14,15 @@
                             [spaceBetween]="10" [navigation]="true" [thumbs]="{ swiper: thumbsSwiper }"
                             [zoom]="true"
                             class="mySwiper2">
-                            <ng-template swiperSlide *ngFor="let img of [1,2,3]">
-                                <img src="./../../../assets/img/laptop-{{img}}.png" />
+                            <ng-template swiperSlide *ngFor="let img of detailProduct?.urlImgs| slice:0:3;">
+                                <img src="{{img}}" />
                             </ng-template>
                           
                         </swiper>
                         <swiper (swiper)="thumbsSwiper = $event" [spaceBetween]="10" [slidesPerView]="3"
                             [freeMode]="true" [watchSlidesProgress]="true" class="mySwiper">
-                            <ng-template swiperSlide *ngFor="let img of product?.urlImgs">
-                                <img src="{{img}}" />
+                            <ng-template swiperSlide *ngFor="let img of detailProduct?.urlImgs| slice:0:3;">
+                                <img src="{{img}}"  />
                             </ng-template>
                             
                         </swiper>
@@ -30,7 +30,7 @@
 
                     <div class="info-product" fxFlex="60" fxFlex.sm="50" fxFlex.xs="100" >
                         <h1 class="title-product">
-                            {{product.name}}
+                            {{detailProduct.name}}
                         </h1>
                         <div class="review-result" >
                             <i class="material-icons">star</i>
@@ -44,36 +44,32 @@
                         <div class="product-description">
                             <div class="status">
                                 <span class="first_status">Thương hiệu:
-                                    <span class="status_name">{{product.brand}}</span>
+                                    <span class="status_name">{{detailProduct.brand}}</span>
                                 </span>
                                 <span class="first_status"> &nbsp;|&nbsp; Tình trạng:
-                                    <span class="status_name availabel" *ngIf="product?.amount">
+                                    <span class="status_name availabel" *ngIf="detailProduct?.quantity">
                                         Còn hàng
                                     </span>
-                                    <!-- <span class="status_name" *ngIf="product?.amount && product?.amount < 0">
+                                    <!-- <span class="status_name" *ngIf="detailProduct?.quantity && detailProduct?.quantity < 0">
                                         Hết hàng
                                     </span> -->
                                 </span>
                             </div>
                             <div class="price">
                                 <span class="special-price">
-                                    {{product.price - product.price*product.discount/100 }}<sup>đ</sup>
+                                    {{detailProduct.price - detailProduct.price*detailProduct.discount/100 }}<sup>đ</sup>
 
                                 </span>
                                 <span class="old-price">
-                                    {{product.price}}<sup>đ</sup>
+                                    {{detailProduct.price}}<sup>đ</sup>
 
                                 </span>
                             </div>
                             <div class="description">
                                 <ul>
-                                    <li *ngFor="let description of product?.description">
+                                    <li *ngFor="let description of detailProduct?.description">
                                         <i class="material-icons">check_circle</i>
                                         {{description}}
-                                    </li>
-                                    <li class="special-description">
-                                        <i class="material-icons">check_circle</i>
-                                        BẢO HÀNH 2 NĂM TOÀN CẦU
                                     </li>
                                 </ul>
                             </div>
@@ -104,7 +100,7 @@
                                     Khuyến mãi
                                 </p>
                                 <ul>
-                                    <li *ngFor="let promotion of product?.promotion">{{promotion}}</li>
+                                    <li *ngFor="let promotion of detailProduct?.promotion">{{promotion}}</li>
                                 </ul>
                                 <p>
                                     <i class="material-icons">card_giftcard</i>
@@ -127,11 +123,12 @@
                     <div class="content">
                         <div class="product-info">
                             <div id="show-less" *ngIf = "!textFull">
+                                {{detailProduct.description_short}}
                                 <p>
-                                    <strong>Laptop Gaming Gigabyte AORUS 17 XE5-73VN534GH </strong>  đáp ứng đủ các tiêu chuẩn của người chơi chuyên nghiệp. Được trang bị GPU GeForce RTX 30 series mới nhất, công nghệ làm mát Windforce Infinity độc quyền, cùng với bộ xử lý Intel Core H thế hệ thứ 12, đảm bảo sự ổn định trong việc cung cấp 100% hiệu suất đầu ra, mang đến cho bạn hiệu ứng hiển thị tốt nhất và chân thực trong các trò chơi.
+                                    <strong>{{detailProduct.name}}</strong>  {{detailProduct.description_short}}
                                 </p>
                                 <p>
-                                    <img style="max-width:100%; max-height:100%;" src="//bizweb.sapocdn.net/100/329/122/files/screenshot-1648700593.jpg?v=1648700644129" style="width: 100%;">
+                                    <img style="max-width:100%; max-height:100%;" src="{{detailProduct.urlImgs[detailProduct.urlImgs.length-1]}}" style="width: 100%;">
                                 </p>
                             </div>
                             <div *ngIf = "!textFull" class="hidden-less"  ></div>
@@ -172,7 +169,7 @@
                 </div>
                 <form  class="form-review" [formGroup]="reviewForm" (ngSubmit)="onSubmitReview()" *ngIf="openFormReview" >
                     <h3 class="title">
-                        Đánh giá, bình luận về <br><strong>{{product.name}}</strong>
+                        Đánh giá, bình luận về <br><strong>{{detailProduct.name}}</strong>
                     </h3>
                     <div class="rate">
                         <label>B1. Chọn đánh giá của bạn</label>
@@ -252,13 +249,13 @@
                     </div>
                 </div>
 
-                <app-recommended-products></app-recommended-products>
+                <!-- <app-recommended-products></app-recommended-products> -->
             </div>
 
             <div fxFlex="100" fxFlex.sm="100" fxFlex.xs="100">
-                <app-related-products [category]="product.category"></app-related-products>
+                <!-- <app-related-products [category]="detailProduct.category"></app-related-products> -->
 
-                <app-viewed-products></app-viewed-products>
+                <!-- <app-viewed-products></app-viewed-products> -->
             </div>
 
         </div>
