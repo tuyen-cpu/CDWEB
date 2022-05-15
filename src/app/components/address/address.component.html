@@ -40,7 +40,7 @@
 
                     <mat-form-field class="field-full-width" appearance="fill">
                         <mat-label>Số điện thoại</mat-label>
-                        <input type="text" matInput formControlName="phone" placeholder="Vd: 0356965894">
+                        <input type="tel" matInput formControlName="phone" placeholder="Vd: 0356965894">
                         <mat-error *ngIf="addressFormControl['phone'].invalid && (addressFormControl['phone'].dirty || addressFormControl['phone'].touched)" class="alert alert-danger">
                             Vui lòng nhập số điện thoại hợp lệ
                         </mat-error>

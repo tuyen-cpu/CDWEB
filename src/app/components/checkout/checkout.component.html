@@ -7,42 +7,47 @@
                     <div class="field">
 
                         <select name="" id="customer-address" class="input-info label-info--select">
-                          <option>tuyen 1</option>
-                            <option>tuyen 3</option>
+
+                          <option *ngFor="let province of provinceList">{{province.name}}</option>
+
                          </select>
                         <label for="customer-address" class="label-info label-info--select">Sổ địa chỉ</label>
                     </div>
-                    <div class="field">
 
+                    <div class="field">
                         <input type="text" class="input-info" id="customer-name">
                         <label for="customer-name" class="label-info">Họ và tên</label>
                     </div>
-                    <div class="field">
 
-                        <select name="" id="customer-province" class="input-info">
-            <option>tuyen 1</option>
-            <option>tuyen 3</option>
-          </select>
+                    <div class="field">
+                        <select (change)="onChangeProvince($event)" name="" id="customer-province" class="input-info">
+                          <option *ngFor="let province of provinceList" [value]="province.code">{{province.name}}</option>
+                         </select>
                         <label for="customer-province" class="label-info label-info--select">Tỉnh thành</label>
                     </div>
-                    <div class="field">
+                    <!-- <mat-form-field appearance="fill">
+                        <mat-label>Select your car</mat-label>
+                        <select (change)="onChangeProvince($event)" matNativeControl id="mySelectId">
+                        <option value="" disabled selected>---</option>
+                        <option  *ngFor="let province of provinceList" [value]="province.code">{{province.name}}</option>
+                      </select>
+                    </mat-form-field> -->
 
-                        <select name="" id="customer-district" class="input-info">
-            <option>tuyen 1</option>
-            <option>tuyen 3</option>
-          </select>
+                    <div class="field">
+                        <select (change)="onChangeDistrict($event)" name="" id="customer-district" class="input-info">
+                          <option *ngFor="let district of districtList" [value]="district.code">{{district.name}}</option>
+                        </select>
                         <label for="customer-district" class="label-info label-info--select">Quận huyện</label>
                     </div>
-                    <div class="field">
 
+                    <div class="field">
                         <select name="" id="customer-wards" class="input-info">
-                            <option>tuyen 1</option>
-                            <option>tuyen 3</option>
+                          <option *ngFor="let communes of communesList" [value]="communes.code">{{communes.name}}</option>
                           </select>
                         <label for="customer-wards" class="label-info label-info--select">Phường xã</label>
                     </div>
-                    <div class="field">
 
+                    <div class="field">
                         <textarea name="" rows="2" id="customer-note" class="input-info"></textarea>
                         <label for="customer-note" class="label-info">Ghi chú (tùy chọn)</label>
                     </div>
@@ -119,12 +124,12 @@
                     </div>
                 </div>
 
-                <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" class="voucher-wrapper">
+                <form [formGroup]="voucherForm" (ngSubmit)="onSubmit()" class="voucher-wrapper">
                     <div class="field">
                         <input type="text" class="input-info" id="voucher-input" formControlName="voucherValue">
                         <label for="voucher-input" class="label-info">Nhập mã giảm giá</label>
                     </div>
-                    <button class="main-btn btn-apply" type="submit" [disabled]="!recipeForm.valid">Áp dụng</button>
+                    <button class="main-btn btn-apply" type="submit" [disabled]="!voucherForm.valid">Áp dụng</button>
                 </form>
 
                 <div class="order-fee">

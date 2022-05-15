@@ -1,3 +1,4 @@
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -30,6 +31,7 @@ const routes: Routes = [
     ],
   },
   { path: 'product/:id', component: DetailProductComponent },
+  { path: 'checkout', component: CheckoutComponent },
 ];
 
 @NgModule({
