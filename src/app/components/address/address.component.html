@@ -11,27 +11,44 @@
         </div>
         <ng-container *ngIf="isShowNewAddress">
             <div class="new-address">
-                <form action="">
-                    <div class="field">
-                        <label for="name-address" class="title">Tên*</label>
-                        <input type="text" id="name-address" class="input-address">
-                    </div>
+                <form (ngSubmit)="onSubmit()" [formGroup]="addressForm">
 
-                    <div class="field">
-                        <label for="address" class="title">Địa chỉ*</label>
-                        <input type="text" id="address" class="input-address">
-                    </div>
-                    <div class="field">
-                        <label for="city" class="title">Thành phố*</label>
-                        <input type="text" id="city" class="input-address">
-                    </div>
-                    <div class="field">
-                        <label for="number-phone" class="title">Số điện thoại*</label>
-                        <input type="text" id="number-phone" class="input-address">
-                    </div>
+                    <mat-form-field class="field-full-width" appearance="fill">
+                        <mat-label>Tên</mat-label>
+                        <input type="text" matInput formControlName="name" placeholder="Vd: Trần Quang Tuyền">
+                        <mat-error *ngIf="addressFormControl['name'].invalid && (addressFormControl['name'].dirty || addressFormControl['name'].touched)" class="alert alert-danger">
+                            Vui lòng nhập tên hợp lệ
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="field-full-width" appearance="fill">
+                        <mat-label>Địa chỉ</mat-label>
+                        <input type="text" matInput formControlName="address" placeholder="Vd: KP3, Phường Linh Trung">
+                        <mat-error *ngIf="addressFormControl['address'].invalid && (addressFormControl['address'].dirty || addressFormControl['address'].touched)" class="alert alert-danger">
+                            Vui lòng nhập địa chỉ hợp lệ
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="field-full-width" appearance="fill">
+                        <mat-label>Thành phố</mat-label>
+                        <input type="text" matInput formControlName="city" placeholder="Vd: Hà Nội">
+                        <mat-error *ngIf="addressFormControl['city'].invalid && (addressFormControl['city'].dirty || addressFormControl['city'].touched)" class="alert alert-danger">
+                            Vui lòng nhập thành phố hợp lệ
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field class="field-full-width" appearance="fill">
+                        <mat-label>Số điện thoại</mat-label>
+                        <input type="text" matInput formControlName="phone" placeholder="Vd: 0356965894">
+                        <mat-error *ngIf="addressFormControl['phone'].invalid && (addressFormControl['phone'].dirty || addressFormControl['phone'].touched)" class="alert alert-danger">
+                            Vui lòng nhập số điện thoại hợp lệ
+                        </mat-error>
+                    </mat-form-field>
+
                     <div class="btn-action">
-                        <button class="main-btn">Thêm địa chỉ</button>
-                        <button mat-flat-button class="dark-btn">Hủy</button>
+                        <button class="main-btn" [disabled]="!addressForm.valid">Thêm địa chỉ</button>
+                        <button type="submit" mat-flat-button class="dark-btn">Hủy</button>
                     </div>
                 </form>
             </div>

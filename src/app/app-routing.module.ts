@@ -7,7 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { DetailProductComponent } from './components/detail-product/detail-product.component';
 import { ListProductComponent } from './components/list-product/list-product.component';
-import { AddressComponent } from './components/account-home/address/address.component';
+import { AddressComponent } from './components/address/address.component';
 import { AccountComponent } from './components/account-home/account/account.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },

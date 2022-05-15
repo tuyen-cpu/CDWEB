@@ -23,7 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSliderModule } from '@angular/material/slider';
-
+import { MatInputModule } from '@angular/material/input';
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -43,7 +43,7 @@ import { ViewedProductsComponent } from './components/viewed-products/viewed-pro
 import { RecommendedProductsComponent } from './components/recommended-products/recommended-products.component';
 
 import { AccountComponent } from './components/account-home/account/account.component';
-import { AddressComponent } from './components/account-home/address/address.component';
+import { AddressComponent } from './components/address/address.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
@@ -102,10 +102,9 @@ import { AccountHomeComponent } from './components/account-home/account-home.com
     MatSliderModule,
     MatTableModule,
     MatRadioModule,
-    FormsModule,
-    ReactiveFormsModule,
     NgxSliderModule,
     HttpClientModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

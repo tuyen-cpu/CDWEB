@@ -1,4 +1,4 @@
-import { Bill } from './../model/bill.model';
+import { Bill } from '../model/bill.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppSettings } from './app-setttings';
