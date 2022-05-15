@@ -10,7 +10,7 @@ export class ProvincesApiService {
   private PROVINCE_API = 'https://provinces.open-api.vn/api';
   constructor(private http: HttpClient) {}
   getProvinces(): Observable<Province[]> {
-    return this.http.get<Province[]>(this.PROVINCE_API + '/p');
+    return this.http.get<Province[]>(`${this.PROVINCE_API}/p/`);
   }
   getDistricts(id: number): Observable<Province> {
     return this.http.get<Province>(`${this.PROVINCE_API}/p/${id}?depth=2`);
