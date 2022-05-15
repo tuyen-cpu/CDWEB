@@ -23,7 +23,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSliderModule } from '@angular/material/slider';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -42,18 +43,17 @@ import { RelatedProductsComponent } from './components/related-products/related-
 import { ViewedProductsComponent } from './components/viewed-products/viewed-products.component';
 import { RecommendedProductsComponent } from './components/recommended-products/recommended-products.component';
 
-import { AccountComponent } from './components/account/account.component';
+import { AccountComponent } from './components/account-home/account/account.component';
 import { AddressComponent } from './components/address/address.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-
 
 //slider
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 //http
 import { HttpClientModule } from '@angular/common/http';
-
+import { AccountHomeComponent } from './components/account-home/account-home.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +78,7 @@ import { HttpClientModule } from '@angular/common/http';
     AddressComponent,
     CheckoutComponent,
     BreadcrumbComponent,
+    AccountHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,10 +103,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatSliderModule,
     MatTableModule,
     MatRadioModule,
-    FormsModule,
-    ReactiveFormsModule,
     NgxSliderModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

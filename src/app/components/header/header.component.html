@@ -1,12 +1,12 @@
 <header>
     <!-- nav mobile -->
-    <div id="mySidenav" class="sidenav menu-mobile open-sidebar-menu"  >
+    <div id="mySidenav" class="sidenav menu-mobile open-sidebar-menu">
         <div class="content-memu-mb">
             <div class="link-list-mobile">
                 <ul class="ct-mobile" (click)="hiddenMenuNav ()">
                     <li class="level0 level-top parent level_ico" (click)="hiddenMenuNav ()">
                         <!-- <img src="./../../assets/img/logo.png" alt="logo"> -->
-                        <img src="https://i.ibb.co/XynK8Fr/logo.webp" alt="logo">                        
+                        <img src="https://i.ibb.co/XynK8Fr/logo.webp" alt="logo">
                     </li>
                     <li class="level0 level-top parent level_ico">
                         <a routerLink="" routerLinkActive="active">TRANG CHỦ</a>
@@ -51,15 +51,15 @@
                     Mở cửa: 9h đến 20h, chủ nhật 10h đến 19h
                 </div>
                 <div class="topbar-right" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayoutAlign="end center">
-                    <ul ngClass.xs="center" >
-                        <li class="login-content"  >
-                            <a href="/account" class="click-account">
+                    <ul ngClass.xs="center">
+                        <li class="login-content">
+                            <a routerLink="/account" class="click-account">
                                 <mat-icon>person</mat-icon>
                                 Tài khoản
                             </a>
                             <ul class="ul-account">
-                                <li><a routerLink="/login" routerLinkActive="active" >Đăng nhập</a></li>
-                                <li><a routerLink="/register" routerLinkActive="active" >Đăng ký</a></li>
+                                <li><a routerLink="/login" routerLinkActive="active">Đăng nhập</a></li>
+                                <li><a routerLink="/register" routerLinkActive="active">Đăng ký</a></li>
                             </ul>
                         </li>
                         <li fxShow fxHide.xs>
@@ -154,9 +154,9 @@
                                                             <i class="material-icons">close</i>
                                                         </a>
                                                         <div class="quantity-select">
-                                                            <button class="btn-reduced "  (click)="decreaseQuantity(inputElementQuantity)">-</button>
-                                                            <input #inputElementQuantity  type="text" class="number-sidebar" maxlength="12" min="1" value="1" size="4">
-                                                            <button class="btn-increase"(click)="increaseQuantity(inputElementQuantity)">+</button>
+                                                            <button class="btn-reduced " (click)="decreaseQuantity(inputElementQuantity)">-</button>
+                                                            <input #inputElementQuantity type="text" class="number-sidebar" maxlength="12" min="1" value="1" size="4">
+                                                            <button class="btn-increase" (click)="increaseQuantity(inputElementQuantity)">+</button>
                                                         </div>
                                                     </div>
 
@@ -208,12 +208,12 @@
                                         <mat-icon class="right">chevron_right</mat-icon>
 
                                     </a>
-                                    <ul class="ul-content-right-1" >
-                                        <li class="nav-item lv2" >
+                                    <ul class="ul-content-right-1">
+                                        <li class="nav-item lv2">
                                             <a href="/thuong-hieu-laptop">Thương hiệu</a>
                                             <ul class="ul-content-right-2">
                                                 <li class="nav-item lv3" *ngFor="let brandItem of menu.brands">
-                                                    <a >{{brandItem}}</a>
+                                                    <a>{{brandItem}}</a>
                                                 </li>
                                             </ul>
                                         </li>
