@@ -42,18 +42,17 @@ import { RelatedProductsComponent } from './components/related-products/related-
 import { ViewedProductsComponent } from './components/viewed-products/viewed-products.component';
 import { RecommendedProductsComponent } from './components/recommended-products/recommended-products.component';
 
-import { AccountComponent } from './components/account/account.component';
-import { AddressComponent } from './components/address/address.component';
+import { AccountComponent } from './components/account-home/account/account.component';
+import { AddressComponent } from './components/account-home/address/address.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-
 
 //slider
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 //http
 import { HttpClientModule } from '@angular/common/http';
-
+import { AccountHomeComponent } from './components/account-home/account-home.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +77,7 @@ import { HttpClientModule } from '@angular/common/http';
     AddressComponent,
     CheckoutComponent,
     BreadcrumbComponent,
+    AccountHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,7 +105,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     NgxSliderModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

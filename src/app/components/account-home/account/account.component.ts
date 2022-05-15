@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Bill } from 'src/app/model/bill.model';
 import { BillService } from 'src/app/shared/bills.service';
 export interface Order {
@@ -59,11 +60,18 @@ export class AccountComponent implements OnInit {
     'status',
   ];
   dataSource: Bill[] = [];
-  constructor(private billService: BillService) {}
+  constructor(
+    private billService: BillService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.billService.getOrders().subscribe((data) => {
       this.dataSource = data;
     });
+  }
+  navigateToAddress() {
+    this.router.navigate(['address'], { relativeTo: this.activatedRoute });
   }
 }
