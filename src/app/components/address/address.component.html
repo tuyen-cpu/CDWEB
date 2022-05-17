@@ -54,34 +54,18 @@
             </div>
         </ng-container>
         <div class="address-list">
-            <div class="address-item">
-                <p class=""><strong>Tên tài khoản:</strong> Trần Quang Tuyền</p>
-                <p class=""><strong>Địa chỉ:</strong> KP6, phường Linh Trung, TP. Thủ Đức</p>
-                <p class=""><strong>Số điện thoại:</strong> 0356955894</p>
-                <div class="btn-wrapper" fxLayoutAlign="start center">
-                    <button class="main-btn">Chỉnh sửa địa chỉ</button>
-                    <button mat-flat-button class="dark-btn">Xóa</button>
-                </div>
 
-            </div>
-            <div class="address-item">
-                <p class=""><strong>Tên tài khoản:</strong> Trần Quang Tuyền</p>
-                <p class=""><strong>Địa chỉ:</strong> KP6, phường Linh Trung, TP. Thủ Đức</p>
+            <div class="address-item" *ngFor="let address of addressList">
+                <p class=""><strong>Tên tài khoản:</strong> {{address.fullname}}</p>
+                <p class=""><strong>Địa chỉ:</strong> {{address.street}}, phường {{address.ward}},quận {{address.district}},thành phố {{address.city}}.</p>
                 <p class=""><strong>Số điện thoại:</strong> 0356955894</p>
                 <div class="btn-wrapper" fxLayoutAlign="start center">
                     <button class="main-btn">Chỉnh sửa địa chỉ</button>
                     <button mat-flat-button class="dark-btn">Xóa</button>
                 </div>
             </div>
-            <div class="address-item">
-                <p class=""><strong>Tên tài khoản:</strong> Trần Quang Tuyền</p>
-                <p class=""><strong>Địa chỉ:</strong> KP6, phường Linh Trung, TP. Thủ Đức</p>
-                <p class=""><strong>Số điện thoại:</strong> 0356955894</p>
-                <div class="btn-wrapper" fxLayoutAlign="start center">
-                    <button class="main-btn">Chỉnh sửa địa chỉ</button>
-                    <button mat-flat-button class="dark-btn">Xóa</button>
-                </div>
-            </div>
+
+
         </div>
     </div>
 </div>

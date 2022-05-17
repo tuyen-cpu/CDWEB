@@ -56,10 +56,9 @@ export class AccountComponent implements OnInit {
     'date',
     'address',
     'total',
-    'status-checkout',
     'status',
   ];
-  dataSource: Bill[] = [];
+  billList: Bill[] = [];
   constructor(
     private billService: BillService,
     private router: Router,
@@ -67,8 +66,9 @@ export class AccountComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.billService.getOrders().subscribe((data) => {
-      this.dataSource = data;
+    this.billService.getBillsByUserId(1).subscribe((data) => {
+      this.billList = data;
+      console.log(this.billList);
     });
   }
   navigateToAddress() {

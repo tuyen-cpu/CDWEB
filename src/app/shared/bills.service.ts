@@ -1,15 +1,18 @@
 import { Bill } from '../model/bill.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AppSettings } from './app-setttings';
+import { AppSettings } from './app-settings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BillService {
-  REST_API = AppSettings.REST_API + 'bill/';
+  REST_API = AppSettings.REST_API + '/bill';
   constructor(private http: HttpClient) {}
-  getOrders() {
-    return this.http.get<Bill[]>(this.REST_API);
+  getBills() {
+    return this.http.get<Bill[]>(this.REST_API + '/all');
+  }
+  getBillsByUserId(id: number) {
+    return this.http.get<Bill[]>(this.REST_API + `/allU?userId=${id}`);
   }
 }
