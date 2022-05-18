@@ -57,6 +57,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
 import { SearchFilterPipe } from './shared/search-filter.pipe';
 import { DropdownDirective } from './directives/dropdown.directive';
+import { HighlighterPipe } from './pipes/highlighter.pipe';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { DropdownDirective } from './directives/dropdown.directive';
     AccountHomeComponent,
     SearchFilterPipe,
     DropdownDirective,
+    HighlighterPipe,
   ],
   imports: [
     BrowserModule,

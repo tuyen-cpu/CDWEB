@@ -110,7 +110,7 @@
                                             <a class="link-item" href="">
                                                 <img src="../../../assets/img/banner_2.webp" alt="">
                                                 <div class="desc">
-                                                    <p class="name-item">{{product.name}}</p>
+                                                    <p class="name-item" [innerHtml]="product.name | highlighter:keySearch:'partial'"></p>
                                                     <span>{{product.price}}</span>
                                                 </div>
                                             </a>
