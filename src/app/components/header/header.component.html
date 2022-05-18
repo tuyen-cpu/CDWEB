@@ -96,13 +96,30 @@
                     </div>
                     <div class="header-left" fxFlex="40%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlexOrder.sm="2">
                         <div class="header-search">
-                            <form class="search-bar" action="/search" method="get">
-                                <input type="text" class="auto-search" placeholder="Sản phẩm bạn muốn tìm...">
-                                <span>
+                            <form class="search-bar">
+                                <input class="search-input" #searchInput type="text" appDropdown (keyup)="onSearch($event)" name="search" placeholder="Sản phẩm bạn muốn tìm...">
+                                <span class="btn-wrapper">
                                     <button type="submit">
                                         <mat-icon>search</mat-icon>
                                     </button>
                                 </span>
+                                <div class="result-search">
+                                    <div class="result-title">Sản phẩm<span *ngIf="isLoading" class="loading"><i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i></span></div>
+                                    <ul *ngIf="!isLoading && productList.length>0" class="search-list">
+                                        <li class="search-item" *ngFor="let product of productList">
+                                            <a class="link-item" href="">
+                                                <img src="../../../assets/img/banner_2.webp" alt="">
+                                                <div class="desc">
+                                                    <p class="name-item">{{product.name}}</p>
+                                                    <span>{{product.price}}</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <div class="more-item"><a href="" class="more-link">Xem thêm kết quả cho: {{keySearch}}</a></div>
+                                    </ul>
+                                    <div *ngIf="!isLoading && productList.length===0" class="result-empty">Không tìm thấy sản phẩm nào phù hợp.</div>
+
+                                </div>
                             </form>
                         </div>
                     </div>
