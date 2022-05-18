@@ -25,6 +25,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -54,6 +55,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 //http
 import { HttpClientModule } from '@angular/common/http';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
+import { SearchFilterPipe } from './shared/search-filter.pipe';
+import { DropdownDirective } from './directives/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,8 @@ import { AccountHomeComponent } from './components/account-home/account-home.com
     CheckoutComponent,
     BreadcrumbComponent,
     AccountHomeComponent,
+    SearchFilterPipe,
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,

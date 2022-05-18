@@ -8,7 +8,7 @@
 
                         <select name="" id="customer-address" class="input-info label-info--select">
 
-                          <option *ngFor="let province of provinceList">{{province.name}}</option>
+                          <option *ngFor="let address of addressList"> {{address.street}}, phường {{address.ward}},quận {{address.district}},thành phố {{address.city}}.</option>
 
                          </select>
                         <label for="customer-address" class="label-info label-info--select">Sổ địa chỉ</label>
