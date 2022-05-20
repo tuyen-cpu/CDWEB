@@ -96,8 +96,8 @@
                     </div>
                     <div class="header-left" fxFlex="40%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlexOrder.sm="2">
                         <div class="header-search">
-                            <form class="search-bar">
-                                <input class="search-input" #searchInput type="text" appDropdown (keyup)="onSearch($event)" name="search" placeholder="Sản phẩm bạn muốn tìm...">
+                            <form class="search-bar" (ngSubmit)="onSubmit()" [formGroup]="searchForm">
+                                <input class="search-input" #searchInput formControlName="inputSearch" type="text" appDropdown (keyup)="onSearch($event)" name="search" placeholder="Sản phẩm bạn muốn tìm...">
                                 <span class="btn-wrapper">
                                     <button type="submit">
                                         <mat-icon>search</mat-icon>
@@ -115,10 +115,9 @@
                                                 </div>
                                             </a>
                                         </li>
-                                        <div class="more-item"><a href="" class="more-link">Xem thêm kết quả cho: {{keySearch}}</a></div>
+                                        <div class="more-item"><a (click)="goSearchProducts()" class="more-link">Xem thêm kết quả cho: {{keySearch}}</a></div>
                                     </ul>
                                     <div *ngIf="!isLoading && productList.length===0" class="result-empty">Không tìm thấy sản phẩm nào phù hợp.</div>
-
                                 </div>
                             </form>
                         </div>
