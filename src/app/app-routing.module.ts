@@ -1,3 +1,4 @@
+import { SearchComponent } from './components/search/search.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
 import { NgModule } from '@angular/core';
@@ -32,10 +33,15 @@ const routes: Routes = [
   },
   { path: 'product/:id', component: DetailProductComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'search', component: SearchComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

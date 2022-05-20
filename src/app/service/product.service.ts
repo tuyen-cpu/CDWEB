@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Paginator } from 'primeng/paginator';
 import { Observable } from 'rxjs';
 import { DetailProduct } from '../model/detail-product.model';
+import { Pagination } from '../model/pagination.model';
 import { Product } from '../model/product.model';
 
 @Injectable({
@@ -13,9 +15,15 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  public getProducts(): Observable<Product[]> {
+  public getProducts(
+    q: string | null,
+    page: number,
+    size: number
+  ): Observable<Pagination> {
     //return this.http.get<Product[]>(`${this.apiServerUrl}/product`);
-    return this.http.get<Product[]>(`${this.apiServerUrl}/product/all`);
+    return this.http.get<Pagination>(
+      `${this.apiServerUrl}/product/all?q=${q}&page=${page}&size=${size}`
+    );
   }
 
   public getDetailProductById(productId: number): Observable<DetailProduct> {
