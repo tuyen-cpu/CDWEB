@@ -28,12 +28,12 @@ export class SearchComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((res) => {
       this.keySearch = res['query'];
       if (res['currentPage'] === undefined) {
-        this.currentPage = 4;
+        this.currentPage = 0;
       } else {
         this.currentPage = res['currentPage'] - 1;
       }
       if (res['size'] === undefined) {
-        this.size = 2;
+        this.size = 5;
       } else {
         this.size = res['size'];
       }
