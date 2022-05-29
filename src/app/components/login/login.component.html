@@ -1,5 +1,5 @@
 <app-breadcrumb [name] = "'Đăng nhập tài khoản'"></app-breadcrumb>
-<div class="form-container" fxLayout="row" fxLayoutAlign="center center">
+<div class="form-container" fxLayout="row" fxLayoutAlign="center center" [ngClass]="{'loading-bg': displayLoading}">
     <div class="plr-15" fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
         <h2 class="title-head">
             <a href="#">Đăng nhập tài khoản</a>
@@ -9,13 +9,22 @@
                 <p class="notice-form">Nếu đã có tài khoản, vui lòng đăng nhập tại đây</p>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="form">
                     <div class="form-group">
-                        <label for="email">
-                            Email *
+                        <div
+                          class="alert alert-danger message"
+                          role="alert"
+                          *ngIf="submitted && isLoginFailed"
+                        >
+                          <strong>Đăng nhập không thành công!</strong> <br>
+                          Tên tài khoản hoặc mật khẩu không đúng!
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">
+                            Tên tài khoản *
                         </label>
-                        <input id="email" type="email" formControlName="email" class="form-control">
-                        <div *ngIf=" fLogin['email'].errors?.['required'] && fLogin['email'].touched
-                        || fLogin['email'].errors?.['required'] && submitted" class="alert">Email bắt buộc phải nhập</div>
-                        <div *ngIf=" fLogin['email'].errors?.['email']" class="alert">Email không hợp lệ</div>
+                        <input id="username" type="text" formControlName="username" class="form-control">
+                        <div *ngIf=" fLogin['username'].errors?.['required'] && fLogin['username'].touched
+                        || fLogin['username'].errors?.['required'] && submitted" class="alert">Tên tài khoản bắt buộc phải nhập</div>
                     </div>
                     <div class="form-group">
                         <label for="password">
@@ -26,13 +35,11 @@
                         || fLogin['password'].errors?.['required'] && submitted" class="alert">Mật khẩu bắt buộc phải nhập</div>
                         <div *ngIf=" fLogin['password'].errors?.['minlength']" class="alert">Mật khẩu phải có ít nhất 6 kí tự</div>
                         <div *ngIf=" fLogin['password'].errors?.['maxLength']" class="alert">Mật khẩu phải chỉ tối đa 40 kí tự</div>
-            
                     </div>
                     <div class="form-buttons">
                         <button class="button" type="submit" [disabled]="loginForm.invalid" >Đăng nhập</button>
                         <a routerLink="/register" routerLinkActive="active">Đăng kí</a>
                     </div>
-                   
                 </form>
             </div>
             <div class="recover-password" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlexFill>
@@ -44,7 +51,7 @@
                         </label>
                         <input id="email" type="email" formControlName="email" class="form-control">
                         <div *ngIf=" fPwd['email'].errors?.['required'] && fPwd['email'].touched
-                        || fPwd['email'].errors?.['required'] && submitted" class="alert">Email bắt buộc phải nhập</div>
+                        || fPwd['email'].errors?.['required'] && submittedForget" class="alert">Email bắt buộc phải nhập</div>
                         <div *ngIf=" fPwd['email'].errors?.['email']" class="alert">Email không hợp lệ</div>
                     </div>
                     <div class="form-buttons">
@@ -53,6 +60,6 @@
                 </form>
             </div>
         </div>
-       
     </div>
 </div>
+<div *ngIf="displayLoading" id="loading"></div>

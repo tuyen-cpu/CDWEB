@@ -14,6 +14,8 @@ import { ProductListHomeComponent } from './components/product-list-home/product
 
 //primeNg
 import { PaginatorModule } from 'primeng/paginator';
+import {DialogModule} from 'primeng/dialog';
+import {ButtonModule} from 'primeng/button';
 
 //Material
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -121,6 +123,9 @@ import { SearchComponent } from './components/search/search.component';
     MatInputModule,
     MatSelectModule,
     PaginatorModule,
+    DialogModule,
+    ButtonModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

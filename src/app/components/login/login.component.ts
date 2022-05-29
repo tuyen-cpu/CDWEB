@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +10,13 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
   styleUrls: ['./login.component.scss','./../register/register.component.scss']
 })
 export class LoginComponent implements OnInit {
+  public displayLoading = false;
+  public submittedForget= false;
   public submitted = false;
-
+  public isLoginFailed = false;
+  public errorMessage = '';
   public loginForm: FormGroup = new FormGroup({
-    email: new FormControl(''),
+    username: new FormControl(''),
     password: new FormControl(''),
   });
 
@@ -20,13 +26,14 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    
+    private authService: AuthService,
+    private storageService: StorageService,
   ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
       {
-        email: ['', [Validators.required, Validators.email]],
+        username: ['', [Validators.required]],
         password: [
           '',
           [
@@ -47,13 +54,27 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmitLogin(){
+    this.displayLoading = true;
     this.submitted = true;
-    console.log(this.loginForm);
-    console.log(this.loginForm.value);
+
+    const { username, password } = this.loginForm.value;
+    this.authService.login(username, password).subscribe({
+      next: data => {
+        this.storageService.saveUser(data);
+        this.isLoginFailed = false;
+        this.displayLoading = false;
+        window.location.href="/";
+      },
+      error: err => {
+        this.isLoginFailed = true;
+        this.displayLoading = false;
+      }
+    });
+    this.displayLoading = false;
 
   }
   public onSubmitRePwd(){
-    this.submitted = true;
+    this.submittedForget = true;
     console.log(this.rePwdForm);
     console.log(this.rePwdForm.value);
 

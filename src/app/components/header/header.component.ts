@@ -17,6 +17,8 @@ import { debounceTime, map, of, Subject, Subscription, take } from 'rxjs';
 import { Menu } from 'src/app/model/menu.model';
 import { MenuService } from 'src/app/service/menu.service';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/service/storage.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +28,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('searchInput') searchInput!: ElementRef;
+  //user login
+  currentUser: any;
   private mqAlias = '';
   public showMenu = false;
   private mediaSub: Subscription = new Subscription();
@@ -46,7 +50,9 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     private mediaObserver: MediaObserver,
     private menuService: MenuService,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -70,6 +76,9 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     );
     this.getMenus();
     this.initForm();
+
+    //get user login
+    this.currentUser = this.storageService.getUser();
   }
 
   searchProducts(key: string) {
@@ -126,7 +135,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
         this.menus = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }
@@ -174,5 +183,19 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   increaseQuantity(e: any): void {
     e.value = ++e.value;
+  }
+
+  public logout():void{
+    this.authService.logout().subscribe({
+      next: res => {
+        console.log(res);
+        this.storageService.clean();
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
+    
+    window.location.reload();
   }
 }

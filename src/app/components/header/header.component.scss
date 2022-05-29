@@ -140,6 +140,7 @@ img {
                     text-align: center;
                     border-radius: 3px;
                     margin: 5px;
+                    cursor: pointer;
                     a {
                         font-size: 14px;
                         font-weight: 500;
@@ -669,7 +670,7 @@ img {
                     padding: 0;
                     &.nav-item:hover {
                         background: #008744;
-                        a {
+                        a:first-child {
                             color: #fff;
                             text-decoration: none;
                             cursor: pointer;
@@ -727,14 +728,14 @@ img {
                             line-height: 24px;
                             display: block;
                             padding: 0 0 8px;
-                            color: #444;
+                            color: #444 !important; 
                             text-transform: initial;
                             margin-bottom: 0;
                             position: relative;
                             border-bottom: 0;
                             text-transform: none;
                             &:hover {
-                                color: #008744;
+                                color: #008744 !important;
                                 text-decoration: none;
                                 cursor: pointer;
                             }

@@ -52,16 +52,28 @@
                 </div>
                 <div class="topbar-right" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayoutAlign="end center">
                     <ul ngClass.xs="center">
-                        <li class="login-content">
+                        <li class="login-content" *ngIf="currentUser; else loggedOut">
                             <a routerLink="/account" class="click-account">
                                 <mat-icon>person</mat-icon>
-                                Tài khoản
+                                Hi! {{ currentUser.username }}
                             </a>
-                            <ul class="ul-account">
-                                <li><a routerLink="/login" routerLinkActive="active">Đăng nhập</a></li>
-                                <li><a routerLink="/register" routerLinkActive="active">Đăng ký</a></li>
+                            <ul class="ul-account" >
+                                <li><a routerLink="/account" routerLinkActive="active">{{ currentUser.username }}</a></li>
+                                <li><a (click)="logout()">Đăng xuất</a></li>
                             </ul>
                         </li>
+                        <ng-template #loggedOut>
+                            <li class="login-content">
+                                <a routerLink="/login" class="click-account">
+                                    <mat-icon>person</mat-icon>
+                                    Tài khoản
+                                </a>
+                                <ul class="ul-account">
+                                    <li><a routerLink="/login" routerLinkActive="active">Đăng nhập</a></li>
+                                    <li><a routerLink="/register" routerLinkActive="active">Đăng ký</a></li>
+                                </ul>
+                            </li>
+                        </ng-template>
                         <li fxShow fxHide.xs>
                             <a href="/san-pham-noi-bat" title="Khuyến mãi hot">
                                 <mat-icon>star</mat-icon>
