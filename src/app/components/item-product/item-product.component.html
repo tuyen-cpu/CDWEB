@@ -1,6 +1,6 @@
 <div class="product-item">
     <a routerLink="/product/{{productItem.id}}" class="wrapper-img">
-        <img class="img" src="{{!!productItem.urlImg?productItem.urlImg:'//bizweb.sapocdn.net/thumb/medium/100/329/122/products/laptop-gaming-asus-rog-zephyrus-g15-ga503rw-ln100w.png?v=1652435877000'}}" alt="Photo of a Shiba Inu">
+        <img class="img" src="{{!!productItem.urlImg?'http://localhost:3000/FileUpload/files/'+productItem.urlImg:'//bizweb.sapocdn.net/thumb/medium/100/329/122/products/laptop-gaming-asus-rog-zephyrus-g15-ga503rw-ln100w.png?v=1652435877000'}}" alt="Photo of a Shiba Inu">
     </a>
     <div class="action">
         <button mat-flat-button color="primary" class="btn add-cart">

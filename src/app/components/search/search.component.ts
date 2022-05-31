@@ -22,6 +22,7 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('rrrr');
     this.getParamsUrl();
   }
   getParamsUrl() {
