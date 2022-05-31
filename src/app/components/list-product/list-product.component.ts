@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   ChangeContext,
   Options,
@@ -41,8 +42,10 @@ export class ListProductComponent implements OnInit {
 
   public attributeProduct!: AttributeProduct;
 
-  public category = 'laptop';
-
+  public categoryName!: string;
+  currentPage: number = 1;
+  size: number = 1;
+  totalPages!: number;
   private sort = 'default';
 
   public products: Product[] = [];
@@ -74,10 +77,13 @@ export class ListProductComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private productService: ProductService
+    private productService: ProductService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.getParamsUrl();
     this.attributeProduct = new AttributeProduct(1, 'Ram', [
       '4GB',
       '6GB',
@@ -87,19 +93,6 @@ export class ListProductComponent implements OnInit {
     for (let index = 0; index < 5; index++) {
       this.attributes.push(this.attributeProduct);
     }
-
-    this.getProducts();
-  }
-
-  public getProducts(): void {
-    this.productService.getProducts(null, 1, 1).subscribe(
-      (response: Pagination) => {
-        this.products = response.products;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
   }
 
   onUserChangeEnd(changeContext: ChangeContext): void {
@@ -148,6 +141,53 @@ export class ListProductComponent implements OnInit {
     const dialogRef = this.dialog.open(ProductPopupComponent, {
       width: '970px',
       data: product,
+    });
+  }
+  onPageChange(event: any) {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        currentPage: event['page'] + 1,
+        size: this.size,
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+  getParamsUrl() {
+    this.activatedRoute.paramMap.subscribe((paramMap) => {
+      this.categoryName = paramMap.get('categoryName')!;
+      this.productService
+        .getProductsByCategoryName(this.categoryName)
+        .subscribe(
+          (response: Pagination) => {
+            this.products = response.products;
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message);
+          }
+        );
+    });
+    this.activatedRoute.queryParams.subscribe((res) => {
+      if (res['currentPage'] === undefined) {
+        this.currentPage = 0;
+      } else {
+        this.currentPage = res['currentPage'] - 1;
+      }
+      if (res['size'] === undefined) {
+        this.size = 5;
+      } else {
+        this.size = res['size'];
+      }
+      this.productService
+        .getProductsByCategoryName(this.categoryName)
+        .subscribe(
+          (response: Pagination) => {
+            this.products = response.products;
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message);
+          }
+        );
     });
   }
 }

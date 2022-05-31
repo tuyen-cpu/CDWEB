@@ -12,11 +12,21 @@ import { ListProductComponent } from './components/list-product/list-product.com
 import { AddressComponent } from './components/address/address.component';
 import { AccountComponent } from './components/account-home/account/account.component';
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  {
+    path: '',
+    component: HomeComponent,
+    // children: [
+    //   {
+    //     path: ':categoryName',
+    //     component: ListProductComponent,
+    //   },
+    // ],
+  },
+  { path: 'category/:categoryName', component: ListProductComponent },
   { path: 'cart', component: CartComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'list', component: ListProductComponent },
+  // { path: 'list', component: ListProductComponent },
   {
     path: 'account',
     component: AccountHomeComponent,

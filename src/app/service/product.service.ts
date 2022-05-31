@@ -11,7 +11,6 @@ import { Product } from '../model/product.model';
 })
 export class ProductService {
   private apiServerUrl = 'http://localhost:3000';
-  //private apiServerUrl ='http://localhost:8080';
 
   constructor(private http: HttpClient) {}
 
@@ -20,12 +19,26 @@ export class ProductService {
     page: number,
     size: number
   ): Observable<Pagination> {
-    //return this.http.get<Product[]>(`${this.apiServerUrl}/product`);
     return this.http.get<Pagination>(
       `${this.apiServerUrl}/product/all?q=${q}&page=${page}&size=${size}`
     );
   }
 
+  public getProductsByCategoryName(
+    categoryName: string | null,
+    page: number = 0,
+    size: number = 12
+  ): Observable<Pagination> {
+    return this.http.get<Pagination>(
+      `${this.apiServerUrl}/product/all/${categoryName}?page=${page}&size=${size}`
+    );
+  }
+  public getImageProduct(productId: number): Observable<Product> {
+    return this.http.post<Product>(
+      `${this.apiServerUrl}/product/add`,
+      productId
+    );
+  }
   public getDetailProductById(productId: number): Observable<DetailProduct> {
     return this.http.get<DetailProduct>(
       `${this.apiServerUrl}/product/` + productId
