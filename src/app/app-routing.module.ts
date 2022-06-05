@@ -11,6 +11,7 @@ import { DetailProductComponent } from './components/detail-product/detail-produ
 import { ListProductComponent } from './components/list-product/list-product.component';
 import { AddressComponent } from './components/address/address.component';
 import { AccountComponent } from './components/account-home/account/account.component';
+import { AuthGuardService } from './service/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +31,7 @@ const routes: Routes = [
   {
     path: 'account',
     component: AccountHomeComponent,
+    canActivate: [AuthGuardService],
     children: [
       {
         path: '',
