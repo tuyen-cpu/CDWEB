@@ -115,15 +115,18 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.keySearch = value;
     this.subjectKeyup.next(value);
   }
+
   goSearchProducts() {
     this.router.navigate(['/search'], {
       queryParams: { query: this.keySearch },
     });
   }
+
   onSubmit() {
     if (!this.searchForm.valid) return;
     this.goSearchProducts();
   }
+
   initForm() {
     this.searchForm = new FormGroup({
       inputSearch: new FormControl('', Validators.required),

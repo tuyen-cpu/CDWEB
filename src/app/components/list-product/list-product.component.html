@@ -1,12 +1,12 @@
-
-<app-breadcrumb [name] = "category"></app-breadcrumb>
+<app-breadcrumb [name]="categoryName">
+</app-breadcrumb>
 
 <div class="list-product-container" id="list-product-container" fxLayout="row" fxLayoutAlign="center center">
     <div fxFlex="87" fxFlex.sm="98" fxFlex.xs="97">
 
         <div class="list-product" fxLayout="row wrap " fxLayoutAlign="space-around  start">
 
-            <div fxFlex="25" fxHide.sm fxHide.xs >
+            <div fxFlex="25" fxHide.sm fxHide.xs>
                 <div class="filter">
                     <div class="item">
                         <div class="title">
@@ -26,7 +26,7 @@
                                     <label>
                                         <input type="checkbox" value="v" >
                                         {{v}}
-                                    </label> 
+                                    </label>
                                 </li>
                             </ul>
                         </div>
@@ -43,13 +43,13 @@
                                 <input type="text" id="min-price" disabled value="0" [ngModel]="formatPrice(value)">
                                 <input type="text" id="max-price" disabled value="110.000.000₫" [ngModel]="formatPrice(highValue)">
                             </div>
-                            <div  class="price-btn">
+                            <div class="price-btn">
                                 <a href="" class="filter-price">Lọc giá</a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="item" *ngFor="let attribute of attributes" >
+                    <div class="item" *ngFor="let attribute of attributes">
                         <div class="title">
                             {{attribute.name}}
                         </div>
@@ -59,7 +59,7 @@
                                     <label>
                                         <input type="checkbox" value="v" >
                                         {{v}}
-                                    </label> 
+                                    </label>
                                 </li>
                             </ul>
                         </div>
@@ -72,7 +72,7 @@
                 <section class="main-container collection">
                     <div class="category-products products">
                         <div class="sortPagiBar">
-                            <div  fxLayout="row " fxLayoutAlign="start  center">
+                            <div fxLayout="row " fxLayoutAlign="start  center">
                                 <div fxFlex="50">
                                     <h1 class="title-head">Laptop</h1>
                                 </div>
@@ -90,7 +90,7 @@
                                             <ul>
                                                 <li class="lv1"><span class="val" id="selected-sort">Mặc định</span>
                                                     <ul class="ul_2">
-                                                        <li><a (click)="sortBy('default')">Mặc định</a></li>								
+                                                        <li><a (click)="sortBy('default')">Mặc định</a></li>
                                                         <li><a (click)="sortBy('AZ')">A → Z</a></li>
                                                         <li><a (click)="sortBy('ZA')">Z → A</a></li>
                                                         <li><a (click)="sortBy('increase')">Giá tăng dần</a></li>
@@ -108,13 +108,13 @@
 
                         <section class="products-view products-view-list" [hidden]="!view_list">
                             <div fxLayout="row" fxLayoutAlign="center center">
-                                <div fxFlex="97" >
+                                <div fxFlex="97">
                                     <div class="item-list" *ngFor="let product of products">
                                         <div fxLayout="row" fxLayoutAlign="center center">
                                             <div fxFlex="35" fxFlex.xs="97">
                                                 <div class="product-thumbnail">
                                                     <a href="" class="img-link">
-                                                        <img src="{{product.urlImg}}" alt="">
+                                                        <img src="http://localhost:3000/FileUpload/files/{{product.urlImg}}" alt="">
                                                     </a>
                                                 </div>
                                             </div>
@@ -144,17 +144,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        <section  class="products-view products-view-grid" [hidden]="view_list">
+                        <section class="products-view products-view-grid" [hidden]="view_list">
                             <div fxLayout="row wrap" fxLayoutAlign="start center">
-                                <div class="item-list" fxFlex="24" fxFlex.sm="33" fxFlex.xs="49" *ngFor="let product of products" >
+                                <div class="item-list" fxFlex="24" fxFlex.sm="33" fxFlex.xs="49" *ngFor="let product of products">
                                     <ng-container *ngIf="!!products">
-                                        <app-item-product [productItem]="product" [textHere]="'ha'" ></app-item-product>
+                                        <app-item-product [productItem]="product" [textHere]="'ha'"></app-item-product>
                                     </ng-container>
                                 </div>
                             </div>
@@ -162,7 +162,7 @@
                     </div>
                 </section>
 
-                <div class="pagination">
+                <!-- <div class="pagination">
                     <a href="#">&laquo;</a>
                     <a href="#">1</a>
                     <a class="active" href="#">2</a>
@@ -171,8 +171,10 @@
                     <a href="#">5</a>
                     <a href="#">6</a>
                     <a href="#">&raquo;</a>
+                </div> -->
+                <div class="pagination">
+                    <p-paginator [rows]="1" [totalRecords]="totalPages" [first]="currentPage" (onPageChange)="onPageChange($event)"></p-paginator>
                 </div>
-                  
             </div>
         </div>
 
