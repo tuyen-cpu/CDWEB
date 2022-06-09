@@ -57,7 +57,7 @@
                                 <mat-icon>person</mat-icon>
                                 Hi! {{ currentUser.username }}
                             </a>
-                            <ul class="ul-account" >
+                            <ul class="ul-account">
                                 <li><a routerLink="/account" routerLinkActive="active">{{ currentUser.username }}</a></li>
                                 <li><a (click)="logout()">Đăng xuất</a></li>
                             </ul>
@@ -230,7 +230,7 @@
                         <div class="list-menu-header" fxShow fXHide.sm fxHide.xs>
                             <ul class="ul-menu">
                                 <li class="nav-item lv1" *ngFor="let menu of menus">
-                                    <a routerLink="/category/{{menu.categoryName}}" title="{{menu.categoryName}}">
+                                    <a routerLink="/category/{{menu.id}}" title="{{menu.categoryName}}">
                                         <mat-icon class="pr-5">laptop</mat-icon>
                                         {{menu.categoryName}}
                                         <mat-icon class="right">chevron_right</mat-icon>

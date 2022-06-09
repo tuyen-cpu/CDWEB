@@ -1,4 +1,5 @@
 export interface Menu {
-  categoryName: string,
-  brands: string[]
+  id: number;
+  categoryName: string;
+  brands: string[];
 }

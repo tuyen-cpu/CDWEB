@@ -24,13 +24,13 @@ export class ProductService {
     );
   }
 
-  public getProductsByCategoryName(
-    categoryName: string | null,
+  public getProductsByCategoryId(
+    id: number | null,
     page: number = 0,
     size: number = 12
   ): Observable<Pagination> {
     return this.http.get<Pagination>(
-      `${this.apiServerUrl}/product/all/${categoryName}?page=${page}&size=${size}`
+      `${this.apiServerUrl}/product/all/${id}?page=${page}&size=${size}`
     );
   }
   public getImageProduct(productId: number): Observable<Product> {

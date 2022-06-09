@@ -1,3 +1,4 @@
+import { AttributeService } from './../../service/attribute.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   ChangeContext,
@@ -20,32 +21,11 @@ import { ProductPopupComponent } from '../product-popup/product-popup.component'
   styleUrls: ['./list-product.component.scss'],
 })
 export class ListProductComponent implements OnInit {
-  //thuong hieu
-  public setTrademark: AttributeProduct = new AttributeProduct(
-    1,
-    'THƯƠNG HIỆU',
-    [
-      'Dell',
-      'Asus',
-      'HP',
-      'Lenovo',
-      'ThinkPad',
-      'Macbook',
-      'Ace',
-      'Dell',
-      'Dell',
-      'Dell',
-      'Dell',
-      'Dell',
-    ]
-  );
-
-  public attributeProduct!: AttributeProduct;
-
-  public categoryName!: string;
+  public categoryId!: string;
   currentPage: number = 1;
   size: number = 1;
   totalPages!: number;
+
   private sort = 'default';
 
   public products: Product[] = [];
@@ -54,7 +34,7 @@ export class ListProductComponent implements OnInit {
 
   //list attribute
   public attributes: AttributeProduct[] = [];
-
+  brands: string[] = [];
   //slider
   value: number = 0;
   highValue: number = 110000000;
@@ -77,22 +57,26 @@ export class ListProductComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private productService: ProductService,
+    private attributeService: AttributeService
   ) {}
 
   ngOnInit(): void {
     this.getParamsUrl();
-    this.attributeProduct = new AttributeProduct(1, 'Ram', [
-      '4GB',
-      '6GB',
-      '8GB',
-      '16GB',
-    ]);
-    for (let index = 0; index < 5; index++) {
-      this.attributes.push(this.attributeProduct);
-    }
+
+    this.attributeService
+      .getAttributesByCategoryId(+this.categoryId)
+      .subscribe((data) => {
+        this.attributes = data;
+        this.attributes.forEach((e) => {
+          if (e.name === 'THƯƠNG HIỆU') {
+            console.log(e.name);
+            this.brands = this.brands.concat(e.values);
+          }
+        });
+      });
   }
 
   onUserChangeEnd(changeContext: ChangeContext): void {
@@ -155,17 +139,15 @@ export class ListProductComponent implements OnInit {
   }
   getParamsUrl() {
     this.activatedRoute.paramMap.subscribe((paramMap) => {
-      this.categoryName = paramMap.get('categoryName')!;
-      this.productService
-        .getProductsByCategoryName(this.categoryName)
-        .subscribe(
-          (response: Pagination) => {
-            this.products = response.products;
-          },
-          (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        );
+      this.categoryId = paramMap.get('id')!;
+      this.productService.getProductsByCategoryId(+this.categoryId).subscribe(
+        (response: Pagination) => {
+          this.products = response.products;
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
     });
     this.activatedRoute.queryParams.subscribe((res) => {
       if (res['currentPage'] === undefined) {
@@ -178,16 +160,14 @@ export class ListProductComponent implements OnInit {
       } else {
         this.size = res['size'];
       }
-      this.productService
-        .getProductsByCategoryName(this.categoryName)
-        .subscribe(
-          (response: Pagination) => {
-            this.products = response.products;
-          },
-          (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        );
+      this.productService.getProductsByCategoryId(+this.categoryId).subscribe(
+        (response: Pagination) => {
+          this.products = response.products;
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
     });
   }
 }

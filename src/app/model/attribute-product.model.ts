@@ -1,11 +1,4 @@
-export class AttributeProduct {
-
-    constructor(
-     public id: number,
-     public name: string,
-     public values:string[],
-     ) {}
-  
-   }
-  
-  
+export interface AttributeProduct {
+  name: string;
+  values: string[];
+}
