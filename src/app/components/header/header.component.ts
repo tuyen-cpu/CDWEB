@@ -19,6 +19,8 @@ import { MenuService } from 'src/app/service/menu.service';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/service/storage.service';
 import { AuthService } from 'src/app/service/auth.service';
+import { CartItem } from 'src/app/model/cart-item.model';
+import { CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -45,6 +47,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   //quantity show when search
   limitedQuantity: number = 5;
   searchForm!: FormGroup;
+
+  //cart 
+  public cartItems: CartItem[] = [];
+  public totalCart: number = 0; 
   constructor(
     private cdRef: ChangeDetectorRef,
     private mediaObserver: MediaObserver,
@@ -53,6 +59,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private storageService: StorageService,
     private authService: AuthService,
+    private cartService: CartService,
   ) {}
 
   ngOnInit() {
@@ -61,13 +68,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       this.isLoading = false;
       this.searchProducts(key);
     });
-    // this.mediaSub = this.mediaObserver.asObservable().subscribe(change => {
-    //   change.forEach((v) => {
-    //     // console.log(v.mediaQuery, v.mqAlias);
-    //     console.log(v.mqAlias,change);
-    //   });
-    //   console.log('-----');
-    // });
 
     this.mediaSub = this.mediaObserver.media$.subscribe(
       (change: MediaChange) => {
@@ -79,6 +79,16 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //get user login
     this.currentUser = this.storageService.getUser();
+
+    //load cart Items 
+    this.loadListCartItem();
+  }
+
+  public loadListCartItem() {
+    this.cartService.getCart().subscribe(res=>{
+      this.cartItems = res;
+      this.totalCart = this.cartItems.reduce((previousValue, currentValue) => previousValue + (currentValue.quantity * currentValue.price), 0)
+    });
   }
 
   searchProducts(key: string) {
@@ -178,16 +188,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       ?.setAttribute('style', 'visibility: hidden;');
   }
 
-  decreaseQuantity(e: any): void {
-    e.value = --e.value;
-    if (e.value < 0) {
-      e.value = 0;
-    }
-  }
-  increaseQuantity(e: any): void {
-    e.value = ++e.value;
-  }
-
   public logout():void{
     this.authService.logout().subscribe({
       next: res => {
@@ -201,5 +201,60 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     
     window.location.reload();
     this.router.navigate(['/']);
+  }
+
+  /*
+  * manipulate with cart mini
+  */
+  public deleteCartItem(id: number){
+    this.cartService.removeCartItem(id);
+  }
+
+  updateQuantity(ele: any, id: number): void {
+    let quantity= ele.value;
+    this.cartService.updateCartItem(id,quantity);
+    this.productService.getQuantityProductById(id).subscribe({
+      next: res => {
+        if(res<quantity){
+          const msg = document.getElementById('msg-quantity-' + id) as HTMLDivElement | null;
+          if(msg){
+            msg.setAttribute('style', 'display: block;');
+            setTimeout(function () {
+              msg.setAttribute('style', 'display: none;');
+            }, 3000);
+           }
+           ele.value = res;
+        }
+      }
+    });
+  }
+
+  decreaseQuantity(e: any, id:number): void {
+    e.value = --e.value;
+    if (e.value <= 0) {
+      e.value = 1
+    }
+    let quantity= e.value;
+    this.cartService.updateCartItem(id,quantity);
+  }
+  
+  increaseQuantity(e: any, id:number): void {
+    e.value = ++e.value;
+    let quantity= e.value;
+    this.cartService.updateCartItem(id,quantity);
+    this.productService.getQuantityProductById(id).subscribe({
+      next: res => {
+        if(res<quantity){
+          const msg = document.getElementById('msg-quantity-' + id) as HTMLDivElement | null;
+          if(msg){
+            msg.setAttribute('style', 'display: block;');
+            setTimeout(function () {
+              msg.setAttribute('style', 'display: none;');
+            }, 3000);
+           }
+           e.value = res;
+        }
+      }
+    });
   }
 }

@@ -1,15 +1,15 @@
 <div class="product-item">
     <a routerLink="/product/{{productItem.id}}" class="wrapper-img">
-        <img class="img" src="{{!!productItem.urlImg?'http://localhost:3000/FileUpload/files/'+productItem.urlImg:'//bizweb.sapocdn.net/thumb/medium/100/329/122/products/laptop-gaming-asus-rog-zephyrus-g15-ga503rw-ln100w.png?v=1652435877000'}}" alt="Photo of a Shiba Inu">
+        <img class="img" 
+        src="{{!!productItem.urlImg?'http://localhost:3000/FileUpload/files/'+productItem.urlImg:'//bizweb.sapocdn.net/thumb/medium/100/329/122/products/laptop-gaming-asus-rog-zephyrus-g15-ga503rw-ln100w.png?v=1652435877000'}}" alt="Photo of a Shiba Inu">
     </a>
     <div class="action">
-        <button mat-flat-button color="primary" class="btn add-cart">
+        <button mat-flat-button color="primary" class="btn add-cart" (click)="addToCart(productItem.id)">
           <mat-icon>shopping_cart_checkout</mat-icon>
             <span>Mua ngay</span></button>
         <button (click)="openDialog()" mat-flat-button color="primary" class="btn quick-view" matTooltipPosition="above" matTooltip="Xem nhanh">
         <mat-icon>remove_red_eye</mat-icon>
       </button>
-
     </div>
 
     <mat-card-content>
