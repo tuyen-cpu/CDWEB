@@ -47,21 +47,23 @@
                                     <span class="status_name">{{detailProduct.brand}}</span>
                                 </span>
                                 <span class="first_status"> &nbsp;|&nbsp; Tình trạng:
-                                    <span class="status_name availabel" *ngIf="detailProduct?.quantity">
+                                    <span class="status_name availabel" *ngIf="detailProduct.quantity && detailProduct.quantity > 0; else outOfStock">
                                         Còn hàng
                                     </span>
-                                    <!-- <span class="status_name" *ngIf="detailProduct?.quantity && detailProduct?.quantity < 0">
-                                        Hết hàng
-                                    </span> -->
+                                    <ng-template #outOfStock>
+                                        <span class="status_name">
+                                            Hết hàng
+                                        </span>
+                                    </ng-template>
                                 </span>
                             </div>
                             <div class="price">
                                 <span class="special-price">
-                                    {{detailProduct.price - detailProduct.price*detailProduct.discount/100 }}<sup>đ</sup>
+                                    {{ formatPrice(detailProduct.price - detailProduct.price*detailProduct.discount/100) }}<sup>đ</sup>
 
                                 </span>
                                 <span class="old-price">
-                                    {{detailProduct.price}}<sup>đ</sup>
+                                    {{ formatPrice(detailProduct.price)}}<sup>đ</sup>
 
                                 </span>
                             </div>
@@ -88,7 +90,8 @@
                             </div>
 
                             <div class="button-actions">
-                                <button>
+                                <button [disabled]="!(detailProduct.quantity && detailProduct.quantity > 0)"
+                                    (click)="addToCart()">
                                     <span>MUA NGAY</span>
                                     <span>Giao hàng miễn phí tận nơi</span>
                                 </button>
