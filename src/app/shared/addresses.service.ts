@@ -15,4 +15,8 @@ export class AddressesService {
   getAddressesByUserId(id: number) {
     return this.http.get<Address[]>(this.REST_API + `/all/user${id}`);
   }
+
+  getAddressesById(id: number) {
+    return this.http.get<Address>(this.REST_API + `/${id}`);
+  }
 }

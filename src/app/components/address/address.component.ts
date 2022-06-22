@@ -2,6 +2,8 @@ import { AddressesService } from './../../shared/addresses.service';
 import { Address } from './../../model/address.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { StorageService } from 'src/app/service/storage.service';
+import { User } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-address',
@@ -13,16 +15,21 @@ export class AddressComponent implements OnInit {
   isShowNewAddress: boolean = false;
   addressForm!: FormGroup;
   addressList: Address[] = [];
-  constructor(private addressesService: AddressesService) {}
+  public user!: User;
+  constructor(private addressesService: AddressesService,private storageService: StorageService,) {}
   toggleNewAddress() {
     this.isShowNewAddress = !this.isShowNewAddress;
   }
   ngOnInit(): void {
+    this.loadUser();
     this.initForm();
     this.getAllAddress();
   }
+  loadUser() {
+    this.user=this.storageService.getUser();
+  }
   getAllAddress() {
-    this.addressesService.getAddressesByUserId(1).subscribe((data) => {
+    this.addressesService.getAddressesByUserId(this.user.id).subscribe((data) => {
       this.addressList = data;
     });
   }

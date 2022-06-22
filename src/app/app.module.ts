@@ -65,6 +65,7 @@ import { SearchFilterPipe } from './shared/search-filter.pipe';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { HighlighterPipe } from './pipes/highlighter.pipe';
 import { SearchComponent } from './components/search/search.component';
+import { BillComponent } from './components/bill/bill.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { SearchComponent } from './components/search/search.component';
     DropdownDirective,
     HighlighterPipe,
     SearchComponent,
+    BillComponent,
   ],
   imports: [
     BrowserModule,

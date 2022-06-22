@@ -166,11 +166,11 @@
                                                 <li>
                                                     <div class="border-list">
                                                         <a href="" class="product-image">
-                                                            <img src="{{ item.img }}" alt="No Image">
+                                                            <img src="{{ item.img }}" alt="Image">
                                                         </a>
                                                         <div class="detail-item">
                                                             <p class="product-name">
-                                                                <a class="text2line" href="#">{{ item.name }}</a>
+                                                                <a class="text2line" [routerLink]="'/product/{{ item.id }}'">{{ item.name }}</a>
                                                             </p>
                                                         </div>
                                                         <div class="product-detail-bottom">

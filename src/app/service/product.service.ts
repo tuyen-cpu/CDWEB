@@ -74,4 +74,10 @@ export class ProductService {
       `${this.apiServerUrl}/product/instantSearch/query?key=${key}`
     );
   }
+
+  public getPriceProductById(productId: number): Observable<number> {
+    return this.http.get<number>(
+      `${this.apiServerUrl}/product/` + productId + '/price'
+    );
+  }
 }
