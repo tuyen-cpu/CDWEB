@@ -199,8 +199,9 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     
-    window.location.reload();
-    this.router.navigate(['/']);
+    //window.location.reload();
+    //this.router.navigate(['/']);
+    window.location.href="/";
   }
 
   /*
