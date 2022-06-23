@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Paginator } from 'primeng/paginator';
 import { Observable } from 'rxjs';
@@ -24,13 +24,13 @@ export class ProductService {
     );
   }
 
-  public getProductsByCategoryName(
-    categoryName: string | null,
+  public getProductsByCategoryId(
+    id: number | null,
     page: number = 0,
     size: number = 12
   ): Observable<Pagination> {
     return this.http.get<Pagination>(
-      `${this.apiServerUrl}/product/all/${categoryName}?page=${page}&size=${size}`
+      `${this.apiServerUrl}/product/all/${id}?page=${page}&size=${size}`
     );
   }
   public getImageProduct(productId: number): Observable<Product> {
@@ -73,5 +73,15 @@ export class ProductService {
     return this.http.get<Product[]>(
       `${this.apiServerUrl}/product/instantSearch/query?key=${key}`
     );
+  }
+  public filterProduct(paras: any): Observable<Pagination> {
+    let params = new HttpParams();
+    Object.keys(paras).forEach((k) => {
+      params = params.set(k, paras[k]);
+    });
+    console.log({ params });
+    return this.http.get<Pagination>(`${this.apiServerUrl}/product/filter`, {
+      params: params,
+    });
   }
 }
