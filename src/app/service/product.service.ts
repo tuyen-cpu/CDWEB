@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Paginator } from 'primeng/paginator';
 import { Observable } from 'rxjs';
@@ -66,5 +66,15 @@ export class ProductService {
     return this.http.get<Product[]>(
       `${this.apiServerUrl}/product/instantSearch/query?key=${key}`
     );
+  }
+  public filterProduct(paras: any): Observable<Pagination> {
+    let params = new HttpParams();
+    Object.keys(paras).forEach((k) => {
+      params = params.set(k, paras[k]);
+    });
+    console.log({ params });
+    return this.http.get<Pagination>(`${this.apiServerUrl}/product/filter`, {
+      params: params,
+    });
   }
 }

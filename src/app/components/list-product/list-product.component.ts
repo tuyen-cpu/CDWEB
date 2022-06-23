@@ -1,12 +1,12 @@
 import { AttributeService } from './../../service/attribute.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {
   ChangeContext,
   Options,
   PointerType,
 } from '@angular-slider/ngx-slider';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Attribute, Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Paginator } from 'primeng/paginator';
 import { AttributeProduct } from 'src/app/model/attribute-product.model';
@@ -25,11 +25,11 @@ export class ListProductComponent implements OnInit {
   currentPage: number = 1;
   size: number = 1;
   totalPages!: number;
-
+  params: any = {};
   private sort = 'default';
 
   public products: Product[] = [];
-
+  private f: Object[] = [];
   public view_list = false;
 
   //list attribute
@@ -64,6 +64,11 @@ export class ListProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // this.productService
+    //   .filterProduct({ category_id: ['1', '2'] })
+    //   .subscribe((data) => {
+    //     console.log(data);
+    //   });
     this.getParamsUrl();
 
     this.attributeService
@@ -137,9 +142,51 @@ export class ListProductComponent implements OnInit {
       queryParamsHandling: 'merge',
     });
   }
+  attributesChange(event: any, attributeName: string) {
+    const value = event.target.value;
+    if (event.currentTarget.checked) {
+      this.params[attributeName]
+        ? (this.params[attributeName] = [...this.params[attributeName], value])
+        : (this.params[attributeName] = [...[], value]);
+    } else {
+      this.params[attributeName] = this.params[attributeName].filter(
+        (e: any) => e !== value
+      );
+    }
+    /**
+     * Remove value with empty array of key
+     */
+    // Object.keys(this.params).forEach((para) => {
+    //   {
+    //     if (this.params[para].length === 0) {
+    //       console.log('rEmpty');
+    //       delete this.params[para];
+    //     }
+    //   }
+    // });
+    this.changeUrl();
+  }
+  changeUrl() {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: this.params,
+    });
+  }
   getParamsUrl() {
-    this.activatedRoute.paramMap.subscribe((paramMap) => {
-      this.categoryId = paramMap.get('id')!;
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      let someObj: any = {
+        // price_gte: 390000,
+        // price_lte: 550000,
+        'THƯƠNG HIỆU': ['Asus', 'Dell'],
+
+        // category_id: 2,
+      };
+      let params = new URLSearchParams();
+      Object.keys(someObj).forEach((k) => {
+        params.set(k, someObj[k]);
+      });
+      console.log(params.toString());
+      this.categoryId = paramMap.get('cateId')!;
       this.productService.getProductsByCategoryId(+this.categoryId).subscribe(
         (response: Pagination) => {
           this.products = response.products;

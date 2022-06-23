@@ -23,7 +23,7 @@ const routes: Routes = [
     //   },
     // ],
   },
-  { path: 'category/:id', component: ListProductComponent },
+  { path: 'list/:cateId', component: ListProductComponent },
   { path: 'cart', component: CartComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
