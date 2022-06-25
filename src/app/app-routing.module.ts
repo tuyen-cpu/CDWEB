@@ -1,3 +1,4 @@
+import { MainAdminComponent } from './components/admin/main-admin/main-admin.component';
 import { SearchComponent } from './components/search/search.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
@@ -12,17 +13,14 @@ import { ListProductComponent } from './components/list-product/list-product.com
 import { AddressComponent } from './components/address/address.component';
 import { AccountComponent } from './components/account-home/account/account.component';
 import { AuthGuardService } from './service/auth-guard.service';
+import { ProductManagerComponent } from './components/admin/product-manager/product-manager.component';
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    // children: [
-    //   {
-    //     path: ':categoryName',
-    //     component: ListProductComponent,
-    //   },
-    // ],
+    pathMatch: 'full',
   },
+  // { path: '**', component: HomeComponent },
   { path: 'list/:cateId', component: ListProductComponent },
   { path: 'cart', component: CartComponent },
   { path: 'register', component: RegisterComponent },
@@ -46,6 +44,17 @@ const routes: Routes = [
   { path: 'product/:id', component: DetailProductComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'search', component: SearchComponent },
+  {
+    path: 'admin',
+    component: MainAdminComponent,
+    children: [
+      { path: '', redirectTo: 'product', pathMatch: 'full' },
+      {
+        path: 'product',
+        component: ProductManagerComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
