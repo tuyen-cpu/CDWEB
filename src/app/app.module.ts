@@ -14,8 +14,10 @@ import { ProductListHomeComponent } from './components/product-list-home/product
 
 //primeNg
 import { PaginatorModule } from 'primeng/paginator';
-import {DialogModule} from 'primeng/dialog';
-import {ButtonModule} from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 //Material
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -65,6 +67,10 @@ import { SearchFilterPipe } from './shared/search-filter.pipe';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { HighlighterPipe } from './pipes/highlighter.pipe';
 import { SearchComponent } from './components/search/search.component';
+import { MainAdminComponent } from './components/admin/main-admin/main-admin.component';
+import { HeaderAdminComponent } from './components/admin/header-admin/header-admin.component';
+import { MenuBarComponent } from './components/admin/menu-bar/menu-bar.component';
+import { ProductManagerComponent } from './components/admin/product-manager/product-manager.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +100,10 @@ import { SearchComponent } from './components/search/search.component';
     DropdownDirective,
     HighlighterPipe,
     SearchComponent,
+    MainAdminComponent,
+    HeaderAdminComponent,
+    MenuBarComponent,
+    ProductManagerComponent,
   ],
   imports: [
     BrowserModule,
@@ -125,7 +135,8 @@ import { SearchComponent } from './components/search/search.component';
     PaginatorModule,
     DialogModule,
     ButtonModule,
-    
+    AvatarModule,
+    AvatarGroupModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
