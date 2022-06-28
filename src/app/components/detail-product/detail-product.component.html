@@ -185,9 +185,9 @@
                         </ul>
                     </div>
                     <div class="detail-review" fxLayout="row wrap" fxLayoutAlign="start start">
-                        <div fxFlex="100" fxFlex.sm="100" fxFlex.xs="100">
+                        <div fxFlex="100" fxFlex.sm="100" fxFlex.xs="100" style="margin-top: 10px;">
                             <label for="txt-comment">B2. Nhập đánh giá về sản phẩm(*):</label>
-                            <textarea placeholder="" class="aer-input aer-content" id="txt-comment" formControlName="content"></textarea>
+                            <textarea maxlength="1000" class="aer-input aer-content" id="txt-comment" formControlName="content" rows="4"></textarea>
                         </div>
                         <div fxFlex="25" fxFlex.sm="25" fxFlex.xs="100">
                             <div class="form-group">
@@ -205,7 +205,7 @@
                             <div>
                                 <label>B5. Thêm hình sản phẩm nếu có (Tối đa 5 hình):
                                 </label>
-                                <input type="file" id="aer-files" multiple="" accept="image/png, image/jpeg" formControlName="aerFiles">
+                                <input type="file" id="aer-files" multiple="" accept="image/png, image/jpeg" formControlName="imgFiles">
                             </div>
                             <div id="list-image-upload"></div>
                         </div>
@@ -231,7 +231,18 @@
                     </select>
                 </div>
                 <div class="list-review">
-                    <div class="alert alert-warning" role="alert">Chưa có đánh giá</div>
+                    <!-- <div *ngIf="" class="alert alert-warning" role="alert">Chưa có đánh giá</div> -->
+                    <div *ngIf="!newComment && comments.length<=0" class="alert alert-warning" role="alert">Chưa có đánh giá</div>
+
+                    <div>
+                        <app-comment *ngIf="newComment" [comment]="newComment"></app-comment>
+                    </div>
+
+                    <div *ngFor="let item of comments">
+                        <app-comment *ngIf="item" [comment]="item"></app-comment>
+                    </div>
+                    
+                    <p-paginator [rows]="1" [totalRecords]="totalPages" [first]="currentPage" (onPageChange)="onPageChange($event)"></p-paginator>
                 </div>
 
 

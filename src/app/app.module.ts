@@ -16,6 +16,7 @@ import { ProductListHomeComponent } from './components/product-list-home/product
 import { PaginatorModule } from 'primeng/paginator';
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
+import {RatingModule} from 'primeng/rating';
 
 //Material
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -31,13 +32,15 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
 
 //Form
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatRadioModule } from '@angular/material/radio';
 // Swiper
 import { SwiperModule } from 'swiper/angular';
+
+//Components
 import { SlideHomeComponent } from './components/slide-home/slide-home.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -55,6 +58,9 @@ import { AddressComponent } from './components/address/address.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
+import { BillComponent } from './components/bill/bill.component';
+import { CommentComponent } from './components/comment/comment.component';
+
 //slider
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
@@ -65,7 +71,6 @@ import { SearchFilterPipe } from './shared/search-filter.pipe';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { HighlighterPipe } from './pipes/highlighter.pipe';
 import { SearchComponent } from './components/search/search.component';
-import { BillComponent } from './components/bill/bill.component';
 
 @NgModule({
   declarations: [
@@ -95,38 +100,43 @@ import { BillComponent } from './components/bill/bill.component';
     DropdownDirective,
     HighlighterPipe,
     SearchComponent,
+
     BillComponent,
+    CommentComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MatIconModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SwiperModule,
     LayoutModule,
+    NgxSliderModule,
+
+    //material
+    MatIconModule,
     MatGridListModule,
     MatCardModule,
-    MatIconModule,
     MatButtonModule,
-    FlexLayoutModule,
     MatTooltipModule,
-    SwiperModule,
     MatExpansionModule,
     MatDialogModule,
     MatTableModule,
-    ReactiveFormsModule,
-    FormsModule,
     MatProgressBarModule,
     MatSliderModule,
-    MatTableModule,
     MatRadioModule,
-    NgxSliderModule,
-    HttpClientModule,
     MatInputModule,
     MatSelectModule,
+
+    //primeng
     PaginatorModule,
     DialogModule,
     ButtonModule,
+    RatingModule,
     
   ],
   providers: [],

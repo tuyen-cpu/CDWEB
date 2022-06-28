@@ -12,6 +12,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ItemProductComponent } from '../item-product/item-product.component';
 import { CartItem } from 'src/app/model/cart-item.model';
 import { CartService } from 'src/app/service/cart.service';
+import { DetailComment } from 'src/app/model/comment.model';
+import { User } from 'src/app/model/user.model';
+import { StorageService } from 'src/app/service/storage.service';
+import { CommentService } from 'src/app/service/comment.service';
 
 // install Swiper modules
 SwiperCore.use([Zoom, FreeMode, Navigation, Thumbs]);
@@ -35,7 +39,7 @@ export class DetailProductComponent implements OnInit {
     content: new FormControl(''),
     fullName: new FormControl(''),
     phone: new FormControl(''),
-    aerFiles: new FormControl(''),
+    imgFiles: new FormControl(''),
   });
   public service_details: { urlImg: string, name: string, detail: string }[] = [
     { 'urlImg': 'https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/shiper.png?1650680388655', 'name': 'Giao hàng miễn phí toàn quốc', 'detail': '' },
@@ -52,12 +56,19 @@ export class DetailProductComponent implements OnInit {
     { id: 5, title: 'Quá tuyệt vời!' },
   ];
 
+  public user!: User;
+  //comments
+  public comments: DetailComment[] = [];
+  public totalPages: number = 0;
+  public currentPage: number = 0;
+
   constructor(
     private formBuilder: FormBuilder,
     private _Activatedroute: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
-
+    private storageService: StorageService,
+    private commentService: CommentService,
   ) { }
 
   ngOnInit(): void {
@@ -67,12 +78,41 @@ export class DetailProductComponent implements OnInit {
         content: ['', [Validators.required]],
         fullName: ['', [Validators.required]],
         phone: [''],
-        aerFiles: [''],
+        imgFiles: [''],
       },
 
     );
     this.id = this._Activatedroute.snapshot.params['id'];
     this.getDetailProduct(this.id);
+    this.loadUser();
+    this.loadComments(this.id, this.currentPage);
+  }
+  public loadComments(id: number, currentPage: number) {
+    this.commentService.getPageCommentsByProductId(id, currentPage).subscribe({
+      next:(response: any) => {
+        console.log(response)
+        this.comments = response?.content;
+        this.currentPage = response?.number;
+        this.totalPages = response?.totalPages;
+      },
+      error:(error: HttpErrorResponse) => {
+        console.log("Comment: " + error.message);
+      }
+    });
+  }
+
+  //comments
+  onPageChange(event: any){
+    console.log(event.page);
+    this.loadComments(this.id,event.page )
+  }
+  public loadUser() {
+    this.user=this.storageService.getUser();
+    if(this.user!=null){
+      this.reviewForm.patchValue({
+        fullName: this.user.username
+     });
+    }
   }
 
   public getDetailProduct(productId: number): void {
@@ -123,9 +163,47 @@ export class DetailProductComponent implements OnInit {
     this.textFull = !this.textFull;
   }
 
+  // public newComment: DetailComment={
+  //   "id": 1,
+  //   "content": "dsfdsfsd",
+  //   "status": 1,
+  //   "star": 4,
+  //   "urlImg": "C:\\fakepath\\b.jpg",
+  //   "phone": "0123456789",
+  //   "fullname": "ha123",
+  //   userId: 0,
+  //   productId: 0,
+  //   createdDate: new Date
+  // };
+  public newComment!: DetailComment;
   public onSubmitReview(): void {
-    console.log(this.reviewForm);
-    console.log(this.reviewForm.value);
+    // console.log(this.reviewForm);
+    // console.log(this.reviewForm.value);
+    let {numberStar,content,fullName,phone,imgFiles}=this.reviewForm.value;
+    let userId:number = this.user?this.user.id:-1;
+    let detailComment:DetailComment={
+      id: 0,
+      fullname: fullName,
+      phone: phone,
+      content: content,
+      urlImg: imgFiles,
+      userId: userId,
+      productId: this.id,
+      status: 1,
+      star: numberStar,
+      createdDate: new Date()
+    };
+    this.commentService.comment(detailComment).subscribe(
+      (response: DetailComment) => {
+        this.newComment = response;
+        //console.log("New Comment: " + this.newComment.content);
+        //add component comment 
+        //parse into newComment
+      },
+      (error: HttpErrorResponse) => {
+        console.log("Comment: " + error.message);
+      }
+    );
   }
   public setReviewStar(num_star: number): void {
     this.number_star = num_star;

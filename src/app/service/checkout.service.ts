@@ -25,7 +25,6 @@ export class CheckoutService {
   }
 
   placeAnOrder(checkout: any): Observable<Number> {
-    console.log("service: " + JSON.stringify(checkout))
     return this.http.post<number>(
       this.REST_API + '/order',
       JSON.stringify(checkout),
