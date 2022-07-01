@@ -7,8 +7,6 @@
                     <div style="text-align: right;" *ngIf="user==null">
                         <button routerLink="/login" pButton type="button" label="Đăng nhập" icon="pi pi-user"
                             iconPos="left" class="p-button-text p-button-text" style="color:#008744;"></button>
-                        <button (click)="onSubmitAddress()" pButton type="button" label="Đăng nhập" icon="pi pi-user"
-                            iconPos="left" class="p-button-text p-button-text" style="color:#008744;"></button>
                     </div>
                     <div class="field" *ngIf="addressList.length > 0">
                         <select (change)="onChangeAddress($event)" id="customer-address"
