@@ -15,14 +15,14 @@
                             [zoom]="true"
                             class="mySwiper2">
                             <ng-template swiperSlide *ngFor="let img of detailProduct?.urlImgs| slice:0:3;">
-                                <img src="{{img}}" />
+                                <img src="{{'http://localhost:3000/FileUpload/files/'+img}}" />
                             </ng-template>
                           
                         </swiper>
                         <swiper (swiper)="thumbsSwiper = $event" [spaceBetween]="10" [slidesPerView]="3"
                             [freeMode]="true" [watchSlidesProgress]="true" class="mySwiper">
                             <ng-template swiperSlide *ngFor="let img of detailProduct?.urlImgs| slice:0:3;">
-                                <img src="{{img}}"  />
+                                <img src="{{'http://localhost:3000/FileUpload/files/'+img}}"  />
                             </ng-template>
                             
                         </swiper>
@@ -131,7 +131,9 @@
                                     <strong>{{detailProduct.name}}</strong>  {{detailProduct.description_short}}
                                 </p>
                                 <p>
-                                    <img style="max-width:100%; max-height:100%;" src="{{detailProduct.urlImgs[detailProduct.urlImgs.length-1]}}" style="width: 100%;">
+                                    <img style="max-width:100%; max-height:100%;" 
+                                    src="{{'http://localhost:3000/FileUpload/files/'+detailProduct.urlImgs[detailProduct.urlImgs.length-1]}}" 
+                                    alt="Photo of a Shiba Inu" style="width: 100%;">
                                 </p>
                             </div>
                             <div *ngIf = "!textFull" class="hidden-less"  ></div>

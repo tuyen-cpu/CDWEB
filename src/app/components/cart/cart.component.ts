@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { CartItem } from 'src/app/model/cart-item.model';
 import { CartService } from 'src/app/service/cart.service';
 import { ProductService } from 'src/app/service/product.service';
@@ -76,6 +77,7 @@ export class CartComponent implements OnInit {
       this.dataSource = res;
       //load total price
       this.getTotal();
+      this.refreshTable();
     });
   }
   updateQuantity(ele: any, id: number): void {
@@ -99,8 +101,14 @@ export class CartComponent implements OnInit {
 
   public deleteCartItem(id: number){
     this.cartService.removeCartItem(id);
+    console.log(this.dataSource);
+    this.refreshTable();
   }
 
+  dataSourceTable = new MatTableDataSource<CartItem>();
+  private refreshTable() {
+    this.dataSourceTable.data=this.dataSource;
+}
 }
 
 
