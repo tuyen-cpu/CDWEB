@@ -1,11 +1,12 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { AttributeService } from './../../service/attribute.service';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {
   ChangeContext,
   Options,
   PointerType,
 } from '@angular-slider/ngx-slider';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Attribute, Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Paginator } from 'primeng/paginator';
 import { AttributeProduct } from 'src/app/model/attribute-product.model';
@@ -20,41 +21,20 @@ import { ProductPopupComponent } from '../product-popup/product-popup.component'
   styleUrls: ['./list-product.component.scss'],
 })
 export class ListProductComponent implements OnInit {
-  //thuong hieu
-  public setTrademark: AttributeProduct = new AttributeProduct(
-    1,
-    'THƯƠNG HIỆU',
-    [
-      'Dell',
-      'Asus',
-      'HP',
-      'Lenovo',
-      'ThinkPad',
-      'Macbook',
-      'Ace',
-      'Dell',
-      'Dell',
-      'Dell',
-      'Dell',
-      'Dell',
-    ]
-  );
-
-  public attributeProduct!: AttributeProduct;
-
-  public categoryName!: string;
+  public categoryId!: string;
   currentPage: number = 1;
   size: number = 1;
   totalPages!: number;
+  params: any = {};
   private sort = 'default';
 
   public products: Product[] = [];
-
+  private f: Object[] = [];
   public view_list = false;
 
   //list attribute
   public attributes: AttributeProduct[] = [];
-
+  brands: string[] = [];
   //slider
   value: number = 0;
   highValue: number = 110000000;
@@ -77,22 +57,31 @@ export class ListProductComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private productService: ProductService,
+    private attributeService: AttributeService
   ) {}
 
   ngOnInit(): void {
+    // this.productService
+    //   .filterProduct({ category_id: ['1', '2'] })
+    //   .subscribe((data) => {
+    //     console.log(data);
+    //   });
     this.getParamsUrl();
-    this.attributeProduct = new AttributeProduct(1, 'Ram', [
-      '4GB',
-      '6GB',
-      '8GB',
-      '16GB',
-    ]);
-    for (let index = 0; index < 5; index++) {
-      this.attributes.push(this.attributeProduct);
-    }
+
+    this.attributeService
+      .getAttributesByCategoryId(+this.categoryId)
+      .subscribe((data) => {
+        this.attributes = data;
+        this.attributes.forEach((e) => {
+          if (e.name === 'THƯƠNG HIỆU') {
+            console.log(e.name);
+            this.brands = this.brands.concat(e.values);
+          }
+        });
+      });
   }
 
   onUserChangeEnd(changeContext: ChangeContext): void {
@@ -153,19 +142,59 @@ export class ListProductComponent implements OnInit {
       queryParamsHandling: 'merge',
     });
   }
+  attributesChange(event: any, attributeName: string) {
+    const value = event.target.value;
+    if (event.currentTarget.checked) {
+      this.params[attributeName]
+        ? (this.params[attributeName] = [...this.params[attributeName], value])
+        : (this.params[attributeName] = [...[], value]);
+    } else {
+      this.params[attributeName] = this.params[attributeName].filter(
+        (e: any) => e !== value
+      );
+    }
+    /**
+     * Remove value with empty array of key
+     */
+    // Object.keys(this.params).forEach((para) => {
+    //   {
+    //     if (this.params[para].length === 0) {
+    //       console.log('rEmpty');
+    //       delete this.params[para];
+    //     }
+    //   }
+    // });
+    this.changeUrl();
+  }
+  changeUrl() {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: this.params,
+    });
+  }
   getParamsUrl() {
-    this.activatedRoute.paramMap.subscribe((paramMap) => {
-      this.categoryName = paramMap.get('categoryName')!;
-      this.productService
-        .getProductsByCategoryName(this.categoryName)
-        .subscribe(
-          (response: Pagination) => {
-            this.products = response.products;
-          },
-          (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        );
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      let someObj: any = {
+        // price_gte: 390000,
+        // price_lte: 550000,
+        'THƯƠNG HIỆU': ['Asus', 'Dell'],
+
+        // category_id: 2,
+      };
+      let params = new URLSearchParams();
+      Object.keys(someObj).forEach((k) => {
+        params.set(k, someObj[k]);
+      });
+      console.log(params.toString());
+      this.categoryId = paramMap.get('cateId')!;
+      this.productService.getProductsByCategoryId(+this.categoryId).subscribe(
+        (response: Pagination) => {
+          this.products = response.products;
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
     });
     this.activatedRoute.queryParams.subscribe((res) => {
       if (res['currentPage'] === undefined) {
@@ -178,16 +207,14 @@ export class ListProductComponent implements OnInit {
       } else {
         this.size = res['size'];
       }
-      this.productService
-        .getProductsByCategoryName(this.categoryName)
-        .subscribe(
-          (response: Pagination) => {
-            this.products = response.products;
-          },
-          (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        );
+      this.productService.getProductsByCategoryId(+this.categoryId).subscribe(
+        (response: Pagination) => {
+          this.products = response.products;
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
     });
   }
 }

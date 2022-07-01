@@ -1,4 +1,4 @@
-<app-breadcrumb [name]="categoryName">
+<app-breadcrumb [name]="categoryId">
 </app-breadcrumb>
 
 <div class="list-product-container" id="list-product-container" fxLayout="row" fxLayoutAlign="center center">
@@ -22,7 +22,8 @@
                                 </span>
                             </div>
                             <ul>
-                                <li class="filter-item" *ngFor="let v of setTrademark.values">
+
+                                <li class="filter-item" *ngFor="let v of brands">
                                     <label>
                                         <input type="checkbox" value="v" >
                                         {{v}}
@@ -57,7 +58,7 @@
                             <ul>
                                 <li class="filter-item" *ngFor="let v of attribute.values">
                                     <label>
-                                        <input type="checkbox" value="v" >
+                                        <input (change)="attributesChange($event,attribute.name)"  type="checkbox"  [value]="v" >
                                         {{v}}
                                     </label>
                                 </li>

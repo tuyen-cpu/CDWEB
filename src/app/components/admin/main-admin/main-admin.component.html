@@ -1,0 +1,11 @@
+<div class="admin-wrapper" [class.isShowSidebar]="isShowSidebar">
+    <app-header-admin (newItemEvent)="showSidebar($event)"></app-header-admin>
+    <div class="sidebar">
+        <a [routerLink]="['product']" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="p-link sidebar-item"><i class="pi pi-calendar"></i><span>Product</span></a>
+        <a [routerLink]="['x']" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="p-link sidebar-item"><i class="pi pi-cog"></i><span>Settings</span></a>
+        <a class="p-link sidebar-item"><i class="pi pi-user"></i><span>Profile</span></a>
+    </div>
+    <div class="main-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
