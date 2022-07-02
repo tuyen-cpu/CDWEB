@@ -18,6 +18,8 @@ export class CartService {
   }
 
   public getCart() {
+    //update price of items
+    this.updatePriceCartItems();
     this.cart.next(this.cartItemList);
     return this.cart.asObservable();
   }
@@ -91,4 +93,31 @@ export class CartService {
   public removeAllCartItems() {
     this.storageService.removeCartItemList();
   }
+
+
+  public hasCartItems(): boolean {
+    let list: CartItem[] = [];
+    this.cart.subscribe((data) => {
+      list = data;
+      return (list.length > 0 ? true : false)
+    });
+    return (list.length > 0 ? true : false)
+  }
+
+  public updatePriceCartItems(){
+    this.cartItemList.map((itemCart: CartItem, index: number) => {
+      this.productService.getPriceProductById(itemCart.id).subscribe({
+        next: res =>{
+          let outputPrice = res;
+          itemCart.price = outputPrice;
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+      this.cart.next(this.cartItemList);
+      this.storageService.saveCartItemList(this.cartItemList);
+    });
+  }
+
 }

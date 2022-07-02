@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CartItem } from '../model/cart-item.model';
 
 const USER_KEY = 'auth-user';
-const   CART_KEY = 'cart';
+const CART_KEY = 'cart';
 
 @Injectable({
   providedIn: 'root'
@@ -55,4 +55,6 @@ export class StorageService {
   public removeCartItemList(): void {
     window.localStorage.removeItem(CART_KEY);
   }
+
+  
 }

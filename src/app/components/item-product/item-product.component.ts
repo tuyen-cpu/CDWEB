@@ -31,9 +31,10 @@ export class ItemProductComponent implements OnInit {
     //this.productItem = new Product(1,' Laptop Gaming Gigabyte AORUS 17 XE5-73VN534GH (i7-12700H, RTX 3070 Ti 8GB, Ram 16GB DDR5, SSD 1TB, 17.3 Inch IPS 360Hz FHD) ','','Intel',60660990,10,'https://bizweb.sapocdn.net/thumb/medium/100/329/122/products/laptop-gaming-gigabyte-aorus-17-xe5-73vn534gh.png?v=1648702456000')
   }
 
-  public addToCart(Id: number) {
+
+  public addToCart(Id: any){
     let item: CartItem = {
-      id: this.productItem.id,
+      id: Id,
       name: this.productItem.name,
       img: this.productItem.urlImg,
       price:

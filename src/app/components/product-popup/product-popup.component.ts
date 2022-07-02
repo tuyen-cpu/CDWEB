@@ -43,7 +43,7 @@ export class ProductPopupComponent implements OnInit {
   }
   ngOnInit(): void {
     this.productService
-      .getImagesProduct(this.data.id)
+      .getImagesProduct(this.data.id||1)
       .subscribe((resp: Image[]) => {
         this.images = resp;
       });

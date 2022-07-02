@@ -13,7 +13,10 @@ import { ListProductComponent } from './components/list-product/list-product.com
 import { AddressComponent } from './components/address/address.component';
 import { AccountComponent } from './components/account-home/account/account.component';
 import { AuthGuardService } from './service/auth-guard.service';
+import { CheckoutGuardService } from './service/checkout-guard.service';
+import { BillComponent } from './components/bill/bill.component';
 import { ProductManagerComponent } from './components/admin/product-manager/product-manager.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -42,7 +45,16 @@ const routes: Routes = [
     ],
   },
   { path: 'product/:id', component: DetailProductComponent },
-  { path: 'checkout', component: CheckoutComponent },
+  { 
+    path: 'checkout',
+    component: CheckoutComponent,
+    canActivate: [CheckoutGuardService],
+   },
+   { 
+    path: 'bill/:id',
+    component: BillComponent,
+    canActivate: [AuthGuardService],
+   },
   { path: 'search', component: SearchComponent },
   {
     path: 'admin',
