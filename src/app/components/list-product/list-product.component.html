@@ -25,7 +25,7 @@
 
                                 <li class="filter-item" *ngFor="let v of brands">
                                     <label>
-                                        <input type="checkbox" value="v" >
+                                        <input  (change)="attributesChange($event)" type="checkbox" [value]="v" [checked]="isChecked(v)" >
                                         {{v}}
                                     </label>
                                 </li>
@@ -38,19 +38,19 @@
                             GIÁ SẢN PHẨM
                         </div>
                         <div class="content">
-                            <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options" (userChangeEnd)="onUserChangeEnd($event)">
+                            <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="onUserChangeEnd($event)">
                             </ngx-slider>
                             <div class="price-input">
-                                <input type="text" id="min-price" disabled value="0" [ngModel]="formatPrice(value)">
-                                <input type="text" id="max-price" disabled value="110.000.000₫" [ngModel]="formatPrice(highValue)">
+                                <input type="text" id="min-price" disabled value="0" [ngModel]="formatPrice(minValue)">
+                                <input type="text" id="max-price" disabled value="110.000.000₫" [ngModel]="formatPrice(maxValue)">
                             </div>
                             <div class="price-btn">
-                                <a href="" class="filter-price">Lọc giá</a>
+                                <a class="filter-price" (click)="onFilterPrice()">Lọc giá</a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="item" *ngFor="let attribute of attributes">
+                    <!-- <div class="item" *ngFor="let attribute of attributes">
                         <div class="title">
                             {{attribute.name}}
                         </div>
@@ -64,7 +64,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -72,7 +72,7 @@
             <div fxFlex="75" fxFlex.sm="100" fxFlex.xs="100">
                 <section class="main-container collection">
                     <div class="category-products products">
-                        <div class="sortPagiBar">
+                        <div class="sortPagiBar" *ngIf="products.length!==0">
                             <div fxLayout="row " fxLayoutAlign="start  center">
                                 <div fxFlex="50">
                                     <h1 class="title-head">Laptop</h1>
@@ -152,9 +152,10 @@
                         </section>
 
                         <section class="products-view products-view-grid" [hidden]="view_list">
-                            <div fxLayout="row wrap" fxLayoutAlign="start center">
-                                <div class="item-list" fxFlex="24" fxFlex.sm="33" fxFlex.xs="49" *ngFor="let product of products">
-                                    <ng-container *ngIf="!!products">
+                            <div class="text-center" *ngIf="products.length===0">Không có sản phẩm nào phù hợp</div>
+                            <div *ngIf="!!products" fxLayout="row wrap" fxLayoutAlign="start center">
+                                <div class="item-list" fxFlex="24" fxFlex.sm="33" fxFlex.xs="49" *ngFor="let product of products;trackBy: trackById">
+                                    <ng-container>
                                         <app-item-product [productItem]="product" [textHere]="'ha'"></app-item-product>
                                     </ng-container>
                                 </div>
@@ -173,8 +174,8 @@
                     <a href="#">6</a>
                     <a href="#">&raquo;</a>
                 </div> -->
-                <div class="pagination">
-                    <p-paginator [rows]="1" [totalRecords]="totalPages" [first]="currentPage" (onPageChange)="onPageChange($event)"></p-paginator>
+                <div class="pagination" *ngIf="products.length!==0">
+                    <p-paginator [rows]="1" [totalRecords]="totalPages" [first]="page" (onPageChange)="onPageChange($event)"></p-paginator>
                 </div>
             </div>
         </div>

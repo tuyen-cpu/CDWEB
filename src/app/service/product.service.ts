@@ -1,3 +1,4 @@
+import { Image } from './../model/image.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Paginator } from 'primeng/paginator';
@@ -33,11 +34,8 @@ export class ProductService {
       `${this.apiServerUrl}/product/all/${id}?page=${page}&size=${size}`
     );
   }
-  public getImageProduct(productId: number): Observable<Product> {
-    return this.http.post<Product>(
-      `${this.apiServerUrl}/product/add`,
-      productId
-    );
+  public getImagesProduct(productId: number): Observable<Image[]> {
+    return this.http.get<Image[]>(`${this.apiServerUrl}/image/${productId}`);
   }
 
   public getQuantityProductById(productId: number): Observable<number> {

@@ -5,14 +5,14 @@ import { ProductService } from './product.service';
 import { StorageService } from './storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
   public cartItemList: CartItem[] = [];
   public cart = new BehaviorSubject<CartItem[]>([]);
   constructor(
     private storageService: StorageService,
-    private productService: ProductService,
+    private productService: ProductService
   ) {
     this.cartItemList = storageService.getCartItemList() || [];
   }
@@ -29,12 +29,11 @@ export class CartService {
   }
 
   public addToCart(item: CartItem) {
-
     let existItem: boolean = false;
     this.cartItemList.map((itemCart: CartItem, index: number) => {
       if (itemCart.id === item.id) {
         this.productService.getQuantityProductById(item.id).subscribe({
-          next: res => {
+          next: (res) => {
             let maxQuantity = res;
             itemCart.quantity += item.quantity;
             if (maxQuantity < itemCart.quantity) {
@@ -44,9 +43,9 @@ export class CartService {
             this.storageService.saveCartItemList(this.cartItemList);
             return;
           },
-          error: err => {
+          error: (err) => {
             console.log(err);
-          }
+          },
         });
         existItem = true;
       }
@@ -62,7 +61,7 @@ export class CartService {
     this.cartItemList.map((itemCart: CartItem, index: number) => {
       if (itemCart.id === itemId) {
         this.productService.getQuantityProductById(itemId).subscribe({
-          next: res => {
+          next: (res) => {
             let maxQuantity = res;
             itemCart.quantity = quantity;
             if (maxQuantity < quantity) {
@@ -71,9 +70,9 @@ export class CartService {
             this.cart.next(this.cartItemList);
             this.storageService.saveCartItemList(this.cartItemList);
           },
-          error: err => {
+          error: (err) => {
             console.log(err);
-          }
+          },
         });
       }
     });
@@ -86,11 +85,10 @@ export class CartService {
         this.cart.next(this.cartItemList);
         this.storageService.saveCartItemList(this.cartItemList);
       }
-    })
+    });
   }
 
   public removeAllCartItems() {
-    this.storageService.removeCartItemList()
+    this.storageService.removeCartItemList();
   }
-
 }

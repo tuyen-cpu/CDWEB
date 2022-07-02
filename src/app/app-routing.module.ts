@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    pathMatch: 'full',
+    // pathMatch: 'full',
   },
   // { path: '**', component: HomeComponent },
   { path: 'list/:cateId', component: ListProductComponent },
