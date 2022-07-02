@@ -19,7 +19,13 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-
+import { TableModule } from 'primeng/table';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ToastModule } from 'primeng/toast';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { SkeletonModule } from 'primeng/skeleton';
 //Material
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
@@ -151,6 +157,13 @@ import { ProductManagerComponent } from './components/admin/product-manager/prod
     RatingModule,
     AvatarModule,
     AvatarGroupModule,
+    TableModule,
+    FileUploadModule,
+    ToolbarModule,
+    ToastModule,
+    CardModule,
+    InputTextModule,
+    SkeletonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
