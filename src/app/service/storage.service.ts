@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { CartItem } from '../model/cart-item.model';
+import { User } from '../model/user.model';
 
 const USER_KEY = 'auth-user';
 const CART_KEY = 'cart';
@@ -9,15 +11,19 @@ const CART_KEY = 'cart';
 })
 export class StorageService {
 
+  public userSource = new BehaviorSubject<any>(this.getUser());
+  public currentUser = this.userSource.asObservable();
   constructor() { }
 
   clean(): void {
     window.sessionStorage.clear();
+    this.userSource.next(null);
   }
 
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    this.userSource.next(user);
   }
 
   public getUser(): any {

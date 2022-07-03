@@ -78,7 +78,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initForm();
 
     //get user login
-    this.currentUser = this.storageService.getUser();
+    //this.currentUser = this.storageService.getUser();
+    this.storageService.currentUser.subscribe((data)=>{
+      this.currentUser=data;
+    });
 
     //load cart Items 
     this.loadListCartItem();
@@ -193,6 +196,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       next: res => {
         console.log(res);
         this.storageService.clean();
+        this.router.navigate(['/']);
       },
       error: err => {
         console.log(err);
@@ -201,7 +205,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     
     //window.location.reload();
     //this.router.navigate(['/']);
-    window.location.href="/";
   }
 
   /*
