@@ -26,6 +26,9 @@ import { ToastModule } from 'primeng/toast';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { SkeletonModule } from 'primeng/skeleton';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {CalendarModule} from 'primeng/calendar';
+
 //Material
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
@@ -79,10 +82,17 @@ import { SearchFilterPipe } from './shared/search-filter.pipe';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { HighlighterPipe } from './pipes/highlighter.pipe';
 import { SearchComponent } from './components/search/search.component';
+
+//admin
 import { MainAdminComponent } from './components/admin/main-admin/main-admin.component';
 import { HeaderAdminComponent } from './components/admin/header-admin/header-admin.component';
 import { MenuBarComponent } from './components/admin/menu-bar/menu-bar.component';
 import { ProductManagerComponent } from './components/admin/product-manager/product-manager.component';
+import { UserManagerComponent } from './components/admin/user-manager/user-manager.component';
+import { BillManagerComponent } from './components/admin/bill-manager/bill-manager.component';
+import { VoucherManagerComponent } from './components/admin/voucher-manager/voucher-manager.component';
+import { CommentManagerComponent } from './components/admin/comment-manager/comment-manager.component';
+import { CategoryManagerComponent } from './components/admin/category-manager/category-manager.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +131,11 @@ import { ProductManagerComponent } from './components/admin/product-manager/prod
     HeaderAdminComponent,
     MenuBarComponent,
     ProductManagerComponent,
+    UserManagerComponent,
+    BillManagerComponent,
+    VoucherManagerComponent,
+    CommentManagerComponent,
+    CategoryManagerComponent,
 
   ],
   imports: [
@@ -164,6 +179,9 @@ import { ProductManagerComponent } from './components/admin/product-manager/prod
     CardModule,
     InputTextModule,
     SkeletonModule,
+    MultiSelectModule,
+    CalendarModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

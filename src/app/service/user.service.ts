@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Message } from '../model/message.model';
+import { User } from '../model/user.model';
 const API_URL = 'http://localhost:3000/user';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -11,17 +12,38 @@ const httpOptions = {
 })
 export class UserService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   existsUsername(username: string): Observable<Boolean> {
     return this.http.get<Boolean>(
-      API_URL + '/checkUsername?username='+username
+      API_URL + '/checkUsername?username=' + username
     );
   }
 
   existsEmail(email: string): Observable<Boolean> {
     return this.http.get<Boolean>(
-      API_URL + '/checkEmail?email='+email
+      API_URL + '/checkEmail?email=' + email
+    );
+  }
+
+  newUser(user: User): Observable<User> {
+    return this.http.post<User>(
+      API_URL, JSON.stringify(user),
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
+
+  getUsersInAdmin(page: number, size: number): Observable<User[]> {
+    return this.http.get<User[]>(
+      API_URL + '/all/admin?page=' + page + '&size=' + size,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
+
+  updateDeletedStatus(id: number[]): Observable<boolean> {
+    return this.http.get<boolean>(
+      API_URL + '/editStatus?id=' + id,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
     );
   }
 }
