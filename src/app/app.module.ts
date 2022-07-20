@@ -28,6 +28,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SkeletonModule } from 'primeng/skeleton';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {CalendarModule} from 'primeng/calendar';
+import {MessageModule} from 'primeng/message';
+import {MessagesModule} from 'primeng/messages';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 //Material
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -93,6 +96,7 @@ import { BillManagerComponent } from './components/admin/bill-manager/bill-manag
 import { VoucherManagerComponent } from './components/admin/voucher-manager/voucher-manager.component';
 import { CommentManagerComponent } from './components/admin/comment-manager/comment-manager.component';
 import { CategoryManagerComponent } from './components/admin/category-manager/category-manager.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +129,7 @@ import { CategoryManagerComponent } from './components/admin/category-manager/ca
 
     BillComponent,
     CommentComponent,
+    ForgotPasswordComponent,
 
     //admin
     MainAdminComponent,
@@ -181,6 +186,9 @@ import { CategoryManagerComponent } from './components/admin/category-manager/ca
     SkeletonModule,
     MultiSelectModule,
     CalendarModule,
+    MessageModule,
+    MessagesModule,
+    ProgressSpinnerModule,
 
   ],
   providers: [],

@@ -46,4 +46,25 @@ export class UserService {
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
     );
   }
+
+  forgotPassword(email: string): Observable<boolean> {
+    return this.http.get<boolean>(
+      API_URL + '/forgot_password?email=' + email
+    );
+  }
+
+  checkValidToken(token: string): Observable<boolean> {
+    return this.http.get<boolean>(
+      API_URL + '/checkToken?token=' + token,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
+
+  updatePassword(token:string, password: string): Observable<string> {
+    return this.http.post<string>(
+      API_URL + '/reset_password',{"token":token, "password": password},
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
+  
 }
