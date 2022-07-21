@@ -89,7 +89,9 @@ export class UserManagerComponent implements OnInit {
     this.user = {};
     this.user = user;
     console.log(user);
-    this.user.birthday = this.creatDate(this.user.birthday);
+    if(this.user.birthday!=null){
+      this.user.birthday = this.creatDate(this.user.birthday);
+    }
     Object.values(this.user.roles).forEach(item => {
       if (item == 'client' && !this.selectedRoles.includes(this.listRoles[0])) {
         this.selectedRoles.push(this.listRoles[1]);
