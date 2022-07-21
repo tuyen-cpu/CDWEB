@@ -16,6 +16,12 @@ import { AuthGuardService } from './service/auth-guard.service';
 import { CheckoutGuardService } from './service/checkout-guard.service';
 import { BillComponent } from './components/bill/bill.component';
 import { ProductManagerComponent } from './components/admin/product-manager/product-manager.component';
+import { UserManagerComponent } from './components/admin/user-manager/user-manager.component';
+import { BillManagerComponent } from './components/admin/bill-manager/bill-manager.component';
+import { VoucherManagerComponent } from './components/admin/voucher-manager/voucher-manager.component';
+import { CategoryManagerComponent } from './components/admin/category-manager/category-manager.component';
+import { CommentManagerComponent } from './components/admin/comment-manager/comment-manager.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -28,6 +34,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'reset_password', component: ForgotPasswordComponent },
   { path: 'list', component: ListProductComponent },
   {
     path: 'account',
@@ -64,6 +71,26 @@ const routes: Routes = [
       {
         path: 'product',
         component: ProductManagerComponent,
+      },
+      {
+        path: 'user',
+        component: UserManagerComponent,
+      },
+      {
+        path: 'bill',
+        component: BillManagerComponent,
+      },
+      {
+        path: 'voucher',
+        component: VoucherManagerComponent,
+      },
+      {
+        path: 'category',
+        component: CategoryManagerComponent,
+      },
+      {
+        path: 'comment',
+        component: CommentManagerComponent,
       },
     ],
   },
