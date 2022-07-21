@@ -95,9 +95,9 @@
         </div>
 
 
-        <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" class="p-fluid">
+        <p-dialog [(visible)]="productDialog" [style]="{width: '100wh'}" header="Product Details" [modal]="true" class="p-fluid">
             <ng-template pTemplate="content">
-                <img [src]="'assets/demo/images/product/' + product.urlImg" [alt]="" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="product.urlImg">
+
                 <div class="field">
                     <label for="name">Name</label>
                     <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}" />
@@ -105,39 +105,6 @@
                 </div>
 
 
-                <!-- <div class="field">
-                  <label for="status">Inventory Status</label>
-                  <p-dropdown id="status" [options]="statuses" optionLabel="label" [(ngModel)]="product.inventoryStatus" placeholder="Select a Status">
-                      <ng-template pTemplate="selectedItem">
-                          <span *ngIf="product && product.inventoryStatus" [class]="'product-badge status-' + product.inventoryStatus.value">{{product.inventoryStatus.label}}</span>
-                      </ng-template>
-                      <ng-template let-status pTemplate="status">
-                          <span [class]="'product-badge status-' + status.value.toLowerCase()">{{status.label}}</span>
-                      </ng-template>
-                  </p-dropdown>
-              </div> -->
-
-                <!-- <div class="field">
-                  <label class="mb-3">Category</label>
-                  <div class="formgrid grid">
-                      <div class="field-radiobutton col-6">
-                          <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="product.category"></p-radioButton>
-                          <label for="category1">Accessories</label>
-                      </div>
-                      <div class="field-radiobutton col-6">
-                          <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="product.category"></p-radioButton>
-                          <label for="category2">Clothing</label>
-                      </div>
-                      <div class="field-radiobutton col-6">
-                          <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="product.category"></p-radioButton>
-                          <label for="category3">Electronics</label>
-                      </div>
-                      <div class="field-radiobutton col-6">
-                          <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="product.category"></p-radioButton>
-                          <label for="category4">Fitness</label>
-                      </div>
-                  </div>
-              </div> -->
                 <div class="formgrid grid">
                     <div class="field col">
                         <label for="price">Price</label>
@@ -150,7 +117,8 @@
                 </div>
                 <div class="field">
                     <label for="description">Description</label>
-                    <textarea id="description" pInputTextarea [(ngModel)]="product.desc" required rows="3" cols="20"></textarea>
+                    <!-- <textarea id="description" pInputTextarea [(ngModel)]="product.desc" required rows="3" cols="20"></textarea> -->
+                    <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="data" (ready)="onReady($event)"></ckeditor>
                 </div>
 
             </ng-template>
@@ -160,5 +128,7 @@
                 <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
             </ng-template>
         </p-dialog>
+
     </div>
+
 </div>

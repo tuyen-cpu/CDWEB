@@ -14,7 +14,7 @@ import { ProductListHomeComponent } from './components/product-list-home/product
 
 //primeNg
 import { PaginatorModule } from 'primeng/paginator';
-import { RatingModule} from 'primeng/rating';
+import { RatingModule } from 'primeng/rating';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
@@ -98,6 +98,7 @@ import { CommentManagerComponent } from './components/admin/comment-manager/comm
 import { CategoryManagerComponent } from './components/admin/category-manager/category-manager.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -141,7 +142,6 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     VoucherManagerComponent,
     CommentManagerComponent,
     CategoryManagerComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -184,6 +184,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     CardModule,
     InputTextModule,
     SkeletonModule,
+    CKEditorModule,
     MultiSelectModule,
     CalendarModule,
     MessageModule,

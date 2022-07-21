@@ -124,6 +124,7 @@ export class ListProductComponent implements OnInit {
       }
     }
     this.page = 0;
+    this.params['page'] = 1;
     this.changeUrl();
   }
   isChecked(branch: string): boolean {
@@ -134,7 +135,6 @@ export class ListProductComponent implements OnInit {
   }
 
   changeUrl() {
-    console.log('vào change url');
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams: this.params,
