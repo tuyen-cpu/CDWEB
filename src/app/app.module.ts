@@ -14,7 +14,7 @@ import { ProductListHomeComponent } from './components/product-list-home/product
 
 //primeNg
 import { PaginatorModule } from 'primeng/paginator';
-import { RatingModule} from 'primeng/rating';
+import { RatingModule } from 'primeng/rating';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
@@ -84,6 +84,7 @@ import { HeaderAdminComponent } from './components/admin/header-admin/header-adm
 import { MenuBarComponent } from './components/admin/menu-bar/menu-bar.component';
 import { ProductManagerComponent } from './components/admin/product-manager/product-manager.component';
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -121,7 +122,6 @@ import { ProductManagerComponent } from './components/admin/product-manager/prod
     HeaderAdminComponent,
     MenuBarComponent,
     ProductManagerComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -164,6 +164,7 @@ import { ProductManagerComponent } from './components/admin/product-manager/prod
     CardModule,
     InputTextModule,
     SkeletonModule,
+    CKEditorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
