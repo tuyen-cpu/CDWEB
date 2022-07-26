@@ -5,7 +5,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Product } from 'src/app/model/product.model';
+import { Product, ProductAdd } from 'src/app/model/product.model';
 import { ProductService } from 'src/app/service/product.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Pagination } from 'src/app/model/pagination.model';
@@ -20,14 +20,16 @@ import * as customBuild from '../../../ckeditor5Custom/build/ckeditor';
 })
 export class ProductManagerComponent implements OnInit {
   products!: Product[];
-  product!: Product;
+  product!: ProductAdd;
   cols!: any[];
   @ViewChild('dt') dt!: Table;
 
   productDialog!: boolean;
+  productDialogEdit!: boolean;
+  uploadedFiles: any[] = [];
   submitted!: boolean;
   public Editor = customBuild;
-  data: string = '<p>Hello World</p>';
+  data: string = '<p>Enter description here!</p>';
   config = {
     toolbar: {
       items: [
@@ -92,12 +94,24 @@ export class ProductManagerComponent implements OnInit {
       editor.model.schema.extend('image', { allowAttributes: 'blockIndent' });
     }
   }
+  onUpload(event) {
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
+
+    this.messageService.add({
+      severity: 'info',
+      summary: 'File Uploaded',
+      detail: 'Uploaded file success!',
+    });
+  }
   constructor(
-    private productService: ProductService // private messageService: MessageService
+    private productService: ProductService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
-    this.productService.getProducts('l', 1, 10).subscribe((res: Pagination) => {
+    this.productService.getProducts('', 0, 30).subscribe((res: Pagination) => {
       this.products = res.products;
       console.log(this.products);
     });
@@ -105,7 +119,7 @@ export class ProductManagerComponent implements OnInit {
       { field: 'id', header: 'ID' },
       { field: 'name', header: 'NAME' },
       { field: 'price', header: 'PRICE' },
-      { field: 'brand', header: 'BRAND' },
+      { field: 'quantity', header: 'QUANTITY' },
       { field: 'discount', header: 'DISCOUNT' },
     ];
   }
@@ -120,13 +134,11 @@ export class ProductManagerComponent implements OnInit {
   }
   openNew() {
     this.product = {
-      id: 123,
       name: '',
-      desc: 'string',
-      brand: 'string',
-      price: 123,
-      discount: 12,
-      urlImg: 'string',
+      longDescription: this.data,
+      price: 0,
+      discount: 0,
+      quantity: 0,
     };
     this.submitted = false;
     this.productDialog = true;
@@ -138,12 +150,20 @@ export class ProductManagerComponent implements OnInit {
 
   saveProduct() {
     this.submitted = true;
+    this.productService.addProduct(this.product).subscribe((res) => {
+      console.log(res);
+      this.productDialog = false;
+    });
     console.log(this.data);
+    this.data = '<p>Enter description here!</p>';
   }
 
   deleteSelectedProducts() {}
 
-  editProduct(product: Product) {}
+  editProduct(product: ProductAdd) {
+    this.product = { ...product };
+    this.productDialogEdit = true;
+  }
 
   deleteProduct(product: Product) {}
 }

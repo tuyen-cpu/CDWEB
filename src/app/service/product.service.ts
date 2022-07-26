@@ -5,7 +5,7 @@ import { Paginator } from 'primeng/paginator';
 import { Observable } from 'rxjs';
 import { DetailProduct } from '../model/detail-product.model';
 import { Pagination } from '../model/pagination.model';
-import { Product } from '../model/product.model';
+import { Product, ProductAdd } from '../model/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   public getProducts(
-    q: string | null,
+    q: string,
     page: number,
     size: number
   ): Observable<Pagination> {
@@ -50,8 +50,11 @@ export class ProductService {
     );
   }
 
-  public addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.apiServerUrl}/product/add`, product);
+  public addProduct(product: ProductAdd): Observable<ProductAdd> {
+    return this.http.post<ProductAdd>(
+      `${this.apiServerUrl}/product/add`,
+      product
+    );
   }
 
   public updateProduct(product: Product): Observable<Product> {
@@ -73,7 +76,6 @@ export class ProductService {
     );
   }
 
-
   public getPriceProductById(productId: number): Observable<number> {
     return this.http.get<number>(
       `${this.apiServerUrl}/product/` + productId + '/price'
@@ -89,6 +91,5 @@ export class ProductService {
     return this.http.get<Pagination>(`${this.apiServerUrl}/product/filter`, {
       params: params,
     });
-
   }
 }
