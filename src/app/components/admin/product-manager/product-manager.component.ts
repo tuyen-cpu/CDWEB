@@ -1,6 +1,8 @@
+import { Image } from './../../../model/image.model';
 import {
   Component,
   ElementRef,
+  OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation,
@@ -11,6 +13,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { Pagination } from 'src/app/model/pagination.model';
 import { Table } from 'primeng/table';
 import * as customBuild from '../../../ckeditor5Custom/build/ckeditor';
+import { mergeMap, Subscription } from 'rxjs';
 @Component({
   selector: 'app-product-manager',
   templateUrl: './product-manager.component.html',
@@ -21,9 +24,11 @@ import * as customBuild from '../../../ckeditor5Custom/build/ckeditor';
 export class ProductManagerComponent implements OnInit {
   products!: Product[];
   product!: ProductAdd;
+  quantity: number;
+  images: Image[] = [];
   cols!: any[];
   @ViewChild('dt') dt!: Table;
-
+  private imageSub: Subscription = new Subscription();
   productDialog!: boolean;
   productDialogEdit!: boolean;
   uploadedFiles: any[] = [];
@@ -98,7 +103,22 @@ export class ProductManagerComponent implements OnInit {
     for (let file of event.files) {
       this.uploadedFiles.push(file);
     }
-
+    var fd = new FormData();
+    for (let file of event.files) {
+      fd.append('file', file);
+    }
+    this.productService
+      .uploadFileImage(fd)
+      .pipe(
+        mergeMap((res) => this.productService.addImage(res, this.product.id))
+      )
+      .subscribe((resp) => {
+        console.log('KKK');
+        console.log(resp);
+      });
+    // this.productService.addImage({link:this.uploadedFiles[0]['name'],productId:this.product.id}).subscribe(res=>{
+    //   console.log("dd")
+    // })
     this.messageService.add({
       severity: 'info',
       summary: 'File Uploaded',
@@ -107,7 +127,8 @@ export class ProductManagerComponent implements OnInit {
   }
   constructor(
     private productService: ProductService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -146,6 +167,7 @@ export class ProductManagerComponent implements OnInit {
   hideDialog() {
     this.productDialog = false;
     this.submitted = false;
+    this.imageSub.unsubscribe();
   }
 
   saveProduct() {
@@ -156,12 +178,42 @@ export class ProductManagerComponent implements OnInit {
     });
     console.log(this.data);
     this.data = '<p>Enter description here!</p>';
+    this.imageSub.unsubscribe();
   }
-
+  removeImage(img: Image) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete!',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.productService.deleteImage(img.id).subscribe((res) => {
+          console.log(res);
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Dialog',
+            detail: 'Delete image success!',
+          });
+        });
+      },
+      reject: () => {},
+    });
+  }
   deleteSelectedProducts() {}
 
   editProduct(product: ProductAdd) {
-    this.product = { ...product };
+    this.productService.resetImages();
+
+    this.productService.getQuantityProductById(product.id).subscribe((res) => {
+      this.quantity = res;
+      this.product = { ...product, quantity: this.quantity };
+    });
+    this.productService.getImagesProduct(product.id).subscribe((res) => {
+      console.log(this.images);
+    });
+    this.imageSub = this.productService.imageChanged.subscribe((res) => {
+      console.log(res);
+      this.images = res;
+    });
     this.productDialogEdit = true;
   }
 

@@ -9,6 +9,7 @@ export interface Product {
   status?: number;
 }
 export interface ProductAdd {
+  id?: number;
   name: string;
   longDescription: string;
   price: number;

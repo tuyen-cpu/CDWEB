@@ -158,8 +158,22 @@
                         <p-inputNumber id="quantity" [(ngModel)]="product.discount"></p-inputNumber>
                     </div>
                 </div>
+                <div class="formgrid grid">
+                    <div class="field col" *ngFor="let img of images">
+                        <div class="image-edit">
+                            <div class="tag-img">
+                                <p-image src="http://localhost:3000/FileUpload/files/{{img.link}}" alt="Image" width="250" [preview]="true"></p-image>
+                                <i class="pi pi-times-circle" (click)="removeImage(img)"></i>
+                            </div>
+
+
+
+                            <!-- <img src="http://localhost:3000/FileUpload/files/{{img.link}}" alt=""> -->
+                        </div>
+                    </div>
+                </div>
                 <div class="field">
-                    <p-fileUpload name="file" url="http://localhost:3000/FileUpload" (onUpload)="onUpload($event)" [multiple]="true" accept="image/*" [maxFileSize]=1000000>
+                    <p-fileUpload name="file" url="" [customUpload]="true" (uploadHandler)="onUpload($event)" [multiple]="true" accept="image/*" [maxFileSize]=1000000>
                         <ng-template pTemplate="content">
                             <ul *ngIf="uploadedFiles.length">
                                 <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
@@ -180,6 +194,7 @@
                 <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
             </ng-template>
         </p-dialog>
+        <p-confirmDialog></p-confirmDialog>
     </div>
 
 </div>

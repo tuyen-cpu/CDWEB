@@ -14,3 +14,35 @@ p-dialog {
         z-index: 44!important;
     }
 }
+
+
+
+p-dialog {
+    .p-dialog-mask {
+        .p-element.ng-trigger.ng-trigger-animation.ng-tns-c150-2.p-dialog.p-component.p-dialog-draggable.p-dialog-resizable.ng-star-inserted {
+            width: 100vw;
+        }
+    }
+}
+
+.field {
+  .image-edit {
+    .tag-img {
+      display: flex;
+      align-items:center;
+      img {
+        width: 100%;
+        height:50px;
+    }
+      i{
+        cursor: pointer;
+        font-size: 1.3rem;
+        &:hover{
+          color:red;
+        }
+      }
+  }
+    
+}
+    
+}
