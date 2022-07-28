@@ -1,4 +1,5 @@
 export interface Image {
-  id: number;
+  id?: number;
   link: string;
+  productId:number;
 }

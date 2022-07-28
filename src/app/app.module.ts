@@ -26,11 +26,15 @@ import { ToastModule } from 'primeng/toast';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { SkeletonModule } from 'primeng/skeleton';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {CalendarModule} from 'primeng/calendar';
-import {MessageModule} from 'primeng/message';
-import {MessagesModule} from 'primeng/messages';
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { CalendarModule } from 'primeng/calendar';
+import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ChipModule } from 'primeng/chip';
+import { ImageModule } from 'primeng/image';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DropdownModule } from 'primeng/dropdown';
 
 //Material
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -190,7 +194,10 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MessageModule,
     MessagesModule,
     ProgressSpinnerModule,
-
+    ChipModule,
+    ImageModule,
+    ConfirmDialogModule,
+    DropdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
