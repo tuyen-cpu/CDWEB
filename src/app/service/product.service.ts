@@ -14,6 +14,8 @@ export class ProductService {
   private apiServerUrl = 'http://localhost:3000';
   imageChanged: BehaviorSubject<Image[]> = new BehaviorSubject([]);
   images: Image[] = [];
+  productManagerChanged: BehaviorSubject<Product[]> = new BehaviorSubject([]);
+  productManager: Product[] = [];
   constructor(private http: HttpClient) {}
   public resetImages() {
     this.images = [];
@@ -28,7 +30,22 @@ export class ProductService {
       `${this.apiServerUrl}/product/all?q=${q}&page=${page}&size=${size}`
     );
   }
-
+  public getProductsManager(
+    q: string,
+    page: number,
+    size: number
+  ): Observable<Pagination> {
+    return this.http
+      .get<Pagination>(
+        `${this.apiServerUrl}/product/all?q=${q}&page=${page}&size=${size}`
+      )
+      .pipe(
+        tap((resp) => {
+          this.productManager = this.productManager.concat(resp.products);
+          this.productManagerChanged.next(this.productManager);
+        })
+      );
+  }
   public getProductsByCategoryId(
     id: number | null,
     page: number = 0,
@@ -43,7 +60,6 @@ export class ProductService {
       .get<Image[]>(`${this.apiServerUrl}/image/${productId}`)
       .pipe(
         tap((resp) => {
-          console.log(resp);
           this.images = this.images.concat(resp);
           console.log();
           this.imageChanged.next(this.images);
@@ -60,6 +76,13 @@ export class ProductService {
         })
       );
   }
+  public getLongDescriptionById(productId: number) {
+    return this.http.get(
+      `${this.apiServerUrl}/product/` + productId + '/description',
+      { responseType: 'text' }
+    );
+  }
+
   public addImage(image: any[], productId: number): Observable<Image[]> {
     var f = [];
     image.forEach((img) => {
@@ -88,18 +111,33 @@ export class ProductService {
     );
   }
 
-  public addProduct(product: ProductAdd): Observable<ProductAdd> {
-    return this.http.post<ProductAdd>(
-      `${this.apiServerUrl}/product/add`,
-      product
-    );
+  public addProduct(product: ProductAdd): Observable<Product> {
+    return this.http
+      .post<Product>(`${this.apiServerUrl}/product/add`, product)
+      .pipe(
+        tap((resp) => {
+          this.productManager.push(resp);
+          this.productManagerChanged.next(this.productManager);
+        })
+      );
   }
 
-  public updateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>(
-      `${this.apiServerUrl}/product/update`,
-      product
-    );
+  public updateProduct(product: ProductAdd): Observable<Product> {
+    {
+      return this.http
+        .put<Product>(`${this.apiServerUrl}/product/update`, product)
+        .pipe(
+          tap((resp) => {
+            console.log(resp);
+            this.productManager = this.productManager.map((product) =>
+              product.id === resp.id
+                ? { ...product, status: resp.status }
+                : { ...product }
+            );
+            this.productManagerChanged.next(this.productManager);
+          })
+        );
+    }
   }
 
   public deleteProduct(productId: number): Observable<void> {

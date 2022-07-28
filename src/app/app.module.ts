@@ -34,6 +34,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ChipModule } from 'primeng/chip';
 import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DropdownModule } from 'primeng/dropdown';
 
 //Material
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -196,6 +197,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ChipModule,
     ImageModule,
     ConfirmDialogModule,
+    DropdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

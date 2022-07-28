@@ -15,4 +15,5 @@ export interface ProductAdd {
   price: number;
   quantity: number;
   discount: number;
+  status: number;
 }

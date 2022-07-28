@@ -13,7 +13,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { Pagination } from 'src/app/model/pagination.model';
 import { Table } from 'primeng/table';
 import * as customBuild from '../../../ckeditor5Custom/build/ckeditor';
-import { mergeMap, Subscription } from 'rxjs';
+import { forkJoin, mergeMap, Subscription } from 'rxjs';
 @Component({
   selector: 'app-product-manager',
   templateUrl: './product-manager.component.html',
@@ -21,18 +21,30 @@ import { mergeMap, Subscription } from 'rxjs';
   styleUrls: ['./product-manager.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ProductManagerComponent implements OnInit {
+export class ProductManagerComponent implements OnInit, OnDestroy {
   products!: Product[];
   product!: ProductAdd;
+  productEdit: ProductAdd = {
+    name: '',
+    longDescription: 'Enter here!',
+    price: 0,
+    quantity: 0,
+    discount: 0,
+    status: 1,
+  };
+  isLoading: boolean = false;
   quantity: number;
+  statuses!: any[];
   images: Image[] = [];
   cols!: any[];
   @ViewChild('dt') dt!: Table;
   private imageSub: Subscription = new Subscription();
+  private productSub: Subscription = new Subscription();
   productDialog!: boolean;
   productDialogEdit!: boolean;
   uploadedFiles: any[] = [];
   submitted!: boolean;
+  editSubmitted!: boolean;
   public Editor = customBuild;
   data: string = '<p>Enter description here!</p>';
   config = {
@@ -113,12 +125,8 @@ export class ProductManagerComponent implements OnInit {
         mergeMap((res) => this.productService.addImage(res, this.product.id))
       )
       .subscribe((resp) => {
-        console.log('KKK');
-        console.log(resp);
+        console.log('Add image success!');
       });
-    // this.productService.addImage({link:this.uploadedFiles[0]['name'],productId:this.product.id}).subscribe(res=>{
-    //   console.log("dd")
-    // })
     this.messageService.add({
       severity: 'info',
       summary: 'File Uploaded',
@@ -132,16 +140,27 @@ export class ProductManagerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.getProducts('', 0, 30).subscribe((res: Pagination) => {
-      this.products = res.products;
-      console.log(this.products);
-    });
+    this.productService
+      .getProductsManager('', 0, 30)
+      .subscribe((res: Pagination) => {
+        this.products = res.products;
+      });
+    this.productSub = this.productService.productManagerChanged.subscribe(
+      (res) => {
+        this.products = res;
+      }
+    );
+    this.statuses = [
+      { label: 'INSTOCK', value: 1 },
+      { label: 'OUTOFSTOCK', value: 0 },
+    ];
     this.cols = [
       { field: 'id', header: 'ID' },
       { field: 'name', header: 'NAME' },
       { field: 'price', header: 'PRICE' },
       { field: 'quantity', header: 'QUANTITY' },
       { field: 'discount', header: 'DISCOUNT' },
+      { field: 'status', header: 'STATUS' },
     ];
   }
   blur() {
@@ -160,6 +179,7 @@ export class ProductManagerComponent implements OnInit {
       price: 0,
       discount: 0,
       quantity: 0,
+      status: 1,
     };
     this.submitted = false;
     this.productDialog = true;
@@ -167,16 +187,18 @@ export class ProductManagerComponent implements OnInit {
   hideDialog() {
     this.productDialog = false;
     this.submitted = false;
+  }
+  hideDialogEdit() {
+    this.productDialogEdit = false;
     this.imageSub.unsubscribe();
   }
-
   saveProduct() {
+    this.isLoading = true;
     this.submitted = true;
     this.productService.addProduct(this.product).subscribe((res) => {
-      console.log(res);
       this.productDialog = false;
+      this.isLoading = false;
     });
-    console.log(this.data);
     this.data = '<p>Enter description here!</p>';
     this.imageSub.unsubscribe();
   }
@@ -187,7 +209,6 @@ export class ProductManagerComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.productService.deleteImage(img.id).subscribe((res) => {
-          console.log(res);
           this.messageService.add({
             severity: 'info',
             summary: 'Dialog',
@@ -199,23 +220,47 @@ export class ProductManagerComponent implements OnInit {
     });
   }
   deleteSelectedProducts() {}
-
+  saveProductEdit() {
+    this.isLoading = true;
+    this.editSubmitted = true;
+    this.productService.updateProduct(this.productEdit).subscribe((res) => {
+      this.isLoading = false;
+      this.productDialogEdit = false;
+      this.productEdit = {
+        name: 'mm',
+        longDescription: 'Enter here!',
+        price: 0,
+        quantity: 0,
+        discount: 0,
+        status: 1,
+      };
+    });
+  }
   editProduct(product: ProductAdd) {
+    this.editSubmitted = false;
     this.productService.resetImages();
 
-    this.productService.getQuantityProductById(product.id).subscribe((res) => {
-      this.quantity = res;
-      this.product = { ...product, quantity: this.quantity };
+    forkJoin([
+      this.productService.getQuantityProductById(product.id),
+      this.productService.getLongDescriptionById(product.id),
+    ]).subscribe((res) => {
+      this.quantity = res[0];
+      this.productEdit = {
+        ...product,
+        quantity: this.quantity,
+        longDescription: res[1],
+      };
     });
-    this.productService.getImagesProduct(product.id).subscribe((res) => {
-      console.log(this.images);
-    });
+
+    this.productService.getImagesProduct(product.id).subscribe((res) => {});
     this.imageSub = this.productService.imageChanged.subscribe((res) => {
-      console.log(res);
       this.images = res;
     });
     this.productDialogEdit = true;
   }
 
   deleteProduct(product: Product) {}
+  ngOnDestroy(): void {
+    this.productSub.unsubscribe();
+  }
 }

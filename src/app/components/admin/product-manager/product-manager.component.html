@@ -46,8 +46,11 @@
                         <th pSortableColumn="price">Price
                             <p-sortIcon field="price"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="discount">discount
+                        <th pSortableColumn="discount">Discount
                             <p-sortIcon field="discount"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="status">Status
+                            <p-sortIcon field="status"></p-sortIcon>
                         </th>
                         <!-- <th pSortableColumn="inventoryStatus">Status
                           <p-sortIcon field="inventoryStatus"></p-sortIcon>
@@ -77,7 +80,10 @@
                         <td style="width:14%; min-width:10rem;">
                             <span class="p-column-title">Discount</span> {{product.discount}}
                         </td>
-
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Status</span>
+                            <span [class]="'product-badge status-' + product.status">{{product.status===0?"OUTSTOCK":"INSTOCK"}}</span>
+                        </td>
                         <!-- <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Reviews</span>
                           <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
                       </td> -->
@@ -121,6 +127,14 @@
                     </div>
                 </div>
                 <div class="field">
+                    <label for="inventoryStatus">Inventory Status</label>
+                    <p-dropdown [(ngModel)]="product.status" inputId="inventoryStatus" [options]="statuses" placeholder="Select">
+                        <ng-template let-option pTemplate="item">
+                            <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div class="field">
                     <label for="description">Description</label>
                     <!-- <textarea id="description" pInputTextarea [(ngModel)]="product.desc" required rows="3" cols="20"></textarea> -->
                     <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="data" (ready)="onReady($event)"></ckeditor>
@@ -130,7 +144,7 @@
 
             <ng-template pTemplate="footer">
                 <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" [loading]="isLoading" (click)="saveProduct()"></button>
             </ng-template>
         </p-dialog>
 
@@ -139,24 +153,32 @@
 
                 <div class="field">
                     <label for="name">Name</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}" />
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.name">Name is required.</small>
+                    <input type="text" pInputText id="name" [(ngModel)]="productEdit.name" required />
+                    <!-- <small class="ng-dirty ng-invalid" *ngIf="editSubmitted && !productEdit.name">Name is required.</small> -->
                 </div>
 
 
                 <div class="formgrid grid">
                     <div class="field col">
                         <label for="price">Price</label>
-                        <p-inputNumber id="price" [(ngModel)]="product.price"></p-inputNumber>
+                        <p-inputNumber id="price" [(ngModel)]="productEdit.price"></p-inputNumber>
                     </div>
                     <div class="field col">
                         <label for="quantity">Quantity</label>
-                        <p-inputNumber id="quantity" [(ngModel)]="product.quantity"></p-inputNumber>
+                        <p-inputNumber id="quantity" [(ngModel)]="productEdit.quantity"></p-inputNumber>
                     </div>
                     <div class="field col">
                         <label for="quantity">Discount</label>
-                        <p-inputNumber id="quantity" [(ngModel)]="product.discount"></p-inputNumber>
+                        <p-inputNumber id="quantity" [(ngModel)]="productEdit.discount"></p-inputNumber>
                     </div>
+                </div>
+                <div class="field">
+                    <label for="inventoryStatus">Inventory Status</label>
+                    <p-dropdown [(ngModel)]="productEdit.status" inputId="inventoryStatus" [options]="statuses" placeholder="Select">
+                        <ng-template let-option pTemplate="item">
+                            <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
+                        </ng-template>
+                    </p-dropdown>
                 </div>
                 <div class="formgrid grid">
                     <div class="field col" *ngFor="let img of images">
@@ -184,14 +206,14 @@
                 <div class="field">
                     <label for="description">Description</label>
                     <!-- <textarea id="description" pInputTextarea [(ngModel)]="product.desc" required rows="3" cols="20"></textarea> -->
-                    <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="data" (ready)="onReady($event)"></ckeditor>
+                    <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="productEdit.longDescription" (ready)="onReady($event)"></ckeditor>
                 </div>
 
             </ng-template>
 
             <ng-template pTemplate="footer">
-                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+                <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialogEdit()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" [loading]="isLoading" (click)="saveProductEdit()"></button>
             </ng-template>
         </p-dialog>
         <p-confirmDialog></p-confirmDialog>
