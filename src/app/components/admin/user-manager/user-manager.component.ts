@@ -88,7 +88,7 @@ export class UserManagerComponent implements OnInit {
     this.selectedRoles = [];
     this.user = {};
     this.user = user;
-    console.log(user);
+    //console.log(user);
     if(this.user.birthday!=null){
       this.user.birthday = this.creatDate(this.user.birthday);
     }
