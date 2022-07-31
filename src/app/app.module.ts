@@ -31,6 +31,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {ImageModule} from 'primeng/image';
 
 //Material
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -190,7 +191,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MessageModule,
     MessagesModule,
     ProgressSpinnerModule,
-
+    ImageModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

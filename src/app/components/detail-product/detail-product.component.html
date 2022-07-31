@@ -152,15 +152,20 @@
                     <h3>KHÁCH HÀNG NHẬN XÉT</h3> 
                     <div class="review-summary" fxLayout="row wrap" fxLayoutAlign="space-around start">
                         <div fxFlex="33,3%" fxFlex.sm="100" fxFlex.xs="100">
-                            <div class="alert-warning">Chưa có đánh giá, hãy là người đầu tiên</div>
+                            <div class="alert-warning" *ngIf="comments.length==0;else review">Chưa có đánh giá, hãy là người đầu tiên</div>
+                            <ng-template #review>
+                                <p>Đánh giá</p>
+                                <p style="color: rgb(183, 32, 32); font-weight: 700; font-size: 30px; ">{{average}}/5</p>
+                                <div>({{comments.length}} đánh giá)</div>
+                            </ng-template>
                         </div>
                         <div  fxFlex="33,3%" fxFlex.sm="100" fxFlex.xs="100" class="progress-star">
-                            <div class="percent_{{item}}" *ngFor="let item of [5,4,3,2,1]" class="progress-line" >
+                            <div class="percent_{{i+1}}" *ngFor="let value of percentComments; let i = index" class="progress-line" >
                                 <label>
-                                    {{item}}
+                                    {{i+1}}
                                 </label>
                                 <i class="material-icons">star</i>
-                                <mat-progress-bar mode="determinate" value="10"></mat-progress-bar> 0%
+                                <mat-progress-bar mode="determinate" value="{{value}}"></mat-progress-bar> {{value}}%
                             </div>
                         </div>
                         <div  fxFlex="33,3%" fxFlex.sm="100" fxFlex.xs="100">
@@ -207,9 +212,23 @@
                             <div>
                                 <label>B5. Thêm hình sản phẩm nếu có (Tối đa 5 hình):
                                 </label>
-                                <input type="file" id="aer-files" multiple="" accept="image/png, image/jpeg" formControlName="imgFiles">
+                                <p>
+                                    <button pButton type="button" label="Browser" (click)="fileInput.click()" class="p-button-outlined"></button>
+                                </p>
+                                
+                                <input type="hidden" formControlName="imgFiles" value="">
+                                
+                                <input #fileInput style="display: none;" (change)="uploadFile($event)" type="file" maxSi id="aer-files" multiple accept="image/png, image/jpeg" >
                             </div>
-                            <div id="list-image-upload"></div>
+                            <div id="list-image-upload">
+                                <ng-container *ngFor="let url of urls; let i = index" >
+                                    <span [style.margin-right.px]="15">
+                                        <p-image [src]="url" alt="Image" width="150"  [preview]="true"></p-image>
+                                        <button (click)="removeImage(i)" pButton type="button" icon="pi pi-times" class="p-button-danger p-button-outlined p-button-rounded" [style.margin-left.px]="-10"></button>
+                                    </span>
+                                 </ng-container>
+                                
+                            </div>
                         </div>
                         <div fxFlex="25" fxFlex.sm="25" fxFlex.xs="100">
                             <button class="btn btn-sm btn-danger" id="btn-send"  type="submit" [disabled]="reviewForm.invalid">Gửi đánh giá</button>

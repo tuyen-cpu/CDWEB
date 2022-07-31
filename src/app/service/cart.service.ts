@@ -92,6 +92,8 @@ export class CartService {
 
   public removeAllCartItems() {
     this.storageService.removeCartItemList();
+    this.cartItemList=[];
+    this.cart.next(this.cartItemList);
   }
 
 

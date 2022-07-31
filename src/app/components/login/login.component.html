@@ -59,7 +59,7 @@
                         <div *ngIf=" fPwd['email'].errors?.['required'] && fPwd['email'].touched
                         || fPwd['email'].errors?.['required'] && submittedForget" class="alert">Email bắt buộc phải nhập</div>
                         <div *ngIf=" fPwd['email'].errors?.['email']" class="alert">Email không hợp lệ</div>
-                        <div class="alert" *ngIf="!existEmail">Email này chưa được đăng ký{{existEmail}}</div>
+                        <div class="alert" *ngIf="!existEmail">Email này chưa được đăng ký</div>
                     </div>
                     <div class="form-buttons">
                         <button class="button" type="submit" [disabled]="rePwdForm.invalid||!existEmail||isLoadingForgotPwd" >Lấy lại mật khẩu</button>
