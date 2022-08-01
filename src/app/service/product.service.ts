@@ -123,15 +123,15 @@ export class ProductService {
   }
 
   public updateProduct(product: ProductAdd): Observable<Product> {
+    console.log('sp muon suawL:', product);
     {
       return this.http
         .put<Product>(`${this.apiServerUrl}/product/update`, product)
         .pipe(
           tap((resp) => {
+            console.log(console.log('say khi sua:', resp));
             this.productManager = this.productManager.map((product) =>
-              product.id === resp.id
-                ? { ...product, status: resp.status }
-                : { ...product }
+              product.id === resp.id ? { ...product, ...resp } : { ...product }
             );
             this.productManagerChanged.next(this.productManager);
           })
