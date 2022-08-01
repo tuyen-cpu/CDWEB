@@ -177,7 +177,7 @@ export class UserManagerComponent implements OnInit {
       this.users = this.users.filter(val => val.id !== this.user.id);
     }
     this.userService.newUser(this.user).subscribe((response: User) => {
-      console.log(response.birthday + "....")
+      //console.log(response.birthday + "....")
       response.numAddresses = 0;
       response.numBills = 0;
       response.numComments = 0;

@@ -17,9 +17,6 @@ export class CommentManagerComponent implements OnInit {
   comments: DetailComment[] = [];
   comment!: any;
 
-  public deleteCommentDialog: boolean = false;
-  public deleteCommentsDialog: boolean = false;
-
   //pagination
   public totalRecords: number = 0;
   public currentPage: number = 0;
@@ -102,7 +99,7 @@ export class CommentManagerComponent implements OnInit {
             this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Comment Deleted', life: 3000 });
           },
           error: (error: HttpErrorResponse) => {
-            this.messageService.add({severity:'error', summary: 'Error', detail: 'The process errors', life: 3000});
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'The process errors', life: 3000 });
             console.log("Delete comment : " + error.message);
           }
         });
@@ -145,22 +142,22 @@ export class CommentManagerComponent implements OnInit {
         this.commentService.deleteComments(ids).subscribe({
           next: (response: any) => {
             this.comments = this.comments.filter(val => !this.selectedComments.includes(val));
-        this.selectedComments = [];
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Comments Deleted', life: 3000 });
+            this.selectedComments = [];
+            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Comments Deleted', life: 3000 });
           },
           error: (error: HttpErrorResponse) => {
-            this.messageService.add({severity:'error', summary: 'Error', detail: 'The process errors', life: 3000});
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'The process errors', life: 3000 });
             console.log("Delete comments : " + error.message);
           }
         });
-        
+
       }
     });
   }
   getImgs(urls: string) {
-    if(urls!=null && urls !=''){
+    if (urls != null && urls != '') {
       return urls.split(',');
-    }else{
+    } else {
       return [];
     }
   }
