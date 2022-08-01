@@ -1,1 +1,111 @@
-<p>category-manager works!</p>
+<div class="col-12" style="min-height: 700px;">
+    <div class="card">
+        <h3 class="m-0" style="font-size: 20px;"><p>Manage categories and attributes</p> </h3>
+        <p-toast></p-toast>
+        <p-table #dt [globalFilterFields]="['name','status','id']" [value]="categories" dataKey="id" [expandedRowKeys]="expandedRows" responsiveLayout="scroll" >
+            <ng-template pTemplate="caption">
+                <button pButton icon="pi pi-fw {{isExpanded ? 'pi-minus' : 'pi-plus'}}"
+                    label="{{isExpanded ? 'Collapse All' : 'Expand All'}}" (click)="expandAll()"></button>
+                    <button pButton pRipple label="New category" icon="pi pi-plus" class="p-button-success mr-2 ml-2" (click)="openNewCategory()"></button>
+                    <button pButton pRipple label="New attribute" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNewAttribute()" class="pupple"></button>
+                    <div class="flex table-header" style="float: right;">
+                    <h3 class="m-0" style="line-height: 40px;">Manage Categories</h3>
+                    <span style="display: flex;margin-left: 10px;" >
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+                        </span>
+                    </span>
+                </div>
+                
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th style="width: 3rem"></th>
+                    <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon> </th>
+                    <th pSortableColumn="name">Category name <p-sortIcon field="name"></p-sortIcon> </th>
+                    <th pSortableColumn="status">Status<p-sortIcon field="status"></p-sortIcon> </th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-category let-expanded="expanded">
+                <tr>
+                    <td>
+                        <button type="button" pButton pRipple [pRowToggler]="category"
+                            class="p-button-text p-button-rounded p-button-plain"
+                            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                    </td>
+                    <td>{{category.id}}</td>
+                    <td>{{category.name}}</td>
+                    <td>{{category.status}}</td>
+                    <td>
+                        <div class="flex">
+                            <button title="Edit category" pButton pRipple icon="pi pi-pencil" class="p-button-raised p-button-outlined p-button-rounded p-button-infor mr-2"
+                                (click)="editCategory(category)"></button>
+                            <button pButton pRipple icon="pi pi-bookmark" class="p-button-raised p-button-rounded p-button-outlined p-button-danger mr-2"
+                                title="Inactive category" (click)="deleteCategory(category)"></button>
+                            <button pButton pRipple icon="pi pi-bookmark-fill" class="p-button-raised p-button-rounded p-button-outlined p-button-success"
+                                title="Active category" (click)="activeCategory(category)"></button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="rowexpansion" let-category>
+                <tr>
+                    <td colspan="7">
+                        <div class=" ml-5 p-1 box" >
+                            <p-table #dt2 [globalFilterFields]="['name','status','id']" [value]="category.attributes" dataKey="id" responsiveLayout="scroll">
+                                <ng-template pTemplate="header" let-columns>
+                <tr class="p-1">
+                    <th colspan="5" >
+                        <div class="flex table-header" style="float: right;">
+                            <h3 class="m-0" style="line-height: 40px;">Manage Attributes</h3>
+                            <span style="display: flex;margin-left: 10px;">
+                                <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                    <i class="pi pi-search"></i>
+                                    <input pInputText type="text" (input)="applyFilterGlobal2($event, 'contains')"
+                                        placeholder="Search..." />
+                                </span>
+                            </span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th  class="border-tb" pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+                    <th  class="border-tb" pSortableColumn="name">Attribute name <p-sortIcon field="name"></p-sortIcon></th>
+                    <th  class="border-tb" pSortableColumn="value">Attribute value <p-sortIcon field="value"></p-sortIcon></th>
+                    <th  class="border-tb" pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                    <th  class="border-tb">Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-attribute>
+                <tr>
+                    <td>{{attribute.id}}</td>
+                    <td>{{attribute.name}}</td>
+                    <td>{{attribute.value}}</td>
+                    <td>{{attribute.status}}</td>
+                    <td>
+                        <div class="flex">
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-infor mr-2"
+                                (click)="editAttribute(attribute)"></button>
+                            <button pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-danger mr-2"
+                                title="Update status" (click)="deleteAttribute(attribute)"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-success"
+                                title="Update status" (click)="activeAttribute(attribute)"></button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6">There are no attribute for this category yet.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    </td>
+    </tr>
+    </ng-template>
+    </p-table>
+</div>
+</div>
