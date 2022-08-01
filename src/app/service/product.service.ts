@@ -128,7 +128,6 @@ export class ProductService {
         .put<Product>(`${this.apiServerUrl}/product/update`, product)
         .pipe(
           tap((resp) => {
-            console.log(resp);
             this.productManager = this.productManager.map((product) =>
               product.id === resp.id
                 ? { ...product, status: resp.status }

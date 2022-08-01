@@ -64,6 +64,9 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
       ],
       shouldNotGroupWhenFull: true,
     },
+    alignment: {
+      options: ['left', 'center', 'justify', 'right'],
+    },
     image: {
       style: ['alignLeft', 'alignCenter', 'alignRight'],
       resizeUnit: '%',
@@ -122,7 +125,9 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
     this.productService
       .uploadFileImage(fd)
       .pipe(
-        mergeMap((res) => this.productService.addImage(res, this.product.id))
+        mergeMap((res) =>
+          this.productService.addImage(res, this.productEdit.id)
+        )
       )
       .subscribe((resp) => {
         console.log('Add image success!');
@@ -191,6 +196,7 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
   hideDialogEdit() {
     this.productDialogEdit = false;
     this.imageSub.unsubscribe();
+    this.uploadedFiles = [];
   }
   saveProduct() {
     this.isLoading = true;
@@ -235,6 +241,7 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
         status: 1,
       };
     });
+    this.uploadedFiles = [];
   }
   editProduct(product: ProductAdd) {
     this.editSubmitted = false;
