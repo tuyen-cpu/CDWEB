@@ -69,7 +69,8 @@
                             <span class="p-column-title">Name</span> {{product.name}}
                         </td>
                         <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
-                            <img src="https://www.primefaces.org/sakai-ng/assets/demo/images/product/bamboo-watch.jpg" [alt]="product.name" width="100" class="shadow-4" />
+                            <p-skeleton class="img" *ngIf="!product.urlImg" width="100%" height="120px"></p-skeleton>
+                            <img *ngIf="product.urlImg" [src]="'http://localhost:3000/FileUpload/files/'+product.urlImg" [alt]="product.name" width="120" class="shadow-4" />
                         </td>
                         <td style="width:14%; min-width:10rem;">
                             <span class="p-column-title">Quantity</span> {{product.quantity}}

@@ -31,6 +31,7 @@ import ImageResizeHandles from "@ckeditor/ckeditor5-image/src/imageresize/imager
 import ImageResize from "@ckeditor/ckeditor5-image/src/imageresize";
 import TableProperties from "@ckeditor/ckeditor5-table/src/tableproperties";
 import TableCellProperties from "@ckeditor/ckeditor5-table/src/tablecellproperties";
+import Alignment from "@ckeditor/ckeditor5-alignment/src/alignment";
 class Editor extends ClassicEditor {}
 
 // Plugins to include in the build.
@@ -51,6 +52,7 @@ Editor.builtinPlugins = [
   Italic,
   Link,
   List,
+  Alignment,
   MediaEmbed,
   Paragraph,
   PasteFromOffice,
@@ -68,9 +70,12 @@ Editor.builtinPlugins = [
 // Editor configuration.
 Editor.defaultConfig = {
   toolbar: {
-    items: ["|"],
+    items: ["|", "alignment"],
   },
   language: "en",
+  alignment: {
+    options: ["left", "right"],
+  },
   image: {
     toolbar: [
       "imageTextAlternative",
