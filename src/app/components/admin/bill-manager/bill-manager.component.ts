@@ -25,7 +25,6 @@ export class BillManagerComponent implements OnInit {
   public currentPage: number = 0;
   public size: number = 5;
 
-  
   public cols: any[] = [];
   public listStatuses:SelectItem[] = [];
   public selectedStatus:number = 0;

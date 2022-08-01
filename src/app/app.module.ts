@@ -32,6 +32,7 @@ import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {ImageModule} from 'primeng/image';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 //Material
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -192,6 +193,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MessagesModule,
     ProgressSpinnerModule,
     ImageModule,
+    ConfirmDialogModule,
     
   ],
   providers: [],
