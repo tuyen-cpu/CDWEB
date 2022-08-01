@@ -157,8 +157,12 @@ export class VoucherManagerComponent implements OnInit {
   existsCode(code:string){
     this.voucherService.existsVoucher(code).subscribe({
       next: (response: boolean) => {
-        this.existedCode = response;
-        return response;
+        const value:boolean  = response;
+        if (value == true) {
+          this.existedCode = true;
+        } else {
+          this.existedCode = false;
+        }
       },
       error: (error: HttpErrorResponse) => {
         console.log("Check voucher code : " + error.message);
@@ -182,7 +186,6 @@ export class VoucherManagerComponent implements OnInit {
     }
     this.voucherService.saveVoucher(this.voucher).subscribe({
       next: (response: Voucher) => {
-        console.log(response + "dshadghsagd")
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Voucher saved', life: 3000 });
         this.voucher = response;
         this.vouchers.unshift(this.voucher);

@@ -30,6 +30,19 @@ export class CategoryManagerComponent implements OnInit {
 
   public cols: any[] = [];
 
+  public category:any;
+  public attribute:any;
+
+  categoryDialog = false;
+  attributeDialog = false;
+  submitted = false;
+
+  existedCategory = false;
+  existedAttribute = false;
+
+  isLoadingCategory=false;
+  isLoadingAttribute=false;
+  
   constructor(
     private categoryService:CategoryService,
     private messageService: MessageService,
@@ -117,10 +130,40 @@ export class CategoryManagerComponent implements OnInit {
   }
 
   openNewCategory(){
-
+    this.submitted = false;
+    this.categoryDialog = true;
   }
 
   openNewAttribute(){
-    
+    this.submitted = false;
+    this.attributeDialog = true;
+  }
+
+  existsCategoryName(categoryName){
+
+  }
+
+  existsAttributeName(categoryName){
+
+  }
+
+  hideDialogCategory(){
+    this.categoryDialog = false;
+    this.submitted = false;
+  }
+
+  saveCategory(){
+    this.isLoadingCategory = true;
+    this.submitted = true;
+  }
+
+  hideDialogAttribute(){
+    this.attributeDialog = false;
+    this.submitted = false;
+  }
+
+  saveAttribute(){
+    this.isLoadingAttribute = true;
+    this.submitted = true;
   }
 }
