@@ -22,6 +22,7 @@ import { VoucherManagerComponent } from './components/admin/voucher-manager/vouc
 import { CategoryManagerComponent } from './components/admin/category-manager/category-manager.component';
 import { CommentManagerComponent } from './components/admin/comment-manager/comment-manager.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { RoleGuardService } from './service/role-guard.service';
 
 const routes: Routes = [
   {
@@ -93,6 +94,8 @@ const routes: Routes = [
         component: CommentManagerComponent,
       },
     ],
+    canActivateChild: [RoleGuardService],
+    canActivate: [RoleGuardService],
   },
 ];
 

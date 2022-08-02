@@ -35,13 +35,13 @@
                 <span class="title">Số lượng:</span>
                 <div class="action-box">
                     <button class="btn-quantity btn-decr" (click)="decreaseQuantity(inputElementQuantity)">-</button>
-                    <input #inputElementQuantity type="text" class="quantity-value" value="1" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="2" step="1" max="99" min="1">
+                    <input [(ngModel)]="quantity" #inputElementQuantity type="text" class="quantity-value" value="1" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="2" step="1" max="99" min="1">
                     <span class="btn-quantity btn-incr" (click)="increaseQuantity(inputElementQuantity)">+</span>
                 </div>
             </div>
             <div class="btn-action">
                 <button mat-flat-button class="btn-buy" fxLayoutAlign="center">
-          <span class="txt1">Mua ngay</span>
+          <span class="txt1" (click)="addToCart()">Mua ngay</span>
           <span class="txt2">Giao hàng miễn phí tận nơi</span>
         </button>
             </div>

@@ -34,4 +34,36 @@ export class CommentService {
     );
   }
 
+  getPercentCommentsByProductId(productId: number): Observable<[]> {
+    return this.http.get<[]>(
+      `${this.REST_API}/product-${productId}/percent-comments`
+    );
+  }
+
+  getAverageCommentsByProductId(productId: number): Observable<Number> {
+    return this.http.get<Number>(
+      `${this.REST_API}/product-${productId}/average`
+    );
+  }
+
+  getCommentsInAdmin(page: number, size: number): Observable<DetailComment[]> {
+    return this.http.get<DetailComment[]>(
+      this.REST_API + '/all/admin?page=' + page + '&size=' + size,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
+
+  deleteComments(id: number[]): Observable<boolean> {
+    return this.http.delete<boolean>(
+      this.REST_API + '?id=' + id,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
+
+  updateStatus(id: number, status: number): Observable<boolean> {
+    return this.http.get<boolean>(
+      this.REST_API + '/updateStatus?id=' + id + '&status='+status,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
 }

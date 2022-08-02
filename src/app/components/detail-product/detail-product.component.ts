@@ -16,6 +16,7 @@ import { DetailComment } from 'src/app/model/comment.model';
 import { User } from 'src/app/model/user.model';
 import { StorageService } from 'src/app/service/storage.service';
 import { CommentService } from 'src/app/service/comment.service';
+import { FileService } from 'src/app/service/file.service';
 
 // install Swiper modules
 SwiperCore.use([Zoom, FreeMode, Navigation, Thumbs]);
@@ -27,6 +28,14 @@ SwiperCore.use([Zoom, FreeMode, Navigation, Thumbs]);
   encapsulation: ViewEncapsulation.None,
 })
 export class DetailProductComponent implements OnInit {
+  //percent of rating 
+  percentComments=[];
+  average=0;
+  //load image comment
+  urls = new Array<string>();
+  files: File[]=[];
+  removeImgFiles=[];
+
   thumbsSwiper: any;
   private id!: number;
   public detailProduct!: DetailProduct;
@@ -69,6 +78,7 @@ export class DetailProductComponent implements OnInit {
     private cartService: CartService,
     private storageService: StorageService,
     private commentService: CommentService,
+    private fileService: FileService,
   ) { }
 
   ngOnInit(): void {
@@ -86,11 +96,37 @@ export class DetailProductComponent implements OnInit {
     this.getDetailProduct(this.id);
     this.loadUser();
     this.loadComments(this.id, this.currentPage);
+    this.loadPercentComments(this.id);
+    this.loadAverageComments(this.id);
   }
+
+  public loadAverageComments(id){
+    this.commentService.getAverageCommentsByProductId(id).subscribe({
+      next:(response: number) => {
+        console.log( "AVG = "+response)
+        this.average = response;
+      },
+      error:(error: HttpErrorResponse) => {
+        console.log("Average comments: " + error.message);
+      }
+    })
+  }
+
+  public loadPercentComments(id){
+    this.commentService.getPercentCommentsByProductId(id).subscribe({
+      next:(response: []) => {
+        this.percentComments = response;
+      },
+      error:(error: HttpErrorResponse) => {
+        console.log("Percent comments: " + error.message);
+      }
+    })
+  }
+
   public loadComments(id: number, currentPage: number) {
     this.commentService.getPageCommentsByProductId(id, currentPage).subscribe({
       next:(response: any) => {
-        console.log(response)
+        //console.log(response)
         this.comments = response?.content;
         this.currentPage = response?.number;
         this.totalPages = response?.totalPages;
@@ -177,8 +213,35 @@ export class DetailProductComponent implements OnInit {
   // };
   public newComment!: DetailComment;
   public onSubmitReview(): void {
-    // console.log(this.reviewForm);
-    // console.log(this.reviewForm.value);
+    if(this.reviewForm){
+      let links:string ='';
+      const formData = new FormData();
+      for (let i = 0; i < this.files.length; i++) {
+        if(!this.removeImgFiles.includes(i)){
+          formData.append('files', this.files[i], this.files[i].name);
+        }
+      }
+      this.fileService.uploadFile(formData).subscribe(
+        (event:[])=>{
+          links = event.join(',');
+          console.log('links='+links)
+        //   this.reviewForm.patchValue({
+        //     imgFiles: links+''
+        //  });
+          this.reviewForm.get('imgFiles').setValue(links);
+          this.createComment();
+          // console.log(this.reviewForm);
+          // console.log(this.reviewForm.value);
+        },
+        (error: HttpErrorResponse)=>{
+          console.log(error)
+        }
+      )
+      
+    }
+  }
+
+  createComment(){
     let {numberStar,content,fullName,phone,imgFiles}=this.reviewForm.value;
     let userId:number = this.user?this.user.id:-1;
     let detailComment:DetailComment={
@@ -199,12 +262,19 @@ export class DetailProductComponent implements OnInit {
         //console.log("New Comment: " + this.newComment.content);
         //add component comment 
         //parse into newComment
+        this.reviewForm.reset();
+        this.urls = [];
+        this.removeImgFiles = [];
+        this.files =[];
+        this.loadPercentComments(this.id);
+        this.loadAverageComments(this.id);
       },
       (error: HttpErrorResponse) => {
         console.log("Comment: " + error.message);
       }
     );
   }
+
   public setReviewStar(num_star: number): void {
     this.number_star = num_star;
     let id = 'title_' + num_star;
@@ -245,4 +315,43 @@ export class DetailProductComponent implements OnInit {
 
     this.cartService.addToCart(item);
   }
+
+
+  uploadFile(event) {
+    // const element = event.currentTarget as HTMLInputElement;
+    // let fileList: FileList | null = element.files;
+    // if (fileList) {
+    //   console.log("FileUpload -> files", fileList);
+    // }
+    this.removeImgFiles = [];
+    this.files =[];
+    this.urls = [];
+    this.files = event.target.files;
+    if (this.files) {
+      for (let file of this.files) {
+        if(file.size > 1000000){
+          alert("File is too big!");
+          this.removeImgFiles = [];
+          this.files =[];
+          this.urls = [];
+          return;
+        };
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.urls.push(e.target.result);
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+  
+  removeImage(index){
+    if (index > -1) { // only splice array when item is found
+      this.urls.splice(index, 1); // 2nd parameter means remove one item only
+      this.removeImgFiles.push(index);
+    }
+   
+  }
+
 }
+

@@ -348,12 +348,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   showOrder() {
-    window.location.href = '/bill/' + this.orderId;
-    // this.route.navigate(['/bill/'+this.orderId]);
+    //window.location.href = '/bill/' + this.orderId;
+    this.route.navigate(['/bill/'+this.orderId]);
   }
 
   continueShopping() {
-    window.location.href = '/list';
-    // this.route.navigate(['/list']);
+    //window.location.href = '/list';
+    this.route.navigate(['/list']);
   }
 }

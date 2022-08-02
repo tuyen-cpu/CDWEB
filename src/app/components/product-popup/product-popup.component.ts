@@ -8,6 +8,8 @@ import {
 import SwiperCore, { FreeMode, Navigation, Thumbs } from 'swiper';
 import { Product } from '../../model/product.model';
 import { Image } from 'src/app/model/image.model';
+import { CartItem } from 'src/app/model/cart-item.model';
+import { CartService } from 'src/app/service/cart.service';
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
@@ -18,12 +20,14 @@ SwiperCore.use([FreeMode, Navigation, Thumbs]);
   encapsulation: ViewEncapsulation.None,
 })
 export class ProductPopupComponent implements OnInit {
+  quantity = 1;
   thumbsSwiper: any;
   images: Image[] = [];
   constructor(
     public dialogRef: MatDialogRef<ProductPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Product,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService,
   ) {}
 
   onNoClick(): void {
@@ -47,5 +51,17 @@ export class ProductPopupComponent implements OnInit {
       .subscribe((resp: Image[]) => {
         this.images = resp;
       });
+  }
+
+  public addToCart() {
+    let item: CartItem = {
+      id: this.data.id,
+      name: this.data.name,
+      price: this.data.price - this.data.price * this.data.discount / 100,
+      quantity: this.quantity,
+      img: this.data.urlImg
+    };
+
+    this.cartService.addToCart(item);
   }
 }

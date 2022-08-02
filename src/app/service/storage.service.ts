@@ -42,6 +42,16 @@ export class StorageService {
     return false;
   }
 
+  public isAdmin(): boolean {
+    if(!this.isLoggedIn()){
+      return false;
+    }else{
+      const user  = window.sessionStorage.getItem(USER_KEY);
+      const result : User = JSON.parse(user);
+      return result.roles.includes("admin");
+    }
+  }
+  
   /*
   *  handle cart
   */

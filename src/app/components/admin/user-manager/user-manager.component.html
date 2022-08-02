@@ -23,7 +23,7 @@
                 [(selection)]="selectedUsers" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="summary">
                     <div class="page">
-                        <p-paginator [rows]="size" [rowsPerPageOptions]="[5,10,15]" [totalRecords]="totalRecords"
+                        <p-paginator [rows]="size" [rowsPerPageOptions]="[5,10,15,30]" [totalRecords]="totalRecords"
                             [first]="currentPage" (onPageChange)="onPageChange($event)"></p-paginator>
                     </div>
 

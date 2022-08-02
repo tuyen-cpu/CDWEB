@@ -77,7 +77,13 @@ export class LoginComponent implements OnInit {
         this.storageService.saveUser(data);
         this.isLoginFailed = false;
         this.displayLoading = false;
-        this.router.navigate(['']);
+        const isAdmin: boolean = data.roles.includes("admin");
+        if(isAdmin){
+          this.router.navigate(['/admin']);
+        }
+        else{
+          this.router.navigate(['']);
+        }
       },
       error: (err) => {
         this.isLoginFailed = true;

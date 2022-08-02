@@ -116,6 +116,14 @@
                 </table>
                 <div class="total-all" fxLayoutAlign="center">
                     <div class="title-wrapper" fxFlex="80">
+                        <p class="title">Vận chuyển:</p>
+                    </div>
+                    <div class="value-wrapper" fxFlex="20">
+                        <span class="value">{{ detailBill.shippingCost | currency: "VND" }}</span>
+                    </div>
+                </div>
+                <div class="total-all" fxLayoutAlign="center">
+                    <div class="title-wrapper" fxFlex="80">
                         <p class="title">Tổng tiền:</p>
                     </div>
                     <div class="value-wrapper" fxFlex="20">
@@ -149,6 +157,9 @@
                 </div>
             </div>
             <div class="total-cart">
+                <h3 class="title">Vận chuyển:</h3>
+                <span class="value">{{ detailBill.shippingCost | currency: "VND" }}</span>
+
                 <h3 class="title">Tổng tiền:</h3>
                 <span class="value">{{ detailBill.total | currency: "VND" }}</span>
             </div>
