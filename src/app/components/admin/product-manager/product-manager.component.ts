@@ -113,8 +113,7 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
       ],
       toolbar: [
         'imageResize',
-        'imageResize:25',
-
+        'imageResize:10',
         'imageResize:original',
         'imageStyle:inline',
         'imageStyle:block',
