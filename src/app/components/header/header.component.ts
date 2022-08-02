@@ -48,6 +48,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   limitedQuantity: number = 5;
   searchForm!: FormGroup;
 
+  isAdmin = false;
+
   //cart
   public cartItems: CartItem[] = [];
   public totalCart: number = 0;
@@ -85,6 +87,12 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //load cart Items
     this.loadListCartItem();
+
+    this.loadIsAdmin();
+  }
+
+  public loadIsAdmin(){
+    this.isAdmin = this.storageService.isAdmin();
   }
 
   public loadListCartItem() {
