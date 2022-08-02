@@ -52,6 +52,12 @@
                 </div>
                 <div class="topbar-right" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayoutAlign="end center">
                     <ul ngClass.xs="center">
+                        <li *ngIf="isAdmin">
+                            <a href="/admin" title="Go to admin page">
+                                <mat-icon>person</mat-icon>
+                                Admin page
+                            </a>
+                        </li>
                         <li class="login-content" *ngIf="currentUser; else loggedOut">
                             <a routerLink="/account" class="click-account">
                                 <mat-icon>person</mat-icon>

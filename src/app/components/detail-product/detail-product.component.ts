@@ -103,7 +103,7 @@ export class DetailProductComponent implements OnInit {
   public loadAverageComments(id){
     this.commentService.getAverageCommentsByProductId(id).subscribe({
       next:(response: number) => {
-        console.log( "AVG = "+response)
+        //console.log( "AVG = "+response)
         this.average = response;
       },
       error:(error: HttpErrorResponse) => {
@@ -139,7 +139,7 @@ export class DetailProductComponent implements OnInit {
 
   //comments
   onPageChange(event: any){
-    console.log(event.page);
+    //console.log(event.page);
     this.loadComments(this.id,event.page )
   }
   public loadUser() {
