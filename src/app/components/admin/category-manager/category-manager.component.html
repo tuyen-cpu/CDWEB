@@ -134,7 +134,7 @@
         <ng-template pTemplate="footer">
             <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
                 (click)="hideDialogCategory()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCategory()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" [disabled]="existedCategory" class="p-button-text" (click)="saveCategory()"></button>
         </ng-template>
     </p-dialog>
     
@@ -159,28 +159,26 @@
                 <div fxFlex="30" style="text-align: right;line-height: 40px;">Attribute name</div>
                 <div fxFlex="5"></div>
                 <div fxFlex="60" style="text-align: left;">
-                    <input type="text" pInputText (input)="existsAttributeName(attribute.name)" [(ngModel)]="attribute.name"
+                    <input type="text" pInputText (input)="existsAttributeName(attribute.name,attribute.value, attribute.categoryId)" [(ngModel)]="attribute.name"
                         required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !attribute.name}" />
-                    <small class="ng-dirty ng-invalid red" *ngIf="submitted && !attribute.name">Attribute name is
-                        required.</small>
-                    <small class="ng-dirty ng-invalid red" *ngIf="existedAttribute">Attribute name existed.</small>
+                    <small class="ng-dirty ng-invalid red" *ngIf="submitted && !attribute.name">Attribute name is required.</small>
                 </div>
             </div>
             <div class="field" fxLayout="row">
                 <div fxFlex="30" style="text-align: right;line-height: 40px;">Attribute value</div>
                 <div fxFlex="5"></div>
                 <div fxFlex="60" style="text-align: left;">
-                    <input type="text" pInputText [(ngModel)]="attribute.value" required
+                    <input type="text" pInputText (input)="existsAttributeName(attribute.name,attribute.value, attribute.categoryId)" [(ngModel)]="attribute.value" required
                         [ngClass]="{'ng-invalid ng-dirty' : submitted && !attribute.value}" />
-                    <small class="ng-dirty ng-invalid red" *ngIf="submitted && !attribute.value">Attribute value is
-                        required.</small>
+                    <small class="ng-dirty ng-invalid red" *ngIf="submitted && !attribute.value">Attribute value is required.</small>
+                    <small class="ng-dirty ng-invalid red" *ngIf="existedAttribute">Attribute name-value existed.</small>
                 </div>
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
             <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
                 (click)="hideDialogAttribute()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" [disabled]="existedAttribute"
                 (click)="saveAttribute()"></button>
         </ng-template>
     </p-dialog>

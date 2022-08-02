@@ -34,9 +34,9 @@ export class AttributeService {
   }
 
   //check trong cùng category
-  existsAttributeName(attributeName: string): Observable<Boolean> {
+  existsAttributeName(attributeName: string, value: string, catId: number): Observable<Boolean> {
     return this.http.get<Boolean>(
-      `${this.apiServerUrl}/attribute`  + '/checkAttributeName?name=' + attributeName
+      `${this.apiServerUrl}/attribute`  + '/checkAttributeName?name=' + attributeName + '&value=' + value + '&categoryId=' + catId
     );
   }
 }

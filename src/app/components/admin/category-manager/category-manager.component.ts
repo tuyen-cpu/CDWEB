@@ -246,8 +246,8 @@ export class CategoryManagerComponent implements OnInit {
     });
   }
 
-  existsAttributeName(attributeName){
-    this.attributeService.existsAttributeName(attributeName).subscribe({
+  existsAttributeName(attributeName, value, catId){
+    this.attributeService.existsAttributeName(attributeName, value, catId).subscribe({
       next: (response: boolean) => {
         const value:boolean  = response;
         if (value == true) {
