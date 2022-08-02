@@ -14,6 +14,7 @@ import { Pagination } from 'src/app/model/pagination.model';
 import { Product } from 'src/app/model/product.model';
 import { ProductService } from 'src/app/service/product.service';
 import { ProductPopupComponent } from '../product-popup/product-popup.component';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-list-product',
@@ -31,7 +32,7 @@ export class ListProductComponent implements OnInit {
   public products: Product[] = [];
   private f: Object[] = [];
   public view_list = false;
-
+  isLoading: boolean = false;
   //list attribute
   public attributes: AttributeProduct[] = [];
   brands: string[] = [];
@@ -184,9 +185,11 @@ export class ListProductComponent implements OnInit {
     });
   }
   getProducts(para: any) {
+    this.isLoading = true;
     this.productService.filterProduct(para).subscribe((resp: Pagination) => {
       this.products = resp.products;
       this.totalPages = resp.totalPages;
+      this.isLoading = false;
     });
   }
 

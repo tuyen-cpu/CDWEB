@@ -48,9 +48,9 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   limitedQuantity: number = 5;
   searchForm!: FormGroup;
 
-  //cart 
+  //cart
   public cartItems: CartItem[] = [];
-  public totalCart: number = 0; 
+  public totalCart: number = 0;
   constructor(
     private cdRef: ChangeDetectorRef,
     private mediaObserver: MediaObserver,
@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private storageService: StorageService,
     private authService: AuthService,
-    private cartService: CartService,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -79,18 +79,22 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //get user login
     //this.currentUser = this.storageService.getUser();
-    this.storageService.currentUser.subscribe((data)=>{
-      this.currentUser=data;
+    this.storageService.currentUser.subscribe((data) => {
+      this.currentUser = data;
     });
 
-    //load cart Items 
+    //load cart Items
     this.loadListCartItem();
   }
 
   public loadListCartItem() {
-    this.cartService.getCart().subscribe(res=>{
+    this.cartService.getCart().subscribe((res) => {
       this.cartItems = res;
-      this.totalCart = this.cartItems.reduce((previousValue, currentValue) => previousValue + (currentValue.quantity * currentValue.price), 0)
+      this.totalCart = this.cartItems.reduce(
+        (previousValue, currentValue) =>
+          previousValue + currentValue.quantity * currentValue.price,
+        0
+      );
     });
   }
 
@@ -191,74 +195,78 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       ?.setAttribute('style', 'visibility: hidden;');
   }
 
-  public logout():void{
+  public logout(): void {
     this.authService.logout().subscribe({
-      next: res => {
+      next: (res) => {
         console.log(res);
         this.storageService.clean();
         this.router.navigate(['/']);
       },
-      error: err => {
+      error: (err) => {
         console.log(err);
-      }
+      },
     });
-    
+
     //window.location.reload();
     //this.router.navigate(['/']);
   }
 
   /*
-  * manipulate with cart mini
-  */
-  public deleteCartItem(id: number){
+   * manipulate with cart mini
+   */
+  public deleteCartItem(id: number) {
     this.cartService.removeCartItem(id);
   }
 
   updateQuantity(ele: any, id: number): void {
-    let quantity= ele.value;
-    this.cartService.updateCartItem(id,quantity);
+    let quantity = ele.value;
+    this.cartService.updateCartItem(id, quantity);
     this.productService.getQuantityProductById(id).subscribe({
-      next: res => {
-        if(res<quantity){
-          const msg = document.getElementById('msg-quantity-' + id) as HTMLDivElement | null;
-          if(msg){
+      next: (res) => {
+        if (res < quantity) {
+          const msg = document.getElementById(
+            'msg-quantity-' + id
+          ) as HTMLDivElement | null;
+          if (msg) {
             msg.setAttribute('style', 'display: block;');
             setTimeout(function () {
               msg.setAttribute('style', 'display: none;');
             }, 3000);
-           }
-           ele.value = res;
+          }
+          ele.value = res;
         }
-      }
+      },
     });
   }
 
-  decreaseQuantity(e: any, id:number): void {
+  decreaseQuantity(e: any, id: number): void {
     e.value = --e.value;
     if (e.value <= 0) {
-      e.value = 1
+      e.value = 1;
     }
-    let quantity= e.value;
-    this.cartService.updateCartItem(id,quantity);
+    let quantity = e.value;
+    this.cartService.updateCartItem(id, quantity);
   }
-  
-  increaseQuantity(e: any, id:number): void {
+
+  increaseQuantity(e: any, id: number): void {
     e.value = ++e.value;
-    let quantity= e.value;
-    this.cartService.updateCartItem(id,quantity);
+    let quantity = e.value;
+    this.cartService.updateCartItem(id, quantity);
     this.productService.getQuantityProductById(id).subscribe({
-      next: res => {
-        if(res<quantity){
-          const msg = document.getElementById('msg-quantity-' + id) as HTMLDivElement | null;
-          if(msg){
+      next: (res) => {
+        if (res < quantity) {
+          const msg = document.getElementById(
+            'msg-quantity-' + id
+          ) as HTMLDivElement | null;
+          if (msg) {
             msg.setAttribute('style', 'display: block;');
             setTimeout(function () {
               msg.setAttribute('style', 'display: none;');
             }, 3000);
-           }
-           e.value = res;
+          }
+          e.value = res;
         }
-      }
+      },
     });
   }
 }
