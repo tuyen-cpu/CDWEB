@@ -1,9 +1,4 @@
-export interface Attribute{
-  "id": number,
-  "name": string,
-  "value": string,
-  "status": string,
-}
+import { Attribute } from "./attribute.model";
 export interface Category{
   "id": number,
   "name": string,

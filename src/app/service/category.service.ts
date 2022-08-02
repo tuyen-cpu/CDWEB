@@ -25,10 +25,23 @@ export class CategoryService {
     );
   }
 
-  updateStatus(id: number, status: number): Observable<boolean> {
+  updateStatus(id: number, status: string): Observable<boolean> {
     return this.http.get<boolean>(
       this.REST_API + '/updateStatus?id=' + id + '&status=' + status,
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
+
+  saveCategory(category: Category): Observable<Category> {
+    return this.http.post<Category>(
+      this.REST_API , JSON.stringify(category),
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
+  }
+
+  existsCategoryName(categoryName: string): Observable<Boolean> {
+    return this.http.get<Boolean>(
+      this.REST_API  + '/checkCategoryName?name=' + categoryName
     );
   }
 }
