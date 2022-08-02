@@ -1,3 +1,4 @@
+import { Category } from 'src/app/model/category.model';
 import { Image } from './../../../model/image.model';
 import {
   Component,
@@ -14,6 +15,7 @@ import { Pagination } from 'src/app/model/pagination.model';
 import { Table } from 'primeng/table';
 import * as customBuild from '../../../ckeditor5Custom/build/ckeditor';
 import { forkJoin, mergeMap, Subscription } from 'rxjs';
+import { Attribute } from 'src/app/model/attribute.model';
 @Component({
   selector: 'app-product-manager',
   templateUrl: './product-manager.component.html',
@@ -24,6 +26,23 @@ import { forkJoin, mergeMap, Subscription } from 'rxjs';
 export class ProductManagerComponent implements OnInit, OnDestroy {
   products!: Product[];
   product!: ProductAdd;
+  attribute: Attribute;
+  categories: Category[] = [
+    {
+      id: 12,
+      name: 'string',
+      status: 'string',
+      attributes: [
+        {
+          id: 0,
+          name: 'string',
+          value: 'string',
+          status: 'string',
+          categoryId: 0,
+        },
+      ],
+    },
+  ];
   productEdit: ProductAdd = {
     name: '',
     longDescription: 'Enter here!',
@@ -77,8 +96,8 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
           icon: 'original',
         },
         {
-          name: 'imageResize:25',
-          value: '25',
+          name: 'imageResize:10',
+          value: '10',
           icon: 'medium',
         },
         {
@@ -94,8 +113,7 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
       ],
       toolbar: [
         'imageResize',
-        'imageResize:25',
-
+        'imageResize:10',
         'imageResize:original',
         'imageStyle:inline',
         'imageStyle:block',
@@ -229,6 +247,7 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
       });
       return;
     }
+    console.log('ss', this.product);
     this.productService.addProduct(this.product).subscribe({
       next: (res) => {
         this.productDialog = false;
