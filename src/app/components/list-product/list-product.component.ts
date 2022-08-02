@@ -33,6 +33,7 @@ export class ListProductComponent implements OnInit {
   private f: Object[] = [];
   public view_list = false;
   isLoading: boolean = false;
+  catId=1;
   //list attribute
   public attributes: AttributeProduct[] = [];
   brands: string[] = [];
@@ -82,7 +83,17 @@ export class ListProductComponent implements OnInit {
           }
         });
       });
+
+      this.updateCateID();
   }
+  updateCateID(){
+    this.productService.getCateId().subscribe(res=>{
+      this.catId= res;
+      const resquest  = {"category_id":""+this.catId,"size":8,"page":0};
+      this.getProducts(resquest)
+    })
+  }
+
   trackById(index: number, item: any) {
     return item.id;
   }
@@ -102,7 +113,7 @@ export class ListProductComponent implements OnInit {
 
   onPageChange(event: any) {
     this.params['page'] = event.page + 1;
-    this.params['size'] = 3;
+    this.params['size'] = 8;
     console.log('change page', this.params);
     this.changeUrl();
   }
@@ -163,7 +174,7 @@ export class ListProductComponent implements OnInit {
       }
       //default
       if (res['size'] === undefined) {
-        this.size = 3;
+        this.size = 8;
       } else {
         this.size = res['size'];
       }

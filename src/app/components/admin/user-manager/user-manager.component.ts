@@ -37,6 +37,9 @@ export class UserManagerComponent implements OnInit {
   existEmail: boolean = false;
   invalidPwd: boolean = false;
 
+  isEmail = false;
+  isTouchedEmail= false;
+
   constructor(
     private userService: UserService,
   ) { }
@@ -205,6 +208,7 @@ export class UserManagerComponent implements OnInit {
 
   public checkEmail(email: string) {
     let value: Boolean = false;
+    this.isTouchedEmail = true;
     this.userService.existsEmail(email).subscribe(
       (response: Boolean) => {
         value = response;
@@ -213,6 +217,7 @@ export class UserManagerComponent implements OnInit {
         } else {
           this.existEmail = false;
         }
+        this.isEmail = this.validateEmail(email);
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
@@ -245,4 +250,9 @@ export class UserManagerComponent implements OnInit {
     this.loadUsers(event.page, event.rows)
   }
 
+  validateEmail (email) {
+    if(email == null || email =='') {return false;}
+    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    return !pattern.test(email);
+  }
 }

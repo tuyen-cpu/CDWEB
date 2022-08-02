@@ -16,7 +16,19 @@ export class ProductService {
   images: Image[] = [];
   productManagerChanged: BehaviorSubject<Product[]> = new BehaviorSubject([]);
   productManager: Product[] = [];
+
+  cateId: BehaviorSubject<number> = new BehaviorSubject(0);
+
   constructor(private http: HttpClient) {}
+
+  public updateCatId(cateId){
+    this.cateId.next(cateId);
+  }
+
+  public getCateId(){
+    return this.cateId.asObservable();
+  }
+
   public resetImages() {
     this.images = [];
     this.imageChanged.next(this.images);

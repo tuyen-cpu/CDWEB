@@ -175,8 +175,9 @@
                     <label for="email">Email<span class="red">*</span></label>
                     <input type="mail" pInputText id="email" (input)="checkEmail(user.email)" [(ngModel)]="user.email"
                         required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !user.email }" />
-                    <small class="ng-dirty ng-invalid red" *ngIf="submitted && !user.email">Email is required.</small>
+                    <small class="ng-dirty ng-invalid red" *ngIf="isTouchedEmail && user.email==''">Email is required.</small>
                     <small class="ng-dirty ng-invalid red" *ngIf="existEmail">Email existed.</small>
+                    <small class="ng-dirty ng-invalid red" *ngIf="isEmail">Email is invalid pattern.</small>
                 </div>
 
                 <div class="field" *ngIf="!user.id">
