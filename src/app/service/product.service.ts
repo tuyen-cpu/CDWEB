@@ -177,4 +177,10 @@ export class ProductService {
       params: params,
     });
   }
+
+  public getRelatedProducts(catId: number): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      `${this.apiServerUrl}/product/relate?catId=${catId}`
+    );
+  }
 }

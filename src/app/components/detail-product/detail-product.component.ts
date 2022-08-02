@@ -28,6 +28,7 @@ SwiperCore.use([Zoom, FreeMode, Navigation, Thumbs]);
   encapsulation: ViewEncapsulation.None,
 })
 export class DetailProductComponent implements OnInit {
+  categoryId = 1;
   //percent of rating 
   percentComments=[];
   average=0;
@@ -71,6 +72,7 @@ export class DetailProductComponent implements OnInit {
   public totalPages: number = 0;
   public currentPage: number = 0;
 
+  
   constructor(
     private formBuilder: FormBuilder,
     private _Activatedroute: ActivatedRoute,
