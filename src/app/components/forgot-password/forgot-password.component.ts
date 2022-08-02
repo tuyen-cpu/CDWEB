@@ -18,6 +18,8 @@ export class ForgotPasswordComponent implements OnInit {
   public isFail = false;
   public token = '';
 
+  public isLoading=false;
+
   public form: FormGroup = new FormGroup({
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
@@ -58,15 +60,18 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   public onSubmit() {
+    this.isLoading=true;
     this.submitted = true;
     this.userService.updatePassword(this.token, this.form.value.password).subscribe({
       next: (response: string) => {
         if (response) {
           this.isSuccess = true;
           this.isFail = false;
+          this.isLoading=false;
         } else {
           this.isFail = true;
           this.isSuccess = false;
+          this.isLoading=false;
         }
       },
       error: (error: HttpErrorResponse) => {

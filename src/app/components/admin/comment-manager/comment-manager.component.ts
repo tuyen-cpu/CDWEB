@@ -25,6 +25,7 @@ export class CommentManagerComponent implements OnInit {
   public cols: any[] = [];
   public listStatuses: SelectItem[] = [];
   public selectedStatus: number = 0;
+  public isLoading=false;
 
   constructor(
     private commentService: CommentService,
@@ -133,6 +134,7 @@ export class CommentManagerComponent implements OnInit {
     });
   }
   deleteSelectedComments() {
+    this.isLoading=true;
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete the selected comments?',
       header: 'Confirm',
@@ -144,10 +146,12 @@ export class CommentManagerComponent implements OnInit {
             this.comments = this.comments.filter(val => !this.selectedComments.includes(val));
             this.selectedComments = [];
             this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Comments Deleted', life: 3000 });
+            this.isLoading=false;
           },
           error: (error: HttpErrorResponse) => {
             this.messageService.add({ severity: 'error', summary: 'Error', detail: 'The process errors', life: 3000 });
             console.log("Delete comments : " + error.message);
+            this.isLoading=false;
           }
         });
 
