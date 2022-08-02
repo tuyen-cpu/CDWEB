@@ -264,7 +264,11 @@
     </ng-template>
 </p-dialog>
 
-<p-dialog header="Loading" [(visible)]="displayModalLoading" [modal]="true" [style]="{width: '500px'}"
+<!-- <p-dialog header="Loading" [(visible)]="displayModalLoading" [modal]="true" [style]="{width: '500px'}"
     [draggable]="false" [resizable]="false">
     <p class="m-0">...</p>
+</p-dialog> -->
+
+<p-dialog header="Loading" [(visible)]="displayModalLoading" [modal]="true" [style]="{width: '500px'}" [draggable]="false" [resizable]="false">
+    <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
 </p-dialog>

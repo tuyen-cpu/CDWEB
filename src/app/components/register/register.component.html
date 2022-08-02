@@ -64,7 +64,10 @@
         </form>
     </div>
 </div>
-<div *ngIf="displayLoading" id="loading"></div>
+<!-- <div *ngIf="displayLoading" id="loading"></div> -->
+<p-dialog header="Loading" [(visible)]="displayLoading" [modal]="true" [style]="{width: '500px'}" [draggable]="false" [resizable]="false">
+    <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+</p-dialog>
 <p-dialog header="Thông báo" [(visible)]="displayModal" [modal]="true" [style]="{width: '500px'}"
     [draggable]="false" [resizable]="false">
     <p class="m-0">Đăng kí thành công</p>

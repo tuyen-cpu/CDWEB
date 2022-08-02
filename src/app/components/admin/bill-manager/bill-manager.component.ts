@@ -30,6 +30,7 @@ export class BillManagerComponent implements OnInit {
   public selectedStatus:number = 0;
 
   public billDialog: boolean = false;
+  public isLoading = false;
 
   constructor(
     private billService: BillService,
@@ -153,6 +154,7 @@ export class BillManagerComponent implements OnInit {
   }
 
   public saveBill() {
+    this.isLoading= true;
     this.billDialog = false;
     this.billService.updateStatus(this.bill.id, this.selectedStatus).subscribe({
       next: (response: boolean) => {
@@ -161,12 +163,15 @@ export class BillManagerComponent implements OnInit {
           this.bills[updatedBill].status = this.selectedStatus;
           this.messageService.add({severity:'success', summary: 'Successful', detail: 'Status bill updated', life: 3000});
           this.bill={};
+          this.isLoading= false;
         }else{
           this.messageService.add({severity:'error', summary: 'Error', detail: 'The process errors', life: 3000});
           this.bill={};
+          this.isLoading= false;
         }
       },
       error: (error: HttpErrorResponse) => {
+        this.isLoading= false;
         this.messageService.add({severity:'error', summary: 'Error', detail: 'The process errors', life: 3000});
         console.log("Update Status: " + error.message);
       }
