@@ -178,14 +178,7 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
   openNew() {
-    this.product = {
-      name: '',
-      longDescription: this.data,
-      price: 0,
-      discount: 0,
-      quantity: 0,
-      status: 1,
-    };
+    this.product = {};
     this.submitted = false;
     this.productDialog = true;
   }
@@ -201,9 +194,50 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
   saveProduct() {
     this.isLoading = true;
     this.submitted = true;
-    this.productService.addProduct(this.product).subscribe((res) => {
-      this.productDialog = false;
+    if (
+      !this.product.name ||
+      this.product.price == 0 ||
+      !this.product.quantity
+    ) {
       this.isLoading = false;
+      return;
+    }
+    if (this.product.price > 500000000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid price!',
+      });
+      return;
+    }
+    if (this.product.quantity > 10000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid quantity!',
+      });
+      return;
+    }
+    if (this.product.discount > 1000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid discount!',
+      });
+      return;
+    }
+    this.productService.addProduct(this.product).subscribe({
+      next: (res) => {
+        this.productDialog = false;
+        this.isLoading = false;
+      },
+      error: (e) => {
+        this.isLoading = false;
+        alert(e.error.message);
+      },
     });
     this.data = '<p>Enter description here!</p>';
     this.imageSub.unsubscribe();
@@ -229,17 +263,51 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
   saveProductEdit() {
     this.isLoading = true;
     this.editSubmitted = true;
-    this.productService.updateProduct(this.productEdit).subscribe((res) => {
+    if (
+      !this.productEdit.name ||
+      this.productEdit.price == 0 ||
+      !this.productEdit.quantity
+    ) {
       this.isLoading = false;
-      this.productDialogEdit = false;
-      this.productEdit = {
-        name: 'mm',
-        longDescription: 'Enter here!',
-        price: 0,
-        quantity: 0,
-        discount: 0,
-        status: 1,
-      };
+      return;
+    }
+    if (this.productEdit.price > 500000000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid price!',
+      });
+      return;
+    }
+    if (this.productEdit.quantity > 10000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid quantity!',
+      });
+      return;
+    }
+    if (this.productEdit.discount > 1000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid discount!',
+      });
+      return;
+    }
+    this.productService.updateProduct(this.productEdit).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.productDialogEdit = false;
+        this.productEdit = {};
+      },
+      error: (e) => {
+        this.isLoading = false;
+        alert(e.error.message);
+      },
     });
     this.uploadedFiles = [];
   }

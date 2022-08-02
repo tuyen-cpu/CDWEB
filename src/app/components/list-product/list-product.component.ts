@@ -71,17 +71,6 @@ export class ListProductComponent implements OnInit {
     //     console.log(data);
     //   });
     this.getParamsUrl();
-
-    this.attributeService
-      .getAttributesByCategoryId(+this.categoryId)
-      .subscribe((data) => {
-        this.attributes = data;
-        this.attributes.forEach((e) => {
-          if (e.name === this.brand) {
-            this.brands = this.brands.concat(e.values);
-          }
-        });
-      });
   }
   trackById(index: number, item: any) {
     return item.id;
@@ -145,6 +134,12 @@ export class ListProductComponent implements OnInit {
   getParamsUrl() {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.categoryId = paramMap.get('cateId')!;
+      this.getAttributesByCategoryId();
+      this.getProducts({
+        size: this.size,
+        page: 0,
+        category_id: this.categoryId,
+      });
     });
     this.activatedRoute.queryParams.subscribe((res) => {
       if (Object.entries(this.params).length === 0) {
@@ -183,6 +178,19 @@ export class ListProductComponent implements OnInit {
         });
       }
     });
+  }
+  getAttributesByCategoryId() {
+    this.brands = [];
+    this.attributeService
+      .getAttributesByCategoryId(+this.categoryId)
+      .subscribe((data) => {
+        this.attributes = data;
+        this.attributes.forEach((e) => {
+          if (e.name === this.brand) {
+            this.brands = this.brands.concat(e.values);
+          }
+        });
+      });
   }
   getProducts(para: any) {
     this.isLoading = true;

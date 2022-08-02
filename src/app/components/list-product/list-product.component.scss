@@ -63,6 +63,16 @@ a {
                     }
                 }
                 ul {
+                    &::-webkit-scrollbar-track {
+                        background-color: #F5F5F5;
+                    }
+                    &::-webkit-scrollbar {
+                        width: 4px;
+                        background-color: #F5F5F5;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: var(--main-color);
+                    }
                     max-height: 235px;
                     overflow-y: auto;
                     margin: 0;
