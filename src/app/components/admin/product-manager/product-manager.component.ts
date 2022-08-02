@@ -1,3 +1,4 @@
+import { Category } from 'src/app/model/category.model';
 import { Image } from './../../../model/image.model';
 import {
   Component,
@@ -14,6 +15,7 @@ import { Pagination } from 'src/app/model/pagination.model';
 import { Table } from 'primeng/table';
 import * as customBuild from '../../../ckeditor5Custom/build/ckeditor';
 import { forkJoin, mergeMap, Subscription } from 'rxjs';
+import { Attribute } from 'src/app/model/attribute.model';
 @Component({
   selector: 'app-product-manager',
   templateUrl: './product-manager.component.html',
@@ -24,6 +26,23 @@ import { forkJoin, mergeMap, Subscription } from 'rxjs';
 export class ProductManagerComponent implements OnInit, OnDestroy {
   products!: Product[];
   product!: ProductAdd;
+  attribute: Attribute;
+  categories: Category[] = [
+    {
+      id: 12,
+      name: 'string',
+      status: 'string',
+      attributes: [
+        {
+          id: 0,
+          name: 'string',
+          value: 'string',
+          status: 'string',
+          categoryId: 0,
+        },
+      ],
+    },
+  ];
   productEdit: ProductAdd = {
     name: '',
     longDescription: 'Enter here!',
@@ -77,8 +96,8 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
           icon: 'original',
         },
         {
-          name: 'imageResize:25',
-          value: '25',
+          name: 'imageResize:10',
+          value: '10',
           icon: 'medium',
         },
         {
@@ -94,8 +113,7 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
       ],
       toolbar: [
         'imageResize',
-        'imageResize:25',
-
+        'imageResize:10',
         'imageResize:original',
         'imageStyle:inline',
         'imageStyle:block',
@@ -178,14 +196,7 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
     this.dt.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
   openNew() {
-    this.product = {
-      name: '',
-      longDescription: this.data,
-      price: 0,
-      discount: 0,
-      quantity: 0,
-      status: 1,
-    };
+    this.product = {};
     this.submitted = false;
     this.productDialog = true;
   }
@@ -201,9 +212,51 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
   saveProduct() {
     this.isLoading = true;
     this.submitted = true;
-    this.productService.addProduct(this.product).subscribe((res) => {
-      this.productDialog = false;
+    if (
+      !this.product.name ||
+      this.product.price == 0 ||
+      !this.product.quantity
+    ) {
       this.isLoading = false;
+      return;
+    }
+    if (this.product.price > 500000000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid price!',
+      });
+      return;
+    }
+    if (this.product.quantity > 10000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid quantity!',
+      });
+      return;
+    }
+    if (this.product.discount > 1000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid discount!',
+      });
+      return;
+    }
+    console.log('ss', this.product);
+    this.productService.addProduct(this.product).subscribe({
+      next: (res) => {
+        this.productDialog = false;
+        this.isLoading = false;
+      },
+      error: (e) => {
+        this.isLoading = false;
+        alert(e.error.message);
+      },
     });
     this.data = '<p>Enter description here!</p>';
     this.imageSub.unsubscribe();
@@ -229,17 +282,51 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
   saveProductEdit() {
     this.isLoading = true;
     this.editSubmitted = true;
-    this.productService.updateProduct(this.productEdit).subscribe((res) => {
+    if (
+      !this.productEdit.name ||
+      this.productEdit.price == 0 ||
+      !this.productEdit.quantity
+    ) {
       this.isLoading = false;
-      this.productDialogEdit = false;
-      this.productEdit = {
-        name: 'mm',
-        longDescription: 'Enter here!',
-        price: 0,
-        quantity: 0,
-        discount: 0,
-        status: 1,
-      };
+      return;
+    }
+    if (this.productEdit.price > 500000000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid price!',
+      });
+      return;
+    }
+    if (this.productEdit.quantity > 10000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid quantity!',
+      });
+      return;
+    }
+    if (this.productEdit.discount > 1000) {
+      this.isLoading = false;
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Wanning',
+        detail: 'Please enter valid discount!',
+      });
+      return;
+    }
+    this.productService.updateProduct(this.productEdit).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.productDialogEdit = false;
+        this.productEdit = {};
+      },
+      error: (e) => {
+        this.isLoading = false;
+        alert(e.error.message);
+      },
     });
     this.uploadedFiles = [];
   }

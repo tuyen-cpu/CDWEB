@@ -108,19 +108,23 @@
 
                 <div class="field">
                     <label for="name">Name</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}" />
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.name">Name is required.</small>
+                    <input type="text" pInputText id="name" [(ngModel)]="product.name" [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}" required focus/>
+                    <small class="p-error block" *ngIf="submitted &&!product.name">Name is required.</small>
                 </div>
-
+                <div class="field">
+                    <!-- <p-cascadeSelect [(ngModel)]="attribute" [options]="categories" optionLabel="value" optionGroupLabel="name" [optionGroupChildren]="['attribute']" [style]="{'minWidth': '14rem'}" placeholder="Select a attribute"></p-cascadeSelect> -->
+                </div>
 
                 <div class="formgrid grid">
                     <div class="field col">
                         <label for="price">Price</label>
-                        <p-inputNumber id="price" [(ngModel)]="product.price"></p-inputNumber>
+                        <p-inputNumber id="price" [(ngModel)]="product.price" [required]="true" [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.price}"></p-inputNumber>
+                        <small class="p-error block" *ngIf="submitted &&!product.price">Price is required.</small>
                     </div>
                     <div class="field col">
                         <label for="quantity">Quantity</label>
-                        <p-inputNumber id="quantity" [(ngModel)]="product.quantity"></p-inputNumber>
+                        <p-inputNumber id="quantity" [(ngModel)]="product.quantity" [required]="true" [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.quantity}"></p-inputNumber>
+                        <small class="p-error block" *ngIf="submitted &&!product.price">Quantity is required.</small>
                     </div>
                     <div class="field col">
                         <label for="quantity">Discount</label>
@@ -138,7 +142,7 @@
                 <div class="field">
                     <label for="description">Description</label>
                     <!-- <textarea id="description" pInputTextarea [(ngModel)]="product.desc" required rows="3" cols="20"></textarea> -->
-                    <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="data" (ready)="onReady($event)"></ckeditor>
+                    <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="product.longDescription" (ready)="onReady($event)"></ckeditor>
                 </div>
 
             </ng-template>
@@ -154,19 +158,21 @@
 
                 <div class="field">
                     <label for="name">Name</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="productEdit.name" required />
-                    <!-- <small class="ng-dirty ng-invalid" *ngIf="editSubmitted && !productEdit.name">Name is required.</small> -->
+                    <input type="text" pInputText id="name" [(ngModel)]="productEdit.name" required [ngClass]="{'ng-invalid ng-dirty' : editSubmitted && !productEdit.name}" />
+                    <small class="p-error block" *ngIf="editSubmitted &&!productEdit.name">Name is required.</small>
                 </div>
 
 
                 <div class="formgrid grid">
                     <div class="field col">
                         <label for="price">Price</label>
-                        <p-inputNumber id="price" [(ngModel)]="productEdit.price"></p-inputNumber>
+                        <p-inputNumber id="price" [required]="true" [(ngModel)]="productEdit.price" [ngClass]="{'ng-invalid ng-dirty' : editSubmitted && !productEdit.price}"></p-inputNumber>
+                        <small class="p-error block" *ngIf="editSubmitted &&!productEdit.price">Price is required.</small>
                     </div>
                     <div class="field col">
                         <label for="quantity">Quantity</label>
-                        <p-inputNumber id="quantity" [(ngModel)]="productEdit.quantity"></p-inputNumber>
+                        <p-inputNumber id="quantity" [required]="true" [(ngModel)]="productEdit.quantity" [ngClass]="{'ng-invalid ng-dirty' : editSubmitted && !productEdit.quantity}"></p-inputNumber>
+                        <small class="p-error block" *ngIf="editSubmitted &&!productEdit.quantity">Quantity is required.</small>
                     </div>
                     <div class="field col">
                         <label for="quantity">Discount</label>
