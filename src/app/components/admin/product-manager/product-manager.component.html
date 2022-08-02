@@ -111,7 +111,9 @@
                     <input type="text" pInputText id="name" [(ngModel)]="product.name" [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}" required focus/>
                     <small class="p-error block" *ngIf="submitted &&!product.name">Name is required.</small>
                 </div>
-
+                <div class="field">
+                    <!-- <p-cascadeSelect [(ngModel)]="attribute" [options]="categories" optionLabel="value" optionGroupLabel="name" [optionGroupChildren]="['attribute']" [style]="{'minWidth': '14rem'}" placeholder="Select a attribute"></p-cascadeSelect> -->
+                </div>
 
                 <div class="formgrid grid">
                     <div class="field col">
@@ -140,7 +142,7 @@
                 <div class="field">
                     <label for="description">Description</label>
                     <!-- <textarea id="description" pInputTextarea [(ngModel)]="product.desc" required rows="3" cols="20"></textarea> -->
-                    <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="data" (ready)="onReady($event)"></ckeditor>
+                    <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="product.longDescription" (ready)="onReady($event)"></ckeditor>
                 </div>
 
             </ng-template>

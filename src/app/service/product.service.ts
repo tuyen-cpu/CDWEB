@@ -112,10 +112,12 @@ export class ProductService {
   }
 
   public addProduct(product: ProductAdd): Observable<Product> {
+    console.log('pro: ', product);
     return this.http
       .post<Product>(`${this.apiServerUrl}/product/add`, product)
       .pipe(
         tap((resp) => {
+          console.log(resp);
           this.productManager.push(resp);
           this.productManagerChanged.next(this.productManager);
         })

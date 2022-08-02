@@ -35,7 +35,7 @@ import { ChipModule } from 'primeng/chip';
 import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { CascadeSelectModule } from 'primeng/cascadeselect';
 
 //Material
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -199,7 +199,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ImageModule,
     ConfirmDialogModule,
     DropdownModule,
-    
+    CascadeSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
