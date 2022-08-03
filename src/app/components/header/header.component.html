@@ -248,7 +248,8 @@
                         <div class="list-menu-header" fxShow fXHide.sm fxHide.xs>
                             <ul class="ul-menu">
                                 <li class="nav-item lv1" *ngFor="let menu of menus">
-                                    <a routerLink="/list/{{menu.id}}" title="{{menu.categoryName}}">
+                                    <a title="{{menu.categoryName}}"  (click)="openCateList(menu.id)">
+                                    <!-- <a routerLink="/list/{{menu.id}}" title="{{menu.categoryName}}"  (click)="openCateList(menu.id)"> -->
                                         <mat-icon class="pr-5">laptop</mat-icon>
                                         {{menu.categoryName}}
                                         <mat-icon class="right">chevron_right</mat-icon>

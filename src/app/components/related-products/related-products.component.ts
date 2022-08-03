@@ -1,4 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Product } from 'src/app/model/product.model';
+import { ProductService } from 'src/app/service/product.service';
 // import Swiper core and required modules
 import SwiperCore, {Pagination, Navigation} from "swiper";
 
@@ -13,12 +15,24 @@ SwiperCore.use([Pagination, Navigation]);
 })
 export class RelatedProductsComponent implements OnInit {
   @Input()
-  category!: string;
+  categoryId!: number;
+  public listProduct :Product[]=[];
 
-  public listProduct = new Array(10);
-  constructor() { }
+  constructor(
+    private productService: ProductService,
+  ) { }
 
   ngOnInit(): void {
+    this.loadProducts();
+  }
+
+  loadProducts() {
+    this.productService.getRelatedProducts(this.categoryId).subscribe({
+      next:(response : Product[])=>{
+        this.listProduct = response;
+        console.log(this.listProduct)
+      }
+    })
   }
 
 }

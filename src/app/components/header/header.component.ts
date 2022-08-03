@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private storageService: StorageService,
     private authService: AuthService,
-    private cartService: CartService
+    private cartService: CartService,
   ) {}
 
   ngOnInit() {
@@ -276,5 +276,9 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       },
     });
+  }
+  openCateList(catId){
+    this.productService.updateCatId(catId);
+    this.router.navigate(['/list/'+catId]) ;
   }
 }
