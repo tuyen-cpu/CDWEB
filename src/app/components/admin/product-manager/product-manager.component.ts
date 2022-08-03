@@ -16,6 +16,8 @@ import { Table } from 'primeng/table';
 import * as customBuild from '../../../ckeditor5Custom/build/ckeditor';
 import { forkJoin, mergeMap, Subscription } from 'rxjs';
 import { Attribute } from 'src/app/model/attribute.model';
+import { CategoryService } from 'src/app/service/category.service';
+
 @Component({
   selector: 'app-product-manager',
   templateUrl: './product-manager.component.html',
@@ -26,23 +28,8 @@ import { Attribute } from 'src/app/model/attribute.model';
 export class ProductManagerComponent implements OnInit, OnDestroy {
   products!: Product[];
   product!: ProductAdd;
-  attribute: Attribute;
-  categories: Category[] = [
-    {
-      id: 12,
-      name: 'string',
-      status: 'string',
-      attributes: [
-        {
-          id: 0,
-          name: 'string',
-          value: 'string',
-          status: 'string',
-          categoryId: 0,
-        },
-      ],
-    },
-  ];
+  attributesSelected: [];
+  categories: Category[] = [];
   productEdit: ProductAdd = {
     name: '',
     longDescription: 'Enter here!',
@@ -159,7 +146,8 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
   constructor(
     private productService: ProductService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -185,6 +173,12 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
       { field: 'discount', header: 'DISCOUNT' },
       { field: 'status', header: 'STATUS' },
     ];
+    this.categoryService.getCategoriesInAdmin(0, 5).subscribe({
+      next: (res: any) => {
+        this.categories = res.content;
+        console.log(res.content);
+      },
+    });
   }
   blur() {
     console.log('blur');
@@ -203,6 +197,7 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
   hideDialog() {
     this.productDialog = false;
     this.submitted = false;
+    console.log(this.attributesSelected);
   }
   hideDialogEdit() {
     this.productDialogEdit = false;
@@ -247,9 +242,15 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
       });
       return;
     }
-    console.log('ss', this.product);
+    // console.log('ss', this.product);
+    this.product['attributeIds'] = [];
+    this.attributesSelected.forEach((element) => {
+      this.product['attributeIds'].push(element['id']);
+    });
+    console.log(this.product);
     this.productService.addProduct(this.product).subscribe({
       next: (res) => {
+        console.log(res);
         this.productDialog = false;
         this.isLoading = false;
       },
@@ -258,6 +259,7 @@ export class ProductManagerComponent implements OnInit, OnDestroy {
         alert(e.error.message);
       },
     });
+
     this.data = '<p>Enter description here!</p>';
     this.imageSub.unsubscribe();
   }

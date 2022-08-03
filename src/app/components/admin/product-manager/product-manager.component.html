@@ -112,7 +112,55 @@
                     <small class="p-error block" *ngIf="submitted &&!product.name">Name is required.</small>
                 </div>
                 <div class="field">
-                    <!-- <p-cascadeSelect [(ngModel)]="attribute" [options]="categories" optionLabel="value" optionGroupLabel="name" [optionGroupChildren]="['attribute']" [style]="{'minWidth': '14rem'}" placeholder="Select a attribute"></p-cascadeSelect> -->
+                    <p-table #dt [globalFilterFields]="['name','status','id']" [value]="categories" dataKey="id" responsiveLayout="scroll">
+
+
+                        <ng-template pTemplate="body" let-category let-expanded="expanded">
+                            <tr>
+                                <td>
+                                    <button type="button" pButton pRipple [pRowToggler]="category" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                                </td>
+                                <td>{{category.id}}</td>
+                                <td>{{category.name}}</td>
+                                <td>{{category.status}}</td>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="rowexpansion" let-category>
+                            <tr>
+                                <td colspan="7">
+                                    <div class=" ml-5 p-1 box">
+                                        <p-table #dt2 [globalFilterFields]="['name','status','id']" [(selection)]="attributesSelected" selectionMode="multiple" [value]="category.attributes" dataKey="id" responsiveLayout="scroll">
+                                            <ng-template pTemplate="header" let-columns>
+
+                                                <tr>
+                                                    <th class="border-tb" pSortableColumn="name">Attribute name
+                                                        <p-sortIcon field="name"></p-sortIcon>
+                                                    </th>
+                                                    <th class="border-tb" pSortableColumn="value">Attribute value
+                                                        <p-sortIcon field="value"></p-sortIcon>
+                                                    </th>
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-attribute let-rowIndex="rowIndex">
+                                                <tr [pSelectableRow]="attribute" [pSelectableRowIndex]="rowIndex">
+
+                                                    <td>{{attribute.name}}</td>
+                                                    <td>{{attribute.value}}</td>
+
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="emptymessage">
+                                                <tr>
+                                                    <td colspan="6">There are no attribute for this category yet.</td>
+                                                </tr>
+                                            </ng-template>
+                                        </p-table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </div>
 
                 <div class="formgrid grid">
